@@ -1,10 +1,21 @@
 
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
   
   const navItems = [
     { name: "Research", href: "#" },
@@ -14,22 +25,24 @@ const Navbar = () => {
     { name: "Careers", href: "/", current: true },
   ];
 
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className="absolute top-0 left-0 right-0 z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img 
-              src="/profile.png" 
-              alt="Trizen Logo" 
-              className="h-16 sm:h-20 w-auto filter brightness-0 invert"
-            />
-            {/* <img 
-              src="/lovable-uploads/94622359-d2cd-4c87-aafa-6764c7f0d73d.png" 
-              alt="TRIZEN" 
-              className="h-6 sm:h-8 w-auto filter brightness-0 invert"
-            /> */}
+            <Link to="/">
+              <img 
+                src="/profile.png" 
+                alt="Trizen Logo" 
+                className="h-16 sm:h-20 w-auto filter brightness-0 invert"
+              />
+            </Link>
           </div>
           
           {/* Desktop Navigation Items */}
@@ -50,20 +63,58 @@ const Navbar = () => {
             ))}
           </div>
           
-          {/* Desktop Login and Signup buttons */}
+          {/* Desktop Auth buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button 
-              variant="ghost" 
-              className="text-white hover:bg-white/10 hover:text-white font-inter font-medium"
-            >
-              Login
-            </Button>
-            <Button 
-              variant="outline" 
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-brand-primary transition-all duration-300 font-inter font-medium"
-            >
-              Sign Up
-            </Button>
+            {isAuthenticated ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="text-white hover:bg-white/10 hover:text-white font-inter font-medium"
+                  >
+                    <User className="h-4 w-4 mr-2" />
+                    {user?.firstName}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel className="font-inter">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{user?.firstName} {user?.lastName}</p>
+                      <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="font-inter">
+                    <User className="mr-2 h-4 w-4" />
+                    <span>Profile</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="font-inter text-red-600">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Link to="/auth">
+                  <Button 
+                    variant="ghost" 
+                    className="text-white hover:bg-white/10 hover:text-white font-inter font-medium"
+                  >
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/auth">
+                  <Button 
+                    variant="outline" 
+                    className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-brand-primary transition-all duration-300 font-inter font-medium"
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -99,18 +150,48 @@ const Navbar = () => {
                 </a>
               ))}
               <div className="flex flex-col space-y-3 pt-4 border-t border-white/20">
-                <Button 
-                  variant="ghost" 
-                  className="text-white hover:bg-white/10 hover:text-white justify-start font-inter"
-                >
-                  Login
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-brand-primary transition-all duration-300 justify-start font-inter"
-                >
-                  Sign Up
-                </Button>
+                {isAuthenticated ? (
+                  <>
+                    <div className="text-white font-inter text-sm">
+                      <p className="font-medium">{user?.firstName} {user?.lastName}</p>
+                      <p className="text-white/70">{user?.email}</p>
+                    </div>
+                    <Button 
+                      variant="ghost" 
+                      className="text-white hover:bg-white/10 hover:text-white justify-start font-inter w-full"
+                    >
+                      <User className="h-4 w-4 mr-2" />
+                      Profile
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      className="text-red-400 hover:bg-red-400/10 hover:text-red-300 justify-start font-inter w-full"
+                      onClick={handleLogout}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Log out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                      <Button 
+                        variant="ghost" 
+                        className="text-white hover:bg-white/10 hover:text-white justify-start font-inter w-full"
+                      >
+                        Login
+                      </Button>
+                    </Link>
+                    <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                      <Button 
+                        variant="outline" 
+                        className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-brand-primary transition-all duration-300 justify-start font-inter w-full"
+                      >
+                        Sign Up
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
