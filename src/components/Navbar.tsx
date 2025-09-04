@@ -18,11 +18,11 @@ const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
   
   const navItems = [
-    { name: "Research", href: "#" },
-    { name: "Consulting", href: "#" },
-    { name: "Training", href: "#" },
-    { name: "Insights", href: "#" },
-    { name: "Careers", href: "/", current: true },
+    { name: "Research", href: "https://www.trizenventures.com/research" },
+    { name: "Consulting", href: "https://www.trizenventures.com/consulting" },
+    { name: "Training", href: "https://www.lms.trizenventures.com" },
+    { name: "Insights", href: "https://www.connect.trizenventures.com" },
+    // { name: "Careers", href: "/", current: true },
   ];
 
   const handleLogout = () => {

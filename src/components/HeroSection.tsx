@@ -3,6 +3,13 @@ import { Button } from "@/components/ui/button";
 import Navbar from "./Navbar";
 
 const HeroSection = () => {
+  const scrollToJobs = () => {
+    const jobsSection = document.getElementById('jobs-section');
+    if (jobsSection) {
+      jobsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative h-screen flex items-center justify-center bg-brand-primary text-white overflow-hidden">
       <div className="absolute inset-0 bg-black/10"></div>
@@ -29,6 +36,7 @@ const HeroSection = () => {
         <div className="flex flex-col sm:flex-row gap-4 sm:space-y-0 sm:space-x-6 justify-center animate-fade-in delay-400 px-4">
           <Button 
             size="lg" 
+            onClick={scrollToJobs}
             className="bg-white text-brand-primary hover:bg-gray-50 px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 border-0 font-inter w-full sm:w-auto"
           >
             Explore Careers
@@ -36,6 +44,7 @@ const HeroSection = () => {
           <Button 
             size="lg" 
             variant="outline" 
+            onClick={scrollToJobs}
             className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-brand-primary px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 font-inter w-full sm:w-auto"
           >
             View Internships

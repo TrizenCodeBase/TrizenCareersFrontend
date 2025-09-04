@@ -7,24 +7,17 @@ import { useState } from "react";
 const testimonials = [
   {
     id: 1,
-    name: "Sarah Chen",
-    role: "Senior Product Manager",
-    quote: "The innovation and collaboration here is unmatched. Every day brings new challenges and opportunities to grow.",
-    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=400&fit=crop&crop=face"
+    name: "Spoorthi Sameera Varada",
+    role: "B.Tech Final Year | AI Intern at Cognitbotz Solutions",
+    quote: "The ML course from Trizen Learning provides a strong foundation in machine learning with clear and practical explanations. The hands-on projects helped me overcome my fear of ML and boosted my confidence. The instructors were knowledgeable and supportive throughout the course. I highly recommend it to anyone starting their ML journey.",
+    image: "/imgs/spoorthi.png"
   },
   {
     id: 2,
-    name: "Marcus Johnson",
-    role: "Lead Software Engineer",
-    quote: "Working here has accelerated my career beyond what I thought possible. The mentorship and learning opportunities are incredible.",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face"
-  },
-  {
-    id: 3,
-    name: "Elena Rodriguez",
-    role: "UX Designer",
-    quote: "The creative freedom and support for innovative thinking makes this the perfect place for designers to thrive.",
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=400&fit=crop&crop=face"
+    name: "Vishakha Deshmukh",
+    role: "MBA | Software Engineer at Kognito AI",
+    quote: "Working with the Trizen team and mentors was an enriching and rewarding experience. The hands-on projects, along with continuous support and insightful guidance, helped me strengthen my skills in machine learning and deep learning. The supportive environment played a key role in boosting my confidence and preparing me to take on real-world AI challenges with clarity and conviction.",
+    image: "/imgs/vishaka.png"
   }
 ];
 
@@ -90,9 +83,9 @@ const LifeAtCompany = () => {
           </div>
         </div>
 
-        {/* Employee Testimonials */}
+        {/* Student Testimonials */}
         <div className="mb-16">
-          <h3 className="text-2xl sm:text-3xl font-bold text-center text-brand-primary mb-12 font-inter">Hear from Our Team</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-center text-brand-primary mb-12 font-inter">Hear from Our Students</h3>
           <div className="relative max-w-4xl mx-auto">
             <div className="relative overflow-hidden rounded-lg">
               <div 

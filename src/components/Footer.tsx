@@ -4,10 +4,10 @@ import { Linkedin, Twitter, Facebook, Instagram, Youtube, Mail } from 'lucide-re
 
 const Footer = () => {
   const socialLinks = [
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/trizenventuresllp/", label: "LinkedIn" },
+    { icon: Twitter, href: "https://x.com/TrizenVenture", label: "Twitter" },
+    { icon: Facebook, href: "https://www.facebook.com/trizenventures/", label: "Facebook" },
+    { icon: Instagram, href: "https://www.instagram.com/trizenventures", label: "Instagram" },
     { icon: Youtube, href: "#", label: "YouTube" },
   ];
 

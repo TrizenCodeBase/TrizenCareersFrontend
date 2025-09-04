@@ -31,7 +31,7 @@ const Auth = () => {
   });
 
   const [loginForm, setLoginForm] = useState({
-    username: "",
+    email: "",
     password: ""
   });
 
@@ -148,7 +148,7 @@ const Auth = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: loginForm.username,
+          email: loginForm.email,
           password: loginForm.password
         }),
       });
@@ -169,7 +169,7 @@ const Auth = () => {
       } else {
         toast({
           title: "Login Failed",
-          description: data.error || "Invalid username or password. Please try again.",
+          description: data.error || "Invalid email or password. Please try again.",
           variant: "destructive"
         });
       }
@@ -406,12 +406,12 @@ const Auth = () => {
               <TabsContent value="login" className="space-y-4 mt-6">
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="loginUsername" className="font-inter">Username</Label>
+                    <Label htmlFor="loginEmail" className="font-inter">Email</Label>
                     <Input
-                      id="loginUsername"
-                      name="username"
-                      type="text"
-                      value={loginForm.username}
+                      id="loginEmail"
+                      name="email"
+                      type="email"
+                      value={loginForm.email}
                       onChange={handleLoginChange}
                       required
                       className="font-inter"

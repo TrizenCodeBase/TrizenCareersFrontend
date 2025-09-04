@@ -35,6 +35,81 @@
       "duration": "2-3 months",
       "startDate": "Immediate",
       "applicationDeadline": "Rolling basis"
+    },
+    {
+      "id": 2,
+      "title": "MERN Stack Developer Intern",
+      "location": "Remote",
+      "type": "Internship",
+      "category": "Web Development",
+      "description": "Thank you for your interest in the MERN Stack Developer Internship at Trizen Ventures LLP! We are looking for dedicated and skilled developers to work on cutting-edge web application projects using the MERN stack (MongoDB, Express.js, React.js, Node.js). This is a full-time, remote, 3 months paid internship opportunity. Please ensure you fill out this application form accurately. Only shortlisted candidates will be contacted. To learn more about our company, visit our website: Trizen Ventures LLP",
+      "tags": ["MongoDB", "Express.js", "React.js", "Node.js", "JavaScript", "RESTful APIs", "Authentication"],
+      "requirements": [
+        "Proficiency in MongoDB, Express.js, React.js, and Node.js",
+        "Experience in secure web application development",
+        "Strong problem-solving and debugging skills",
+        "Knowledge of role-based access control, authentication, and version management",
+        "Familiarity with RESTful APIs, Single Sign-On (SSO), and HRMS integration is a plus",
+        "Dedication to full-time remote work"
+      ],
+      "responsibilities": [
+        "Develop and maintain web applications using MERN stack",
+        "Implement secure authentication and authorization systems",
+        "Create and integrate RESTful APIs",
+        "Work with databases and data management",
+        "Collaborate with team members on project development",
+        "Debug and troubleshoot application issues",
+        "Participate in code reviews and best practices"
+      ],
+      "benefits": [
+        "Full-time remote work opportunity",
+        "3 months paid internship with competitive compensation",
+        "Hands-on experience with modern web technologies",
+        "Opportunity to work on real-world projects",
+        "Mentorship from experienced developers",
+        "Potential for future collaboration opportunities"
+      ],
+      "duration": "3 months",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis"
+    },
+    {
+      "id": 3,
+      "title": "Social Media Manager",
+      "location": "Remote",
+      "type": "Full-time",
+      "category": "Marketing",
+      "description": "We are looking for a creative and dynamic Social Media Manager to handle our company's social media presence and engage with our community. This role involves creating compelling content, managing social media campaigns, and building our brand presence across various platforms. This is a full-time, remote position with opportunities for growth and development.",
+      "tags": ["Social Media", "Content Creation", "Digital Marketing", "Brand Management", "Community Engagement", "Analytics"],
+      "requirements": [
+        "Proven experience in social media management and content creation",
+        "Strong understanding of social media platforms (LinkedIn, Twitter, Facebook, Instagram)",
+        "Excellent written and verbal communication skills",
+        "Creative thinking and ability to create engaging content",
+        "Knowledge of social media analytics and reporting tools",
+        "Experience with graphic design tools (Canva, Adobe Creative Suite) is a plus",
+        "Understanding of AI/ML industry trends and terminology"
+      ],
+      "responsibilities": [
+        "Develop and execute social media strategies across all platforms",
+        "Create engaging content including posts, graphics, and videos",
+        "Manage and grow our social media community",
+        "Monitor social media analytics and provide regular reports",
+        "Engage with followers and respond to comments and messages",
+        "Collaborate with the team to align social media with company goals",
+        "Stay updated with social media trends and best practices"
+      ],
+      "benefits": [
+        "Full-time remote work opportunity",
+        "Competitive salary and benefits package",
+        "Creative freedom in content creation",
+        "Opportunity to shape our brand voice",
+        "Professional development opportunities",
+        "Collaborative and innovative work environment"
+      ],
+      "duration": "Full-time",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis"
     }
   ]
 }

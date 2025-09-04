@@ -11,7 +11,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <HeroSection />
-      <JobSearch />
+      <div id="jobs-section">
+        <JobSearch />
+      </div>
       <LifeAtCompany />
       <ApplicationProcess />
       <TalentCommunity />
