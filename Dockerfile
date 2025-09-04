@@ -25,11 +25,12 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Use existing nginx user and set proper ownership
+# Set proper ownership and permissions
 RUN chown -R nginx:nginx /usr/share/nginx/html
 RUN chown -R nginx:nginx /var/cache/nginx
 RUN chown -R nginx:nginx /var/log/nginx
 RUN chown -R nginx:nginx /etc/nginx/conf.d
+RUN chown -R nginx:nginx /run
 
 # Switch to non-root user
 USER nginx
