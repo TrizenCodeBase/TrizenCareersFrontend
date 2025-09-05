@@ -20,8 +20,8 @@ const Navbar = () => {
   const navItems = [
     { name: "Research", href: "https://www.trizenventures.com/research" },
     { name: "Consulting", href: "https://www.trizenventures.com/consulting" },
-    { name: "Training", href: "https://www.lms.trizenventures.com" },
-    { name: "Insights", href: "https://www.connect.trizenventures.com" },
+    { name: "Training", href: "https://lms.trizenventures.com" },
+    { name: "Insights", href: "https://connect.trizenventures.com/" },
     // { name: "Careers", href: "/", current: true },
   ];
 

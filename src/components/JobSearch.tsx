@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Code, Palette, Database, Brain } from "lucide-react";
+import { MapPin, Clock, Code, Palette, Database, Brain, Globe, Megaphone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import jobsData from "@/data/jobs.json";
 
@@ -33,6 +33,10 @@ const getCategoryIcon = (category) => {
       return <Database className="w-4 h-4" />;
     case "AI/ML":
       return <Brain className="w-4 h-4" />;
+    case "Web Development":
+      return <Globe className="w-4 h-4" />;
+    case "Marketing":
+      return <Megaphone className="w-4 h-4" />;
     default:
       return null;
   }
@@ -139,40 +143,52 @@ const JobSearch = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredJobs.map((job) => (
               <Card key={job.id} className="border border-gray-200 hover:border-brand-primary hover:shadow-lg transition-all duration-300 bg-white">
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between">
-                    <CardTitle className="text-xl font-semibold text-brand-primary leading-tight font-inter flex-1">
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between mb-3">
+                    <CardTitle className="text-lg font-semibold text-brand-primary leading-tight font-inter flex-1">
                       {job.title}
                     </CardTitle>
-                    {getCategoryIcon(job.category)}
+                    <div className="ml-2 p-1.5 bg-brand-accent/30 rounded-md">
+                      {getCategoryIcon(job.category)}
+                    </div>
                   </div>
-                  <div className="mt-3 text-sm text-gray-600 flex flex-col sm:flex-row sm:flex-wrap gap-3">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 flex-shrink-0 text-brand-primary" /> 
+                  <div className="flex items-center gap-4 text-sm text-gray-600">
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-brand-primary" /> 
                       <span className="truncate font-inter">{job.location}</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 flex-shrink-0 text-brand-primary" />
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 flex-shrink-0 text-brand-primary" />
                       <span className="text-brand-primary font-medium font-inter">{job.type}</span>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <p className="text-gray-600 mb-4 font-inter leading-relaxed">{job.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {job.tags.map((tag: string) => (
+                  <p className="text-gray-600 mb-4 font-inter leading-relaxed text-sm line-clamp-2">
+                    {job.shortDescription || job.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {job.tags.slice(0, 4).map((tag: string) => (
                       <Badge
                         key={tag}
                         variant="outline"
-                        className="text-xs bg-brand-accent text-brand-primary border-brand-primary/30 font-inter"
+                        className="text-xs bg-brand-accent/50 text-brand-primary border-brand-primary/20 font-inter px-2 py-1"
                       >
                         {tag}
                       </Badge>
                     ))}
+                    {job.tags.length > 4 && (
+                      <Badge
+                        variant="outline"
+                        className="text-xs bg-gray-100 text-gray-600 border-gray-200 font-inter px-2 py-1"
+                      >
+                        +{job.tags.length - 4} more
+                      </Badge>
+                    )}
                   </div>
                   <Button 
                     onClick={() => handleViewJob(job.id)}
-                    className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-medium font-inter"
+                    className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-medium font-inter text-sm py-2"
                   >
                     View Details & Apply
                   </Button>

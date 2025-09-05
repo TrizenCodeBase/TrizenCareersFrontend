@@ -1,7 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Users, Lightbulb, TrendingUp, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Users, Lightbulb, TrendingUp, Heart, ChevronLeft, ChevronRight, Linkedin } from 'lucide-react';
 import { useState } from "react";
 
 const testimonials = [
@@ -10,14 +10,16 @@ const testimonials = [
     name: "Spoorthi Sameera Varada",
     role: "B.Tech Final Year | AI Intern at Cognitbotz Solutions",
     quote: "The ML course from Trizen Learning provides a strong foundation in machine learning with clear and practical explanations. The hands-on projects helped me overcome my fear of ML and boosted my confidence. The instructors were knowledgeable and supportive throughout the course. I highly recommend it to anyone starting their ML journey.",
-    image: "/imgs/spoorthi.png"
+    image: "/imgs/spoorthi.png",
+    linkedin: "https://www.linkedin.com/in/spoorthi-sameera-209721257/"
   },
   {
     id: 2,
     name: "Vishakha Deshmukh",
     role: "MBA | Software Engineer at Kognito AI",
     quote: "Working with the Trizen team and mentors was an enriching and rewarding experience. The hands-on projects, along with continuous support and insightful guidance, helped me strengthen my skills in machine learning and deep learning. The supportive environment played a key role in boosting my confidence and preparing me to take on real-world AI challenges with clarity and conviction.",
-    image: "/imgs/vishaka.png"
+    image: "/imgs/vishaka.png",
+    linkedin: "https://www.linkedin.com/in/vishakha-deshmukh-a97261264/"
   }
 ];
 
@@ -112,7 +114,16 @@ const LifeAtCompany = () => {
                             </blockquote>
                             <div>
                               <h4 className="text-lg font-semibold text-brand-primary font-inter">{testimonial.name}</h4>
-                              <p className="text-gray-600 font-inter">{testimonial.role}</p>
+                              <p className="text-gray-600 font-inter mb-2">{testimonial.role}</p>
+                              <a 
+                                href={testimonial.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center text-brand-primary hover:text-brand-primary/80 transition-colors"
+                              >
+                                <Linkedin className="w-5 h-5 mr-1" />
+                                {/* <span className="text-sm font-inter">LinkedIn Profile</span> */}
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -160,25 +171,36 @@ const LifeAtCompany = () => {
             <div>
               <h3 className="text-2xl sm:text-3xl font-bold text-brand-primary mb-6 font-inter">Diversity & Inclusion at Our Core</h3>
               <p className="text-lg text-gray-700 mb-8 font-inter leading-relaxed">
-                We're committed to building a workforce that reflects the diversity of the communities we serve. 
-                Our inclusive culture empowers everyone to bring their authentic selves to work.
+                At Trizen, we believe that the best ideas come from diverse minds working together. We're building a culture where every voice matters, every perspective is valued, and everyone has the opportunity to thrive and grow.
               </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-brand-primary font-inter">50%</div>
-                  <div className="text-sm text-gray-600 font-inter">Women in Leadership</div>
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2"></div>
+                  <div>
+                    <h4 className="font-semibold text-brand-primary font-inter mb-1">Equal Opportunities for Growth</h4>
+                    <p className="text-gray-600 text-sm font-inter">We actively promote women and underrepresented groups into leadership roles, ensuring everyone has a clear path to advancement.</p>
+                  </div>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-brand-primary font-inter">80+</div>
-                  <div className="text-sm text-gray-600 font-inter">Countries Represented</div>
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2"></div>
+                  <div>
+                    <h4 className="font-semibold text-brand-primary font-inter mb-1">Global Perspectives</h4>
+                    <p className="text-gray-600 text-sm font-inter">Our team spans across multiple countries and cultures, bringing rich, diverse viewpoints to every project we tackle.</p>
+                  </div>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-brand-primary font-inter">95%</div>
-                  <div className="text-sm text-gray-600 font-inter">Employee Satisfaction</div>
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2"></div>
+                  <div>
+                    <h4 className="font-semibold text-brand-primary font-inter mb-1">Inclusive Environment</h4>
+                    <p className="text-gray-600 text-sm font-inter">We foster a workplace where you can be your authentic self, share your unique ideas, and feel genuinely supported by your colleagues.</p>
+                  </div>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-brand-primary font-inter">40%</div>
-                  <div className="text-sm text-gray-600 font-inter">Underrepresented Groups</div>
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-2 h-2 bg-brand-primary rounded-full mt-2"></div>
+                  <div>
+                    <h4 className="font-semibold text-brand-primary font-inter mb-1">Continuous Learning</h4>
+                    <p className="text-gray-600 text-sm font-inter">We invest in ongoing diversity training, mentorship programs, and inclusive practices that make our workplace better for everyone.</p>
+                  </div>
                 </div>
               </div>
             </div>

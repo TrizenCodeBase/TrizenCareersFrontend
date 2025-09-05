@@ -158,7 +158,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/20 pt-6 sm:pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-white/70 text-xs sm:text-sm space-y-2 md:space-y-0">
-            <p className="font-inter">&copy; 2024 Trizen. All rights reserved.</p>
+            <p className="font-inter">&copy; 2025 Trizen. All rights reserved.</p>
             <p className="text-center md:text-right font-inter">
               Built with ❤️ for amazing candidates worldwide
             </p>

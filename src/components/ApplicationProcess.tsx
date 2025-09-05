@@ -43,12 +43,12 @@ const faqs = [
     answer: "Technical interviews are tailored to your role and may include coding challenges, system design, portfolio reviews, or case studies."
   },
   {
-    question: "Can I apply to multiple positions?",
-    answer: "Absolutely! We encourage you to apply to all roles that interest you. Our team will help identify the best fit."
+    question: "What kind of projects will I work on during the internship?",
+    answer: "You'll work on respective domain projects including AI/ML, Web Development, Android and iOS Development, etc."
   },
   {
-    question: "Do you sponsor work visas?",
-    answer: "Yes, we sponsor H-1B, O-1, and other work visas for qualified candidates in eligible positions."
+    question: "Do you provide mentorship and learning resources?",
+    answer: "Yes! We provide dedicated mentorship from experienced domain experts, access to the latest AI tools and technologies, and opportunities to collaborate on innovative solutions. Our team is committed to your growth and learning journey."
   }
 ];
 
