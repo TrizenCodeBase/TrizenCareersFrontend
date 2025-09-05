@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
+import { useApplication } from "@/contexts/ApplicationContext";
 import { 
   MapPin, 
   Clock, 
@@ -29,6 +30,7 @@ const JobDetails = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { isAuthenticated } = useAuth();
+  const { isJobApplied } = useApplication();
   
   const [job, setJob] = useState<{
     id: number;
@@ -223,6 +225,13 @@ const JobDetails = () => {
                       Please <Link to="/auth" className="text-brand-primary hover:underline">log in</Link> to apply for this position.
                     </AlertDescription>
                   </Alert>
+                ) : isJobApplied(jobId || '') ? (
+                  <Button 
+                    disabled
+                    className="w-full bg-gray-400 cursor-not-allowed"
+                  >
+                    Applied
+                  </Button>
                 ) : (
                   <Button 
                     onClick={() => {

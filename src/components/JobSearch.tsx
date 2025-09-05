@@ -18,6 +18,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Code, Palette, Database, Brain, Globe, Megaphone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useApplication } from "@/contexts/ApplicationContext";
 import jobsData from "@/data/jobs.json";
 
 // Import job data from JSON file
@@ -44,6 +45,7 @@ const getCategoryIcon = (category) => {
 
 const JobSearch = () => {
   const navigate = useNavigate();
+  const { isJobApplied } = useApplication();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedLocation, setSelectedLocation] = useState("all");
@@ -188,9 +190,14 @@ const JobSearch = () => {
                   </div>
                   <Button 
                     onClick={() => handleViewJob(job.id)}
-                    className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-medium font-inter text-sm py-2"
+                    className={`w-full text-white font-medium font-inter text-sm py-2 ${
+                      isJobApplied(job.id.toString()) 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : 'bg-brand-primary hover:bg-brand-primary/90'
+                    }`}
+                    disabled={isJobApplied(job.id.toString())}
                   >
-                    View Details & Apply
+                    {isJobApplied(job.id.toString()) ? 'Applied' : 'View Details & Apply'}
                   </Button>
                 </CardContent>
               </Card>

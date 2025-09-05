@@ -13,6 +13,7 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
+import { useApplication } from "@/contexts/ApplicationContext";
 import { API_CONFIG } from "@/config/api";
 import { 
   Calendar, 
@@ -46,6 +47,7 @@ const ApplicationForm = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { isAuthenticated, token } = useAuth();
+  const { markJobAsApplied } = useApplication();
   
   const [job, setJob] = useState<{
     id: number;
@@ -121,6 +123,7 @@ const ApplicationForm = () => {
     setIsSubmitting(true);
 
     try {
+      console.log('Submitting application:', application);
       const response = await fetch(`${API_CONFIG.ENDPOINTS.APPLICATIONS}`, {
         method: 'POST',
         headers: {
@@ -132,15 +135,20 @@ const ApplicationForm = () => {
 
       if (response.ok) {
         setIsSubmitted(true);
+        // Mark this job as applied
+        if (jobId) {
+          markJobAsApplied(jobId);
+        }
         toast({
           title: "Application Submitted!",
           description: "Thank you for your application. We'll review it and get back to you soon.",
         });
       } else {
         const errorData = await response.json();
+        console.error('Application submission error:', errorData);
         toast({
           title: "Submission Failed",
-          description: errorData.message || "Failed to submit application. Please try again.",
+          description: errorData.error || errorData.message || "Failed to submit application. Please try again.",
           variant: "destructive"
         });
       }
