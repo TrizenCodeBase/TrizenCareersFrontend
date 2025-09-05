@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Linkedin, Twitter, Facebook, Instagram, Youtube, Mail } from 'lucide-react';
+import { Linkedin, Twitter, Facebook, Instagram, Youtube, Mail, MapPin, Phone, Globe } from 'lucide-react';
 
 const Footer = () => {
   const socialLinks = [
@@ -135,8 +135,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
-        {/* Newsletter Signup */}
+{/* 
+        
         <div className="border-t border-white/20 pt-6 sm:pt-8 mb-6 sm:mb-8">
           <div className="max-w-md">
             <h4 className="font-semibold text-base sm:text-lg mb-2 text-white font-inter">Stay Updated</h4>
@@ -153,12 +153,49 @@ const Footer = () => {
               </Button>
             </div>
           </div>
+        </div> */}
+
+        {/* Company Address */}
+        <div className="border-t border-white/20 pt-6 sm:pt-8 mb-6 sm:mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-semibold text-base sm:text-lg mb-3 text-white font-inter">Registered Office</h4>
+              <div className="space-y-2 text-white/70 text-sm sm:text-base font-inter">
+                <div className="flex items-start space-x-2">
+                  <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p>65-3-747/18, Vayaputranagara area,</p>
+                    <p>Sriharipuram, Gajuwaka,</p>
+                    <p>Visakhapatnam (Urban), 530026,</p>
+                    <p>Andhra Pradesh, India</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold text-base sm:text-lg mb-3 text-white font-inter">Contact Information</h4>
+              <div className="space-y-2 text-white/70 text-sm sm:text-base font-inter">
+                <div className="flex items-center space-x-2">
+                  <Phone className="h-4 w-4 flex-shrink-0" />
+                  <a href="tel:+918639648822" className="hover:text-white transition-colors">+91 8639648822</a>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Mail className="h-4 w-4 flex-shrink-0" />
+                  <a href="mailto:info@trizenventures.com" className="hover:text-white transition-colors">info@trizenventures.com</a>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Globe className="h-4 w-4 flex-shrink-0" />
+                  <a href="https://trizenventures.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">trizenventures.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-white/20 pt-6 sm:pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-white/70 text-xs sm:text-sm space-y-2 md:space-y-0">
-            <p className="font-inter">&copy; 2025 Trizen. All rights reserved.</p>
+            <p className="font-inter">&copy; 2025 Trizen Ventures LLP. All rights reserved.</p>
             <p className="text-center md:text-right font-inter">
               Built with ❤️ for amazing candidates worldwide
             </p>
