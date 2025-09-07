@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { useApplication } from "@/contexts/ApplicationContext";
 import { API_CONFIG } from "@/config/api";
+import { emailService } from "@/services/emailService";
 import { 
   Calendar, 
   Clock, 
@@ -134,14 +135,45 @@ const ApplicationForm = () => {
       });
 
       if (response.ok) {
-        setIsSubmitted(true);
         // Mark this job as applied
         if (jobId) {
           markJobAsApplied(jobId);
         }
+
+        // Send confirmation email
+        console.log('📧 Attempting to send confirmation email...');
+        console.log('📧 Applicant details:', {
+          name: application.fullName,
+          email: application.email,
+          job: job.title,
+          jobId: jobId
+        });
+        
+        try {
+          const emailResult = await emailService.sendJobApplicationConfirmation({
+            applicantName: application.fullName,
+            applicantEmail: application.email,
+            jobTitle: job.title,
+            jobId: jobId || '',
+            companyName: 'Trizen Ventures'
+          }, token || '');
+
+          if (emailResult.success) {
+            console.log('✅ Confirmation email sent successfully:', emailResult.data);
+          } else {
+            console.warn('❌ Failed to send confirmation email:', emailResult.message);
+            console.warn('❌ Email error details:', emailResult.error);
+            // Don't fail the application submission if email fails
+          }
+        } catch (emailError) {
+          console.error('❌ Error sending confirmation email:', emailError);
+          // Don't fail the application submission if email fails
+        }
+
+        setIsSubmitted(true);
         toast({
           title: "Application Submitted!",
-          description: "Thank you for your application. We'll review it and get back to you soon.",
+          description: "Thank you for your application. We'll review it and get back to you soon. A confirmation email has been sent to your inbox.",
         });
       } else {
         const errorData = await response.json();
@@ -184,7 +216,7 @@ const ApplicationForm = () => {
               <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Application Submitted!</h2>
               <p className="text-gray-600 mb-6">
-                Thank you for applying to <strong>{job.title}</strong>. We'll review your application and get back to you soon.
+                Thank you for applying to <strong>{job.title}</strong>. We'll review your application and get back to you soon. A confirmation email has been sent to your inbox.
               </p>
               <Button 
                 onClick={() => window.close()}

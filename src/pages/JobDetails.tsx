@@ -12,11 +12,11 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { useApplication } from "@/contexts/ApplicationContext";
-import { 
-  MapPin, 
-  Clock, 
-  Brain, 
-  ArrowLeft, 
+import {
+  MapPin,
+  Clock,
+  Brain,
+  ArrowLeft,
   AlertCircle,
   Calendar,
   Users,
