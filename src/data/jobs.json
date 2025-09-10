@@ -1,8 +1,9 @@
 {
   "jobs": [
     {
-      "id": 1,
+      "id": "TV-AIML-INT-2025-001",
       "title": "AIML Intern",
+      "slug": "ai-ml-intern",
       "location": "Remote",
       "type": "Internship",
       "category": "AI/ML",
@@ -38,8 +39,9 @@
       "applicationDeadline": "Rolling basis"
     },
     {
-      "id": 2,
+      "id": "TV-WEB-MERN-2025-002",
       "title": "MERN Stack Developer Intern",
+      "slug": "mern-stack-developer-intern",
       "location": "Remote",
       "type": "Internship",
       "category": "Web Development",
@@ -79,8 +81,9 @@
       "applicationDeadline": "October 10"
     },
     {
-      "id": 3,
+      "id": "TV-MKT-SMM-2025-003",
       "title": "Social Media Manager",
+      "slug": "social-media-manager",
       "location": "Remote",
       "type": "Internship",
       "category": "Marketing",

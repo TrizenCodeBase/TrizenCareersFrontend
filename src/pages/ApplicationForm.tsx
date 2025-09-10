@@ -51,8 +51,9 @@ const ApplicationForm = () => {
   const { markJobAsApplied } = useApplication();
   
   const [job, setJob] = useState<{
-    id: number;
+    id: string;
     title: string;
+    slug: string;
     location: string;
     type: string;
     category: string;
@@ -87,10 +88,12 @@ const ApplicationForm = () => {
   });
 
   useEffect(() => {
-    const foundJob = jobsData.jobs.find(j => j.id.toString() === jobId);
+    // Extract jobId from URL format: TV-WEB-MERN-2025-002-mern-stack-developer-intern
+    const actualJobId = jobId?.split('-').slice(0, 5).join('-'); // Get TV-WEB-MERN-2025-002
+    const foundJob = jobsData.jobs.find(j => j.id === actualJobId);
     if (foundJob) {
       setJob(foundJob);
-      setApplication(prev => ({ ...prev, jobId: jobId || "" }));
+      setApplication(prev => ({ ...prev, jobId: actualJobId || "" }));
     } else {
       toast({
         title: "Job Not Found",

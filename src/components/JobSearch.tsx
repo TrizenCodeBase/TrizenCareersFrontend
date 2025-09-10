@@ -76,8 +76,8 @@ const JobSearch = () => {
   const categories = ["all", ...new Set(jobListings.map(job => job.category))];
   const locations = ["all", ...new Set(jobListings.map(job => job.location))];
 
-  const handleViewJob = (jobId: number) => {
-    navigate(`/job/${jobId}`);
+  const handleViewJob = (jobId: string, slug: string) => {
+    navigate(`/jobs/${jobId}-${slug}`);
   };
 
   return (
@@ -189,15 +189,15 @@ const JobSearch = () => {
                     )}
                   </div>
                   <Button 
-                    onClick={() => handleViewJob(job.id)}
+                    onClick={() => handleViewJob(job.id, job.slug)}
                     className={`w-full text-white font-medium font-inter text-sm py-2 ${
-                      isJobApplied(job.id.toString()) 
+                      isJobApplied(job.id) 
                         ? 'bg-gray-400 cursor-not-allowed' 
                         : 'bg-brand-primary hover:bg-brand-primary/90'
                     }`}
-                    disabled={isJobApplied(job.id.toString())}
+                    disabled={isJobApplied(job.id)}
                   >
-                    {isJobApplied(job.id.toString()) ? 'Applied' : 'View Details & Apply'}
+                    {isJobApplied(job.id) ? 'Applied' : 'View Details & Apply'}
                   </Button>
                 </CardContent>
               </Card>

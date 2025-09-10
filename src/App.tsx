@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/job/:jobId" element={<JobDetails />} />
+            <Route path="/jobs/:jobId" element={<JobDetails />} />
             <Route path="/application/:jobId" element={<ApplicationForm />} />
             <Route path="/email-test" element={<EmailTest />} />
             <Route path="*" element={<NotFound />} />
