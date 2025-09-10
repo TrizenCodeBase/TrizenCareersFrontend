@@ -38,9 +38,9 @@ const Navbar = () => {
           <div className="flex items-center space-x-3">
             <Link to="/">
               <img 
-                src="/profile.png" 
+                src="/profile2.png" 
                 alt="Trizen Logo" 
-                className="h-16 sm:h-20 w-auto filter brightness-0 invert"
+                className="h-14 sm:h-18 w-auto filter brightness-0 invert"
               />
             </Link>
           </div>
@@ -85,7 +85,7 @@ const Navbar = () => {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="font-inter">
-                    <User className="mr-2 h-4 w-4" />
+                    <User className="mr-2 h- w-4" />
                     <span>Profile</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
