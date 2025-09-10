@@ -21,7 +21,9 @@ import {
   Calendar,
   Users,
   Award,
-  FileText
+  FileText,
+  DollarSign,
+  TrendingUp
 } from "lucide-react";
 import jobsData from "@/data/jobs.json";
 
@@ -215,6 +217,18 @@ const JobDetails = () => {
                     <AlertCircle className="w-4 h-4" />
                     <span>Deadline: {job.applicationDeadline}</span>
                   </div>
+                  {job.title === "MERN Stack Developer Intern" && (
+                    <>
+                      <div className="flex items-center space-x-2">
+                        <DollarSign className="w-4 h-4" />
+                        <span>Stipend: 8K to 10K monthly</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <TrendingUp className="w-4 h-4" />
+                        <span>Possible FTE conversion after 6 months</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </CardHeader>
               <CardContent>
