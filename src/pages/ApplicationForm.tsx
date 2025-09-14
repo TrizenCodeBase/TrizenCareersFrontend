@@ -22,7 +22,8 @@ import {
   AlertCircle,
   Loader2,
   CheckCircle,
-  ArrowLeft
+  ArrowLeft,
+  X
 } from "lucide-react";
 import jobsData from "@/data/jobs.json";
 
@@ -41,6 +42,22 @@ interface JobApplication {
   duration: string;
   aiMlProjects: string;
   motivation: string;
+}
+
+interface ValidationError {
+  field: string;
+  message: string;
+}
+
+interface ExpressValidatorError {
+  path: string;
+  msg: string;
+  location?: string;
+  value?: string | number | boolean;
+}
+
+interface FieldErrors {
+  [key: string]: string;
 }
 
 const ApplicationForm = () => {
@@ -69,6 +86,8 @@ const ApplicationForm = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [showValidationErrors, setShowValidationErrors] = useState(false);
   
   const [application, setApplication] = useState<JobApplication>({
     jobId: jobId || "",
@@ -110,6 +129,92 @@ const ApplicationForm = () => {
       ...prev,
       [name]: value
     }));
+    
+    // Clear field error when user starts typing
+    if (fieldErrors[name]) {
+      setFieldErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+  };
+
+  // Helper function to get field display name
+  const getFieldDisplayName = (fieldName: string): string => {
+    const fieldNames: { [key: string]: string } = {
+      fullName: "Full Name",
+      email: "Email Address",
+      phone: "Phone Number",
+      location: "Location",
+      portfolioUrl: "Portfolio/GitHub/Website URL",
+      linkedinProfile: "LinkedIn Profile URL",
+      educationStatus: "Current Education Status",
+      degreeDiscipline: "Degree/Discipline",
+      researchPapers: "Research Papers/Publications",
+      internshipExperience: "Previous Internship/Work Experience",
+      duration: "Preferred Duration",
+      aiMlProjects: "AI/ML Projects & Experience",
+      motivation: "Motivation to Join"
+    };
+    return fieldNames[fieldName] || fieldName;
+  };
+
+  // Helper function to get field guidance
+  const getFieldGuidance = (fieldName: string): string => {
+    const guidance: { [key: string]: string } = {
+      fullName: "Enter your complete name as it appears on official documents",
+      email: "Enter a valid email address (e.g., your.email@example.com)",
+      phone: "Enter your phone number with country code (e.g., +1 555 123 4567)",
+      location: "Enter your city and country (e.g., New York, NY or Remote)",
+      portfolioUrl: "Enter a valid URL to your portfolio, GitHub profile, or website",
+      linkedinProfile: "Enter your complete LinkedIn profile URL",
+      educationStatus: "Select your current education level",
+      degreeDiscipline: "Enter your field of study or degree discipline",
+      researchPapers: "List any research papers, publications, or academic projects (if none, write 'None')",
+      internshipExperience: "Describe your previous work experience (if none, write 'None')",
+      duration: "Select your preferred internship duration",
+      aiMlProjects: "Describe your AI/ML projects and experience (if none, write 'None')",
+      motivation: "Explain why you're interested in this position and what you hope to learn"
+    };
+    return guidance[fieldName] || "Please provide valid information for this field";
+  };
+
+  // Helper component for form fields with error display
+  const FormField = ({ 
+    fieldName, 
+    label, 
+    children, 
+    required = false 
+  }: { 
+    fieldName: string; 
+    label: string; 
+    children: React.ReactNode; 
+    required?: boolean;
+  }) => {
+    const hasError = fieldErrors[fieldName];
+    
+    return (
+      <div>
+        <Label htmlFor={fieldName} className="text-sm font-medium">
+          {label} {required && <span className="text-red-500">*</span>}
+        </Label>
+        <div className="mt-1">
+          {children}
+        </div>
+        {hasError && (
+          <div className="mt-2 space-y-1">
+            <p className="text-sm text-red-600 flex items-center">
+              <AlertCircle className="h-4 w-4 mr-1" />
+              {fieldErrors[fieldName]}
+            </p>
+            <p className="text-xs text-gray-600 bg-gray-50 p-2 rounded border-l-2 border-gray-300">
+              💡 <strong>Tip:</strong> {getFieldGuidance(fieldName)}
+            </p>
+          </div>
+        )}
+      </div>
+    );
   };
 
   const handleSubmitApplication = async (e: React.FormEvent) => {
@@ -124,6 +229,9 @@ const ApplicationForm = () => {
       return;
     }
 
+    // Clear previous errors
+    setFieldErrors({});
+    setShowValidationErrors(false);
     setIsSubmitting(true);
 
     try {
@@ -181,11 +289,42 @@ const ApplicationForm = () => {
       } else {
         const errorData = await response.json();
         console.error('Application submission error:', errorData);
-        toast({
-          title: "Submission Failed",
-          description: errorData.error || errorData.message || "Failed to submit application. Please try again.",
-          variant: "destructive"
-        });
+        
+        // Handle validation errors
+        if (errorData.error === 'Validation failed' && errorData.details) {
+          const newFieldErrors: FieldErrors = {};
+          
+          console.log('Validation error details:', errorData.details);
+          
+          errorData.details.forEach((error: ExpressValidatorError) => {
+            // express-validator returns objects with 'path' and 'msg' properties
+            const fieldName = error.path;
+            const errorMessage = error.msg;
+            console.log('Processing error:', { fieldName, errorMessage, originalError: error });
+            
+            if (fieldName && errorMessage) {
+              newFieldErrors[fieldName] = errorMessage;
+            }
+          });
+          
+          console.log('Processed field errors:', newFieldErrors);
+          
+          setFieldErrors(newFieldErrors);
+          setShowValidationErrors(true);
+          
+          toast({
+            title: "Validation Failed",
+            description: "Please fix the highlighted fields below and try again.",
+            variant: "destructive"
+          });
+        } else {
+          // Handle other errors
+          toast({
+            title: "Submission Failed",
+            description: errorData.error || errorData.message || "Failed to submit application. Please try again.",
+            variant: "destructive"
+          });
+        }
       }
     } catch (error) {
       console.error('Error submitting application:', error);
@@ -285,26 +424,52 @@ const ApplicationForm = () => {
               </Alert>
             ) : (
               <form onSubmit={handleSubmitApplication} className="space-y-6">
+                {/* Validation Errors Banner */}
+                {showValidationErrors && Object.keys(fieldErrors).length > 0 && (
+                  <Alert variant="destructive" className="mb-6">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertDescription>
+                      <div className="space-y-2">
+                        <p className="font-semibold">Please fix the following errors:</p>
+                        <ul className="list-disc list-inside space-y-1 text-sm">
+                          {Object.entries(fieldErrors).map(([field, message]) => (
+                            <li key={field}>
+                              <strong>{getFieldDisplayName(field)}:</strong> {message}
+                            </li>
+                          ))}
+                        </ul>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setShowValidationErrors(false)}
+                          className="mt-2 h-6 px-2 text-xs"
+                        >
+                          <X className="h-3 w-3 mr-1" />
+                          Dismiss
+                        </Button>
+                      </div>
+                    </AlertDescription>
+                  </Alert>
+                )}
                 {/* Personal Information */}
                 <div className="space-y-6">
                   <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Personal Information</h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <Label htmlFor="fullName" className="text-sm font-medium">Full Name *</Label>
+                    <FormField fieldName="fullName" label="Full Name" required>
                       <Input
                         id="fullName"
                         name="fullName"
                         value={application.fullName}
                         onChange={handleInputChange}
                         required
-                        className="mt-1"
+                        className={fieldErrors.fullName ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                         placeholder="Enter your full name"
                       />
-                    </div>
+                    </FormField>
 
-                    <div>
-                      <Label htmlFor="email" className="text-sm font-medium">Email Address *</Label>
+                    <FormField fieldName="email" label="Email Address" required>
                       <Input
                         id="email"
                         name="email"
@@ -312,13 +477,12 @@ const ApplicationForm = () => {
                         value={application.email}
                         onChange={handleInputChange}
                         required
-                        className="mt-1"
+                        className={fieldErrors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                         placeholder="your.email@example.com"
                       />
-                    </div>
+                    </FormField>
 
-                    <div>
-                      <Label htmlFor="phone" className="text-sm font-medium">Phone Number *</Label>
+                    <FormField fieldName="phone" label="Phone Number" required>
                       <Input
                         id="phone"
                         name="phone"
@@ -326,13 +490,12 @@ const ApplicationForm = () => {
                         value={application.phone}
                         onChange={handleInputChange}
                         required
-                        className="mt-1"
+                        className={fieldErrors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                         placeholder="+1 (555) 123-4567"
                       />
-                    </div>
+                    </FormField>
 
-                    <div>
-                      <Label htmlFor="location" className="text-sm font-medium">Location *</Label>
+                    <FormField fieldName="location" label="Location" required>
                       <Input
                         id="location"
                         name="location"
@@ -340,9 +503,9 @@ const ApplicationForm = () => {
                         onChange={handleInputChange}
                         placeholder="e.g., New York, NY or Remote"
                         required
-                        className="mt-1"
+                        className={fieldErrors.location ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                       />
-                    </div>
+                    </FormField>
                   </div>
                 </div>
 
@@ -351,8 +514,7 @@ const ApplicationForm = () => {
                   <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Professional Links</h3>
                   
                   <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="portfolioUrl" className="text-sm font-medium">Portfolio/GitHub/Website URL *</Label>
+                    <FormField fieldName="portfolioUrl" label="Portfolio/GitHub/Website URL" required>
                       <Input
                         id="portfolioUrl"
                         name="portfolioUrl"
@@ -360,12 +522,11 @@ const ApplicationForm = () => {
                         onChange={handleInputChange}
                         placeholder="https://github.com/yourusername or https://yourwebsite.com"
                         required
-                        className="mt-1"
+                        className={fieldErrors.portfolioUrl ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                       />
-                    </div>
+                    </FormField>
 
-                    <div>
-                      <Label htmlFor="linkedinProfile" className="text-sm font-medium">LinkedIn Profile URL *</Label>
+                    <FormField fieldName="linkedinProfile" label="LinkedIn Profile URL" required>
                       <Input
                         id="linkedinProfile"
                         name="linkedinProfile"
@@ -373,9 +534,9 @@ const ApplicationForm = () => {
                         onChange={handleInputChange}
                         placeholder="https://linkedin.com/in/yourprofile"
                         required
-                        className="mt-1"
+                        className={fieldErrors.linkedinProfile ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                       />
-                    </div>
+                    </FormField>
                   </div>
                 </div>
 
@@ -384,15 +545,16 @@ const ApplicationForm = () => {
                   <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Education</h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <Label htmlFor="educationStatus" className="text-sm font-medium">Current Education Status *</Label>
+                    <FormField fieldName="educationStatus" label="Current Education Status" required>
                       <select
                         id="educationStatus"
                         name="educationStatus"
                         value={application.educationStatus}
                         onChange={handleInputChange}
                         required
-                        className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
+                          fieldErrors.educationStatus ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
+                        }`}
                       >
                         <option value="">Select your education status</option>
                         <option value="high-school">High School</option>
@@ -401,79 +563,80 @@ const ApplicationForm = () => {
                         <option value="phd">PhD</option>
                         <option value="other">Other</option>
                       </select>
-                    </div>
+                    </FormField>
 
-                    <div>
-                      <Label htmlFor="degreeDiscipline" className="text-sm font-medium">Degree/Discipline (if applicable)</Label>
+                    <FormField fieldName="degreeDiscipline" label="Degree/Discipline" required>
                       <Input
                         id="degreeDiscipline"
                         name="degreeDiscipline"
                         value={application.degreeDiscipline}
                         onChange={handleInputChange}
                         placeholder="e.g., Computer Science, Data Science, etc."
-                        className="mt-1"
+                        required
+                        className={fieldErrors.degreeDiscipline ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                       />
-                    </div>
+                    </FormField>
                   </div>
 
-                  <div>
-                    <Label htmlFor="researchPapers" className="text-sm font-medium">Research Papers/Publications (if any)</Label>
+                  <FormField fieldName="researchPapers" label="Research Papers/Publications" required>
                     <Textarea
                       id="researchPapers"
                       name="researchPapers"
                       value={application.researchPapers}
                       onChange={handleInputChange}
                       placeholder="List any research papers, publications, or academic projects..."
-                      className="mt-1"
+                      required
+                      className={fieldErrors.researchPapers ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                       rows={3}
                     />
-                  </div>
+                  </FormField>
                 </div>
 
                 {/* Experience */}
                 <div className="space-y-6">
                   <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Experience</h3>
                   
-                  <div>
-                    <Label htmlFor="internshipExperience" className="text-sm font-medium">Previous Internship/Work Experience</Label>
+                  <FormField fieldName="internshipExperience" label="Previous Internship/Work Experience" required>
                     <Textarea
                       id="internshipExperience"
                       name="internshipExperience"
                       value={application.internshipExperience}
                       onChange={handleInputChange}
                       placeholder="Describe your previous internship or work experience..."
-                      className="mt-1"
+                      required
+                      className={fieldErrors.internshipExperience ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                       rows={3}
                     />
-                  </div>
+                  </FormField>
 
-                  <div>
-                    <Label htmlFor="aiMlProjects" className="text-sm font-medium">AI/ML Projects & Experience</Label>
+                  <FormField fieldName="aiMlProjects" label="AI/ML Projects & Experience" required>
                     <Textarea
                       id="aiMlProjects"
                       name="aiMlProjects"
                       value={application.aiMlProjects}
                       onChange={handleInputChange}
                       placeholder="Describe any AI/ML projects, coursework, or experience you have..."
-                      className="mt-1"
+                      required
+                      className={fieldErrors.aiMlProjects ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                       rows={4}
                     />
-                  </div>
+                  </FormField>
                 </div>
 
                 {/* Preferences */}
                 <div className="space-y-6">
                   <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Preferences</h3>
                   
-                  <div>
-                    <Label htmlFor="duration" className="text-sm font-medium">Preferred Duration *</Label>
+                  <FormField fieldName="duration" label="Preferred Duration" required>
                     <select
                       id="duration"
                       name="duration"
                       value={application.duration}
                       onChange={handleInputChange}
                       required
-                      className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
+                        fieldErrors.duration ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
+                      }`}
                     >
                       <option value="">Select preferred duration</option>
                       <option value="2-months">2 months</option>
@@ -481,15 +644,14 @@ const ApplicationForm = () => {
                       <option value="6-months">6 months</option>
                       <option value="flexible">Flexible</option>
                     </select>
-                  </div>
+                  </FormField>
                 </div>
 
                 {/* Motivation */}
                 <div className="space-y-6">
                   <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Motivation</h3>
                   
-                  <div>
-                    <Label htmlFor="motivation" className="text-sm font-medium">Why are you interested in this internship? *</Label>
+                  <FormField fieldName="motivation" label="Why are you interested in this internship?" required>
                     <Textarea
                       id="motivation"
                       name="motivation"
@@ -497,10 +659,10 @@ const ApplicationForm = () => {
                       onChange={handleInputChange}
                       placeholder="Tell us why you're interested in this position and what you hope to learn..."
                       required
-                      className="mt-1"
+                      className={fieldErrors.motivation ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                       rows={4}
                     />
-                  </div>
+                  </FormField>
                 </div>
 
                 {/* Submit Button */}
