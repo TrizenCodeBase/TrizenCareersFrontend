@@ -119,9 +119,9 @@ const ApplicationForm = () => {
         description: "The job you're looking for doesn't exist.",
         variant: "destructive"
       });
-      window.close();
+      navigate(`/jobs/${jobId}`);
     }
-  }, [jobId, toast]);
+  }, [jobId, toast, navigate]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -361,10 +361,10 @@ const ApplicationForm = () => {
                 Thank you for applying to <strong>{job.title}</strong>. We'll review your application and get back to you soon. A confirmation email has been sent to your inbox.
               </p>
               <Button 
-                onClick={() => window.close()}
+                onClick={() => navigate(`/jobs/${jobId}`)}
                 className="w-full bg-brand-primary hover:bg-brand-primary/90"
               >
-                Close Window
+                Back to Job Details
               </Button>
             </div>
           </CardContent>
@@ -380,7 +380,7 @@ const ApplicationForm = () => {
         <div className="mb-8">
           <Button
             variant="ghost"
-            onClick={() => window.close()}
+            onClick={() => navigate(`/jobs/${jobId}`)}
             className="mb-4 text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />

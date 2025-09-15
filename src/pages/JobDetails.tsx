@@ -46,6 +46,7 @@ const JobDetails = () => {
     requirements: string[];
     responsibilities: string[];
     benefits: string[];
+    selectionProcess: string[];
     duration: string;
     startDate: string;
     applicationDeadline: string;
@@ -200,6 +201,26 @@ const JobDetails = () => {
                 </ul>
               </CardContent>
             </Card>
+
+            {/* Selection Process */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <FileText className="h-5 w-5 mr-2" />
+                  Selection Process
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {job.selectionProcess?.map((process, index) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-brand-primary mr-2">•</span>
+                      <span className="text-gray-700">{process}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Application Form */}
@@ -224,11 +245,19 @@ const JobDetails = () => {
                     <>
                       <div className="flex items-center space-x-2">
                         <DollarSign className="w-4 h-4" />
-                        <span>Stipend: 8K to 10K monthly</span>
+                        <span>Stipend: 8K monthly</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <TrendingUp className="w-4 h-4" />
                         <span>Possible FTE conversion after 6 months</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <MapPin className="w-4 h-4" />
+                        <span>Work location: Hybrid (Hyderabad)</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Users className="w-4 h-4" />
+                        <span>Openings: 2 positions available</span>
                       </div>
                     </>
                   )}
@@ -252,15 +281,8 @@ const JobDetails = () => {
                 ) : (
                   <Button 
                     onClick={() => {
-                      // Open application form in a new window
-                      const applicationWindow = window.open(
-                        `/application/${jobId}`,
-                        'applicationForm',
-                        'width=800,height=900,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no,status=no'
-                      );
-                      if (applicationWindow) {
-                        applicationWindow.focus();
-                      }
+                      // Open application form in a new tab
+                      window.open(`/application/${jobId}`, '_blank');
                     }}
                     className="w-full bg-brand-primary hover:bg-brand-primary/90"
                   >
