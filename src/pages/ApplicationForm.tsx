@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -181,7 +181,7 @@ const ApplicationForm = () => {
   };
 
   // Helper component for form fields with error display
-  const FormField = ({ 
+  const FormField = useCallback(({ 
     fieldName, 
     label, 
     children, 
@@ -215,7 +215,7 @@ const ApplicationForm = () => {
         )}
       </div>
     );
-  };
+  }, [fieldErrors]);
 
   const handleSubmitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
