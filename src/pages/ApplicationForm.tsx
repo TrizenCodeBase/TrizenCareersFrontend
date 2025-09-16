@@ -416,12 +416,23 @@ const ApplicationForm = () => {
         <Card>
           <CardContent className="p-8">
             {!isAuthenticated ? (
-              <Alert>
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>
-                  Please log in to submit your application.
-                </AlertDescription>
-              </Alert>
+              <div className="space-y-6">
+                <Alert>
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription>
+                    Please log in to submit your application.
+                  </AlertDescription>
+                </Alert>
+                <div className="flex justify-center">
+                  <Button
+                    onClick={() => navigate('/auth')}
+                    size="lg"
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-12 py-4 text-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 border-2 border-blue-700 hover:border-blue-800"
+                  >
+                    🔐 Log In to Apply
+                  </Button>
+                </div>
+              </div>
             ) : (
               <form onSubmit={handleSubmitApplication} className="space-y-6">
                 {/* Validation Errors Banner */}

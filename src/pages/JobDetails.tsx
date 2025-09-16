@@ -265,12 +265,19 @@ const JobDetails = () => {
               </CardHeader>
               <CardContent>
                 {!isAuthenticated ? (
-                  <Alert>
-                    <AlertCircle className="h-4 w-4" />
-                    <AlertDescription>
-                      Please <Link to="/auth" className="text-brand-primary hover:underline">log in</Link> to apply for this position.
-                    </AlertDescription>
-                  </Alert>
+                  <div className="space-y-4">
+                    <Alert>
+                      <AlertCircle className="h-4 w-4" />
+                      <AlertDescription>
+                        Please log in to apply for this position.
+                      </AlertDescription>
+                    </Alert>
+                    <Link to="/auth">
+                      <Button className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-bold py-3 text-lg">
+                        Log In to Apply
+                      </Button>
+                    </Link>
+                  </div>
                 ) : isJobApplied(jobId || '') ? (
                   <Button 
                     disabled
