@@ -35,6 +35,7 @@ interface JobApplication {
   location: string;
   portfolioUrl: string;
   linkedinProfile: string;
+  resumeLink: string;
   educationStatus: string;
   degreeDiscipline: string;
   researchPapers: string;
@@ -97,6 +98,7 @@ const ApplicationForm = () => {
     location: "",
     portfolioUrl: "",
     linkedinProfile: "",
+    resumeLink: "",
     educationStatus: "",
     degreeDiscipline: "",
     researchPapers: "",
@@ -149,6 +151,7 @@ const ApplicationForm = () => {
       location: "Location",
       portfolioUrl: "Portfolio/GitHub/Website URL",
       linkedinProfile: "LinkedIn Profile URL",
+      resumeLink: "Resume Link (Google Drive/Dropbox)",
       educationStatus: "Current Education Status",
       degreeDiscipline: "Degree/Discipline",
       researchPapers: "Research Papers/Publications",
@@ -169,6 +172,7 @@ const ApplicationForm = () => {
       location: "Enter your city and country (e.g., New York, NY or Remote)",
       portfolioUrl: "Enter a valid URL to your portfolio, GitHub profile, or website",
       linkedinProfile: "Enter your complete LinkedIn profile URL",
+      resumeLink: "Upload your resume to Google Drive/Dropbox and share with 'Anyone with the link' access. Paste the shareable link here.",
       educationStatus: "Select your current education level",
       degreeDiscipline: "Enter your field of study or degree discipline",
       researchPapers: "List any research papers, publications, or academic projects (if none, write 'None')",
@@ -546,6 +550,18 @@ const ApplicationForm = () => {
                         placeholder="https://linkedin.com/in/yourprofile"
                         required
                         className={fieldErrors.linkedinProfile ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                      />
+                    </FormField>
+
+                    <FormField fieldName="resumeLink" label="Resume Link (Google Drive/Dropbox)" required>
+                      <Input
+                        id="resumeLink"
+                        name="resumeLink"
+                        value={application.resumeLink}
+                        onChange={handleInputChange}
+                        placeholder="https://drive.google.com/file/d/your-file-id/view?usp=sharing"
+                        required
+                        className={fieldErrors.resumeLink ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                       />
                     </FormField>
                   </div>
