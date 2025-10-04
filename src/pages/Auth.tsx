@@ -106,8 +106,8 @@ const Auth = () => {
 
       if (data.success) {
         toast({
-          title: "Verification Code Sent",
-          description: "Please check your email for the verification code.",
+          title: "Account Created",
+          description: "You can verify email now or continue to login.",
         });
         setSignupSlide('otp');
       } else {
