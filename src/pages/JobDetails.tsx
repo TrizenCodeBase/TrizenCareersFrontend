@@ -50,6 +50,7 @@ const JobDetails = () => {
     duration: string;
     startDate: string;
     applicationDeadline: string;
+    status?: string;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -264,7 +265,22 @@ const JobDetails = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                {!isAuthenticated ? (
+                {job.status === "closed" ? (
+                  <div className="space-y-4">
+                    <Alert>
+                      <AlertCircle className="h-4 w-4" />
+                      <AlertDescription>
+                        Applications for this position are currently closed.
+                      </AlertDescription>
+                    </Alert>
+                    <Button 
+                      disabled
+                      className="w-full bg-gray-400 cursor-not-allowed"
+                    >
+                      Applications Closed
+                    </Button>
+                  </div>
+                ) : !isAuthenticated ? (
                   <div className="space-y-4">
                     <Alert>
                       <AlertCircle className="h-4 w-4" />

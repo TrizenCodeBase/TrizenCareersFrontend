@@ -49,6 +49,7 @@
       "location": "Hybrid",
       "type": "Internship",
       "category": "Web Development",
+      "status": "closed",
       "shortDescription": "Build modern web applications using MongoDB, Express.js, React.js, and Node.js with hands-on experience in full-stack development.",
       "description": "Thank you for your interest in the MERN Stack Developer Internship at Trizen Ventures LLP! We are looking for dedicated and skilled developers to work on cutting-edge web application projects using the MERN stack (MongoDB, Express.js, React.js, Node.js). This is a full-time, hybrid, 6 months paid internship opportunity with a monthly stipend of 8K. Possible full-time conversion after 6 months of internship. Please ensure you fill out this application form accurately. Only shortlisted candidates will be contacted. To learn more about our company, visit our website: www.trizenventures.com",
       "tags": ["MongoDB", "Express.js", "React.js", "Node.js", "JavaScript", "RESTful APIs", "Authentication"],
