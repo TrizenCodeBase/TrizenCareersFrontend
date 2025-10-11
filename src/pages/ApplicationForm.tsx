@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Card,
   CardContent,
@@ -43,6 +44,17 @@ interface JobApplication {
   duration: string;
   aiMlProjects: string;
   motivation: string;
+  // Social Media Management Intern specific fields
+  currentQualification?: string;
+  collegeUniversity?: string;
+  relevantCourses?: string;
+  socialMediaPlatforms?: string[];
+  contentCreationSkills?: string[];
+  portfolioWorkSamples?: string;
+  preferredStartDate?: string;
+  hoursPerWeek?: string;
+  workPreference?: string;
+  expectations?: string;
 }
 
 interface ValidationError {
@@ -105,7 +117,18 @@ const ApplicationForm = () => {
     internshipExperience: "",
     duration: "",
     aiMlProjects: "",
-    motivation: ""
+    motivation: "",
+    // Social Media Management Intern specific fields
+    currentQualification: "",
+    collegeUniversity: "",
+    relevantCourses: "",
+    socialMediaPlatforms: [],
+    contentCreationSkills: [],
+    portfolioWorkSamples: "",
+    preferredStartDate: "",
+    hoursPerWeek: "",
+    workPreference: "",
+    expectations: ""
   });
 
   useEffect(() => {
@@ -142,15 +165,41 @@ const ApplicationForm = () => {
     }
   };
 
+  const handleCheckboxChange = (fieldName: string, value: string, checked: boolean) => {
+    setApplication(prev => {
+      const currentArray = (prev[fieldName as keyof JobApplication] as string[]) || [];
+      if (checked) {
+        return {
+          ...prev,
+          [fieldName]: [...currentArray, value]
+        };
+      } else {
+        return {
+          ...prev,
+          [fieldName]: currentArray.filter(item => item !== value)
+        };
+      }
+    });
+    
+    // Clear field error when user makes selection
+    if (fieldErrors[fieldName]) {
+      setFieldErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[fieldName];
+        return newErrors;
+      });
+    }
+  };
+
   // Helper function to get field display name
   const getFieldDisplayName = (fieldName: string): string => {
     const fieldNames: { [key: string]: string } = {
       fullName: "Full Name",
       email: "Email Address",
-      phone: "Phone Number",
-      location: "Location",
+      phone: "Contact Number",
+      location: "Location / City",
       portfolioUrl: "Portfolio/GitHub/Website URL",
-      linkedinProfile: "LinkedIn Profile URL",
+      linkedinProfile: "LinkedIn Profile",
       resumeLink: "Resume Link (Google Drive/Dropbox)",
       educationStatus: "Current Education Status",
       degreeDiscipline: "Degree/Discipline",
@@ -158,7 +207,18 @@ const ApplicationForm = () => {
       internshipExperience: "Previous Internship/Work Experience",
       duration: "Preferred Duration",
       aiMlProjects: "AI/ML Projects & Experience",
-      motivation: "Motivation to Join"
+      motivation: "Motivation to Join",
+      // Social Media Management Intern specific fields
+      currentQualification: "Current Qualification / Year of Study",
+      collegeUniversity: "College / University Name",
+      relevantCourses: "Relevant Courses or Certifications",
+      socialMediaPlatforms: "Social Media Platforms Familiar With",
+      contentCreationSkills: "Content Creation Skills",
+      portfolioWorkSamples: "Portfolio or Work Samples",
+      preferredStartDate: "Preferred Start Date",
+      hoursPerWeek: "Duration / Hours Per Week",
+      workPreference: "Work Preference",
+      expectations: "Expectations or Questions"
     };
     return fieldNames[fieldName] || fieldName;
   };
@@ -179,7 +239,18 @@ const ApplicationForm = () => {
       internshipExperience: "Describe your previous work experience (if none, write 'None')",
       duration: "Select your preferred internship duration",
       aiMlProjects: "Describe your AI/ML projects and experience (if none, write 'None')",
-      motivation: "Explain why you're interested in this position and what you hope to learn"
+      motivation: "Explain why you're interested in this position and what you hope to learn",
+      // Social Media Management Intern specific fields
+      currentQualification: "Enter your current qualification and year of study (e.g., B.Tech 3rd Year, MBA 1st Year)",
+      collegeUniversity: "Enter the name of your college or university",
+      relevantCourses: "List any relevant courses or certifications you have completed (optional)",
+      socialMediaPlatforms: "Select all social media platforms you are familiar with",
+      contentCreationSkills: "Select all content creation skills you possess",
+      portfolioWorkSamples: "Upload your portfolio or work samples to Google Drive/Dropbox and share with 'Anyone with the link' access. Paste the shareable link here.",
+      preferredStartDate: "Select your preferred start date for the internship",
+      hoursPerWeek: "Enter how many hours per week you can commit (optional)",
+      workPreference: "Select your preferred work arrangement",
+      expectations: "Share any expectations or questions you have about this internship (optional)"
     };
     return guidance[fieldName] || "Please provide valid information for this field";
   };
@@ -220,6 +291,11 @@ const ApplicationForm = () => {
       </div>
     );
   }, [fieldErrors]);
+
+  // Helper function to check if this is the Social Media Management Intern job
+  const isSocialMediaJob = () => {
+    return job?.id === "TV-MKT-SMM-2025-003";
+  };
 
   const handleSubmitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -467,230 +543,505 @@ const ApplicationForm = () => {
                     </AlertDescription>
                   </Alert>
                 )}
-                {/* Personal Information */}
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Personal Information</h3>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField fieldName="fullName" label="Full Name" required>
-                      <Input
-                        id="fullName"
-                        name="fullName"
-                        value={application.fullName}
-                        onChange={handleInputChange}
-                        required
-                        className={fieldErrors.fullName ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                        placeholder="Enter your full name"
-                      />
-                    </FormField>
 
-                    <FormField fieldName="email" label="Email Address" required>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={application.email}
-                        onChange={handleInputChange}
-                        required
-                        className={fieldErrors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                        placeholder="your.email@example.com"
-                      />
-                    </FormField>
+                {isSocialMediaJob() ? (
+                  // Social Media Management Intern Form
+                  <>
+                    {/* Step 1: Personal Details */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Step 1: Add Personal Details</h3>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <FormField fieldName="fullName" label="Full Name" required>
+                          <Input
+                            id="fullName"
+                            name="fullName"
+                            value={application.fullName}
+                            onChange={handleInputChange}
+                            required
+                            className={fieldErrors.fullName ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                            placeholder="Enter your full name"
+                          />
+                        </FormField>
 
-                    <FormField fieldName="phone" label="Phone Number" required>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={application.phone}
-                        onChange={handleInputChange}
-                        required
-                        className={fieldErrors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                        placeholder="+1 (555) 123-4567"
-                      />
-                    </FormField>
+                        <FormField fieldName="email" label="Email Address" required>
+                          <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={application.email}
+                            onChange={handleInputChange}
+                            required
+                            className={fieldErrors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                            placeholder="your.email@example.com"
+                          />
+                        </FormField>
 
-                    <FormField fieldName="location" label="Location" required>
-                      <Input
-                        id="location"
-                        name="location"
-                        value={application.location}
-                        onChange={handleInputChange}
-                        placeholder="e.g., New York, NY or Remote"
-                        required
-                        className={fieldErrors.location ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                      />
-                    </FormField>
-                  </div>
-                </div>
+                        <FormField fieldName="phone" label="Contact Number" required>
+                          <Input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            value={application.phone}
+                            onChange={handleInputChange}
+                            required
+                            className={fieldErrors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                            placeholder="+1 (555) 123-4567"
+                          />
+                        </FormField>
 
-                {/* Professional Links */}
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Professional Links</h3>
-                  
-                  <div className="space-y-4">
-                    <FormField fieldName="portfolioUrl" label="Portfolio/GitHub/Website URL" required>
-                      <Input
-                        id="portfolioUrl"
-                        name="portfolioUrl"
-                        value={application.portfolioUrl}
-                        onChange={handleInputChange}
-                        placeholder="https://github.com/yourusername or https://yourwebsite.com"
-                        required
-                        className={fieldErrors.portfolioUrl ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                      />
-                    </FormField>
+                        <FormField fieldName="location" label="Location / City" required>
+                          <Input
+                            id="location"
+                            name="location"
+                            value={application.location}
+                            onChange={handleInputChange}
+                            placeholder="e.g., New York, NY or Remote"
+                            required
+                            className={fieldErrors.location ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
 
-                    <FormField fieldName="linkedinProfile" label="LinkedIn Profile URL" required>
-                      <Input
-                        id="linkedinProfile"
-                        name="linkedinProfile"
-                        value={application.linkedinProfile}
-                        onChange={handleInputChange}
-                        placeholder="https://linkedin.com/in/yourprofile"
-                        required
-                        className={fieldErrors.linkedinProfile ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                      />
-                    </FormField>
+                        <FormField fieldName="linkedinProfile" label="LinkedIn Profile" required>
+                          <Input
+                            id="linkedinProfile"
+                            name="linkedinProfile"
+                            value={application.linkedinProfile}
+                            onChange={handleInputChange}
+                            placeholder="https://linkedin.com/in/yourprofile"
+                            required
+                            className={fieldErrors.linkedinProfile ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
 
-                    <FormField fieldName="resumeLink" label="Resume Link (Google Drive/Dropbox)" required>
-                      <Input
-                        id="resumeLink"
-                        name="resumeLink"
-                        value={application.resumeLink}
-                        onChange={handleInputChange}
-                        placeholder="https://drive.google.com/file/d/your-file-id/view?usp=sharing"
-                        required
-                        className={fieldErrors.resumeLink ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                      />
-                    </FormField>
-                  </div>
-                </div>
+                        <FormField fieldName="resumeLink" label="Resume Link (Google Drive/Dropbox)" required>
+                          <Input
+                            id="resumeLink"
+                            name="resumeLink"
+                            value={application.resumeLink}
+                            onChange={handleInputChange}
+                            placeholder="https://drive.google.com/file/d/your-file-id/view?usp=sharing"
+                            required
+                            className={fieldErrors.resumeLink ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
+                      </div>
+                    </div>
 
-                {/* Education */}
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Education</h3>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField fieldName="educationStatus" label="Current Education Status" required>
-                      <select
-                        id="educationStatus"
-                        name="educationStatus"
-                        value={application.educationStatus}
-                        onChange={handleInputChange}
-                        required
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
-                          fieldErrors.educationStatus ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
-                        }`}
-                      >
-                        <option value="">Select your education status</option>
-                        <option value="high-school">High School</option>
-                        <option value="bachelor">Bachelor's Degree</option>
-                        <option value="master">Master's Degree</option>
-                        <option value="phd">PhD</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </FormField>
+                    {/* Step 2: Education */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Step 2: Education</h3>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <FormField fieldName="currentQualification" label="Current Qualification / Year of Study" required>
+                          <Input
+                            id="currentQualification"
+                            name="currentQualification"
+                            value={application.currentQualification}
+                            onChange={handleInputChange}
+                            placeholder="e.g., B.Tech 3rd Year, MBA 1st Year"
+                            required
+                            className={fieldErrors.currentQualification ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
 
-                    <FormField fieldName="degreeDiscipline" label="Degree/Discipline" required>
-                      <Input
-                        id="degreeDiscipline"
-                        name="degreeDiscipline"
-                        value={application.degreeDiscipline}
-                        onChange={handleInputChange}
-                        placeholder="e.g., Computer Science, Data Science, etc."
-                        required
-                        className={fieldErrors.degreeDiscipline ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                      />
-                    </FormField>
-                  </div>
+                        <FormField fieldName="collegeUniversity" label="College / University Name" required>
+                          <Input
+                            id="collegeUniversity"
+                            name="collegeUniversity"
+                            value={application.collegeUniversity}
+                            onChange={handleInputChange}
+                            placeholder="Enter your college or university name"
+                            required
+                            className={fieldErrors.collegeUniversity ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
+                      </div>
 
-                  <FormField fieldName="researchPapers" label="Research Papers/Publications" required>
-                    <Textarea
-                      id="researchPapers"
-                      name="researchPapers"
-                      value={application.researchPapers}
-                      onChange={handleInputChange}
-                      placeholder="List any research papers, publications, or academic projects..."
-                      required
-                      className={fieldErrors.researchPapers ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                      rows={3}
-                    />
-                  </FormField>
-                </div>
+                      <FormField fieldName="relevantCourses" label="Relevant Courses or Certifications">
+                        <Textarea
+                          id="relevantCourses"
+                          name="relevantCourses"
+                          value={application.relevantCourses}
+                          onChange={handleInputChange}
+                          placeholder="List any relevant courses or certifications you have completed (optional)"
+                          className={fieldErrors.relevantCourses ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          rows={3}
+                        />
+                      </FormField>
+                    </div>
 
-                {/* Experience */}
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Experience</h3>
-                  
-                  <FormField fieldName="internshipExperience" label="Previous Internship/Work Experience" required>
-                    <Textarea
-                      id="internshipExperience"
-                      name="internshipExperience"
-                      value={application.internshipExperience}
-                      onChange={handleInputChange}
-                      placeholder="Describe your previous internship or work experience..."
-                      required
-                      className={fieldErrors.internshipExperience ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                      rows={3}
-                    />
-                  </FormField>
+                    {/* Step 3: Skills & Experience */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Step 3: Skills & Experience</h3>
+                      
+                      <FormField fieldName="internshipExperience" label="Prior Internships or Work Experience" required>
+                        <Textarea
+                          id="internshipExperience"
+                          name="internshipExperience"
+                          value={application.internshipExperience}
+                          onChange={handleInputChange}
+                          placeholder="Describe your previous internship or work experience..."
+                          required
+                          className={fieldErrors.internshipExperience ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          rows={3}
+                        />
+                      </FormField>
 
-                  <FormField fieldName="aiMlProjects" label="AI/ML Projects & Experience" required>
-                    <Textarea
-                      id="aiMlProjects"
-                      name="aiMlProjects"
-                      value={application.aiMlProjects}
-                      onChange={handleInputChange}
-                      placeholder="Describe any AI/ML projects, coursework, or experience you have..."
-                      required
-                      className={fieldErrors.aiMlProjects ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                      rows={4}
-                    />
-                  </FormField>
-                </div>
+                      <FormField fieldName="socialMediaPlatforms" label="Social Media Platforms Familiar With" required>
+                        <div className="space-y-2">
+                          {["LinkedIn", "Instagram", "Facebook", "Twitter", "Other"].map((platform) => (
+                            <div key={platform} className="flex items-center space-x-2">
+                              <Checkbox
+                                id={`social-${platform}`}
+                                checked={application.socialMediaPlatforms?.includes(platform) || false}
+                                onCheckedChange={(checked) => handleCheckboxChange("socialMediaPlatforms", platform, checked as boolean)}
+                              />
+                              <Label htmlFor={`social-${platform}`} className="text-sm font-normal">
+                                {platform}
+                              </Label>
+                            </div>
+                          ))}
+                        </div>
+                      </FormField>
 
-                {/* Preferences */}
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Preferences</h3>
-                  
-                  <FormField fieldName="duration" label="Preferred Duration" required>
-                    <select
-                      id="duration"
-                      name="duration"
-                      value={application.duration}
-                      onChange={handleInputChange}
-                      required
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
-                        fieldErrors.duration ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
-                      }`}
-                    >
-                      <option value="">Select preferred duration</option>
-                      <option value="2-months">2 months</option>
-                      <option value="3-months">3 months</option>
-                      <option value="6-months">6 months</option>
-                      <option value="flexible">Flexible</option>
-                    </select>
-                  </FormField>
-                </div>
+                      <FormField fieldName="contentCreationSkills" label="Content Creation Skills" required>
+                        <div className="space-y-2">
+                          {["Writing", "Graphics", "Video", "Canva", "Adobe Suite", "Other"].map((skill) => (
+                            <div key={skill} className="flex items-center space-x-2">
+                              <Checkbox
+                                id={`content-${skill}`}
+                                checked={application.contentCreationSkills?.includes(skill) || false}
+                                onCheckedChange={(checked) => handleCheckboxChange("contentCreationSkills", skill, checked as boolean)}
+                              />
+                              <Label htmlFor={`content-${skill}`} className="text-sm font-normal">
+                                {skill}
+                              </Label>
+                            </div>
+                          ))}
+                        </div>
+                      </FormField>
 
-                {/* Motivation */}
-                <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Motivation</h3>
-                  
-                  <FormField fieldName="motivation" label="Why are you interested in this internship?" required>
-                    <Textarea
-                      id="motivation"
-                      name="motivation"
-                      value={application.motivation}
-                      onChange={handleInputChange}
-                      placeholder="Tell us why you're interested in this position and what you hope to learn..."
-                      required
-                      className={fieldErrors.motivation ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                      rows={4}
-                    />
-                  </FormField>
-                </div>
+                      <FormField fieldName="portfolioWorkSamples" label="Portfolio or Work Samples" required>
+                        <Input
+                          id="portfolioWorkSamples"
+                          name="portfolioWorkSamples"
+                          value={application.portfolioWorkSamples}
+                          onChange={handleInputChange}
+                          placeholder="https://drive.google.com/file/d/your-file-id/view?usp=sharing"
+                          required
+                          className={fieldErrors.portfolioWorkSamples ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                        />
+                      </FormField>
+                    </div>
+
+                    {/* Step 4: Availability */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Step 4: Availability</h3>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <FormField fieldName="preferredStartDate" label="Preferred Start Date" required>
+                          <Input
+                            id="preferredStartDate"
+                            name="preferredStartDate"
+                            type="date"
+                            value={application.preferredStartDate}
+                            onChange={handleInputChange}
+                            required
+                            className={fieldErrors.preferredStartDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
+
+                        <FormField fieldName="hoursPerWeek" label="Duration / Hours Per Week">
+                          <Input
+                            id="hoursPerWeek"
+                            name="hoursPerWeek"
+                            value={application.hoursPerWeek}
+                            onChange={handleInputChange}
+                            placeholder="e.g., 20-30 hours per week"
+                            className={fieldErrors.hoursPerWeek ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
+                      </div>
+
+                      <FormField fieldName="workPreference" label="Work Preference" required>
+                        <select
+                          id="workPreference"
+                          name="workPreference"
+                          value={application.workPreference}
+                          onChange={handleInputChange}
+                          required
+                          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
+                            fieldErrors.workPreference ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
+                          }`}
+                        >
+                          <option value="">Select your work preference</option>
+                          <option value="Hybrid">Hybrid</option>
+                          <option value="Remote">Remote</option>
+                          <option value="Office">Office</option>
+                        </select>
+                      </FormField>
+                    </div>
+
+                    {/* Step 5: Additional Information */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Step 5: Additional Information</h3>
+                      
+                      <FormField fieldName="motivation" label="Why are you interested in this internship?" required>
+                        <Textarea
+                          id="motivation"
+                          name="motivation"
+                          value={application.motivation}
+                          onChange={handleInputChange}
+                          placeholder="Tell us why you're interested in this position and what you hope to learn..."
+                          required
+                          className={fieldErrors.motivation ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          rows={4}
+                        />
+                      </FormField>
+
+                      <FormField fieldName="expectations" label="Expectations or Questions">
+                        <Textarea
+                          id="expectations"
+                          name="expectations"
+                          value={application.expectations}
+                          onChange={handleInputChange}
+                          placeholder="Share any expectations or questions you have about this internship (optional)"
+                          className={fieldErrors.expectations ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          rows={3}
+                        />
+                      </FormField>
+                    </div>
+                  </>
+                ) : (
+                  // Original form for other jobs
+                  <>
+                    {/* Personal Information */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Personal Information</h3>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <FormField fieldName="fullName" label="Full Name" required>
+                          <Input
+                            id="fullName"
+                            name="fullName"
+                            value={application.fullName}
+                            onChange={handleInputChange}
+                            required
+                            className={fieldErrors.fullName ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                            placeholder="Enter your full name"
+                          />
+                        </FormField>
+
+                        <FormField fieldName="email" label="Email Address" required>
+                          <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={application.email}
+                            onChange={handleInputChange}
+                            required
+                            className={fieldErrors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                            placeholder="your.email@example.com"
+                          />
+                        </FormField>
+
+                        <FormField fieldName="phone" label="Phone Number" required>
+                          <Input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            value={application.phone}
+                            onChange={handleInputChange}
+                            required
+                            className={fieldErrors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                            placeholder="+1 (555) 123-4567"
+                          />
+                        </FormField>
+
+                        <FormField fieldName="location" label="Location" required>
+                          <Input
+                            id="location"
+                            name="location"
+                            value={application.location}
+                            onChange={handleInputChange}
+                            placeholder="e.g., New York, NY or Remote"
+                            required
+                            className={fieldErrors.location ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
+                      </div>
+                    </div>
+
+                    {/* Professional Links */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Professional Links</h3>
+                      
+                      <div className="space-y-4">
+                        <FormField fieldName="portfolioUrl" label="Portfolio/GitHub/Website URL" required>
+                          <Input
+                            id="portfolioUrl"
+                            name="portfolioUrl"
+                            value={application.portfolioUrl}
+                            onChange={handleInputChange}
+                            placeholder="https://github.com/yourusername or https://yourwebsite.com"
+                            required
+                            className={fieldErrors.portfolioUrl ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
+
+                        <FormField fieldName="linkedinProfile" label="LinkedIn Profile URL" required>
+                          <Input
+                            id="linkedinProfile"
+                            name="linkedinProfile"
+                            value={application.linkedinProfile}
+                            onChange={handleInputChange}
+                            placeholder="https://linkedin.com/in/yourprofile"
+                            required
+                            className={fieldErrors.linkedinProfile ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
+
+                        <FormField fieldName="resumeLink" label="Resume Link (Google Drive/Dropbox)" required>
+                          <Input
+                            id="resumeLink"
+                            name="resumeLink"
+                            value={application.resumeLink}
+                            onChange={handleInputChange}
+                            placeholder="https://drive.google.com/file/d/your-file-id/view?usp=sharing"
+                            required
+                            className={fieldErrors.resumeLink ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
+                      </div>
+                    </div>
+
+                    {/* Education */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Education</h3>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <FormField fieldName="educationStatus" label="Current Education Status" required>
+                          <select
+                            id="educationStatus"
+                            name="educationStatus"
+                            value={application.educationStatus}
+                            onChange={handleInputChange}
+                            required
+                            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
+                              fieldErrors.educationStatus ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
+                            }`}
+                          >
+                            <option value="">Select your education status</option>
+                            <option value="high-school">High School</option>
+                            <option value="bachelor">Bachelor's Degree</option>
+                            <option value="master">Master's Degree</option>
+                            <option value="phd">PhD</option>
+                            <option value="other">Other</option>
+                          </select>
+                        </FormField>
+
+                        <FormField fieldName="degreeDiscipline" label="Degree/Discipline" required>
+                          <Input
+                            id="degreeDiscipline"
+                            name="degreeDiscipline"
+                            value={application.degreeDiscipline}
+                            onChange={handleInputChange}
+                            placeholder="e.g., Computer Science, Data Science, etc."
+                            required
+                            className={fieldErrors.degreeDiscipline ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          />
+                        </FormField>
+                      </div>
+
+                      <FormField fieldName="researchPapers" label="Research Papers/Publications" required>
+                        <Textarea
+                          id="researchPapers"
+                          name="researchPapers"
+                          value={application.researchPapers}
+                          onChange={handleInputChange}
+                          placeholder="List any research papers, publications, or academic projects..."
+                          required
+                          className={fieldErrors.researchPapers ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          rows={3}
+                        />
+                      </FormField>
+                    </div>
+
+                    {/* Experience */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Experience</h3>
+                      
+                      <FormField fieldName="internshipExperience" label="Previous Internship/Work Experience" required>
+                        <Textarea
+                          id="internshipExperience"
+                          name="internshipExperience"
+                          value={application.internshipExperience}
+                          onChange={handleInputChange}
+                          placeholder="Describe your previous internship or work experience..."
+                          required
+                          className={fieldErrors.internshipExperience ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          rows={3}
+                        />
+                      </FormField>
+
+                      <FormField fieldName="aiMlProjects" label="AI/ML Projects & Experience" required>
+                        <Textarea
+                          id="aiMlProjects"
+                          name="aiMlProjects"
+                          value={application.aiMlProjects}
+                          onChange={handleInputChange}
+                          placeholder="Describe any AI/ML projects, coursework, or experience you have..."
+                          required
+                          className={fieldErrors.aiMlProjects ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          rows={4}
+                        />
+                      </FormField>
+                    </div>
+
+                    {/* Preferences */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Preferences</h3>
+                      
+                      <FormField fieldName="duration" label="Preferred Duration" required>
+                        <select
+                          id="duration"
+                          name="duration"
+                          value={application.duration}
+                          onChange={handleInputChange}
+                          required
+                          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
+                            fieldErrors.duration ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
+                          }`}
+                        >
+                          <option value="">Select preferred duration</option>
+                          <option value="2-months">2 months</option>
+                          <option value="3-months">3 months</option>
+                          <option value="6-months">6 months</option>
+                          <option value="flexible">Flexible</option>
+                        </select>
+                      </FormField>
+                    </div>
+
+                    {/* Motivation */}
+                    <div className="space-y-6">
+                      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Motivation</h3>
+                      
+                      <FormField fieldName="motivation" label="Why are you interested in this internship?" required>
+                        <Textarea
+                          id="motivation"
+                          name="motivation"
+                          value={application.motivation}
+                          onChange={handleInputChange}
+                          placeholder="Tell us why you're interested in this position and what you hope to learn..."
+                          required
+                          className={fieldErrors.motivation ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                          rows={4}
+                        />
+                      </FormField>
+                    </div>
+                  </>
+                )}
 
                 {/* Submit Button */}
                 <div className="pt-6 border-t">
