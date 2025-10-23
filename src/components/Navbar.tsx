@@ -45,8 +45,8 @@ const Navbar = () => {
             </Link>
           </div>
           
-          {/* Desktop Navigation Items */}
-          <div className="hidden lg:flex items-center space-x-8">
+          {/* Desktop Navigation Items - Centered */}
+          <div className="hidden lg:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
             {navItems.map((item) => (
               <a
                 key={item.name}
