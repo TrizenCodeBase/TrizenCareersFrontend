@@ -262,6 +262,18 @@ const JobDetails = () => {
                       </div>
                     </>
                   )}
+                  {job.title === "AIML Intern" && job.id === "TV-AIML-INT-2025-004" && (
+                    <>
+                      <div className="flex items-center space-x-2">
+                        <TrendingUp className="w-4 h-4" />
+                        <span>Possible FTE conversion after 6 months</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <MapPin className="w-4 h-4" />
+                        <span>Work location: Hybrid (Hyderabad)</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </CardHeader>
               <CardContent>

@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Code, Palette, Database, Brain, Globe, Megaphone } from "lucide-react";
+import { MapPin, Clock, Code, Palette, Database, Brain, Globe, Megaphone, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useApplication } from "@/contexts/ApplicationContext";
 import jobsData from "@/data/jobs.json";
@@ -144,29 +144,49 @@ const JobSearch = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredJobs.map((job) => (
-              <Card key={job.id} className="border border-gray-200 hover:border-brand-primary hover:shadow-lg transition-all duration-300 bg-white">
+              <Card key={job.id} className={`border transition-all duration-300 ${
+                job.status === 'closed' 
+                  ? 'border-gray-300 bg-gray-50 hover:border-gray-400 hover:shadow-md' 
+                  : 'border-gray-200 hover:border-brand-primary hover:shadow-lg bg-white'
+              }`}>
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between mb-3">
-                    <CardTitle className="text-lg font-semibold text-brand-primary leading-tight font-inter flex-1">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <CardTitle className={`text-lg font-semibold leading-tight font-inter flex-1 ${
+                          job.status === 'closed' ? 'text-gray-600' : 'text-brand-primary'
+                        }`}>
                       {job.title}
                     </CardTitle>
-                    <div className="ml-2 p-1.5 bg-brand-accent/30 rounded-md">
+                        {job.status === 'closed' && (
+                          <Badge variant="secondary" className="text-xs bg-gray-200 text-gray-700">
+                            <Lock className="w-3 h-3 mr-1" />
+                            Closed
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                    <div className={`ml-2 p-1.5 rounded-md ${
+                      job.status === 'closed' ? 'bg-gray-200' : 'bg-brand-accent/30'
+                    }`}>
                       {getCategoryIcon(job.category)}
                     </div>
                   </div>
                   <div className="flex items-center gap-4 text-sm text-gray-600">
                     <div className="flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-brand-primary" /> 
-                      <span className="truncate font-inter">{job.location}</span>
+                      <MapPin className={`w-3.5 h-3.5 flex-shrink-0 ${job.status === 'closed' ? 'text-gray-400' : 'text-brand-primary'}`} /> 
+                      <span className={`truncate font-inter ${job.status === 'closed' ? 'text-gray-400' : ''}`}>{job.location}</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 flex-shrink-0 text-brand-primary" />
-                      <span className="text-brand-primary font-medium font-inter">{job.type}</span>
+                      <Clock className={`w-3.5 h-3.5 flex-shrink-0 ${job.status === 'closed' ? 'text-gray-400' : 'text-brand-primary'}`} />
+                      <span className={`font-medium font-inter ${job.status === 'closed' ? 'text-gray-400' : 'text-brand-primary'}`}>{job.type}</span>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <p className="text-gray-600 mb-4 font-inter leading-relaxed text-sm line-clamp-2">
+                  <p className={`mb-4 font-inter leading-relaxed text-sm line-clamp-2 ${
+                    job.status === 'closed' ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
                     {job.shortDescription || job.description}
                   </p>
                   <div className="flex flex-wrap gap-1.5 mb-4">
@@ -191,13 +211,20 @@ const JobSearch = () => {
                   <Button 
                     onClick={() => handleViewJob(job.id, job.slug)}
                     className={`w-full text-white font-medium font-inter text-sm py-2 ${
-                      isJobApplied(job.id) 
-                        ? 'bg-gray-400 cursor-not-allowed' 
-                        : 'bg-brand-primary hover:bg-brand-primary/90'
+                      job.status === 'closed'
+                        ? 'bg-gray-500 hover:bg-gray-600 cursor-not-allowed'
+                        : isJobApplied(job.id) 
+                          ? 'bg-gray-400 cursor-not-allowed' 
+                          : 'bg-brand-primary hover:bg-brand-primary/90'
                     }`}
-                    disabled={isJobApplied(job.id)}
+                    disabled={job.status === 'closed' || isJobApplied(job.id)}
                   >
-                    {isJobApplied(job.id) ? 'Applied' : 'View Details & Apply'}
+                    {job.status === 'closed' 
+                      ? 'Applications Closed' 
+                      : isJobApplied(job.id) 
+                        ? 'Applied' 
+                        : 'View Details & Apply'
+                    }
                   </Button>
                 </CardContent>
               </Card>
