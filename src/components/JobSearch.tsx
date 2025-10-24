@@ -16,13 +16,31 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Code, Palette, Database, Brain, Globe, Megaphone, Lock } from "lucide-react";
+import { MapPin, Clock, Code, Palette, Database, Brain, Globe, Megaphone, Lock, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useApplication } from "@/contexts/ApplicationContext";
 import jobsData from "@/data/jobs.json";
 
 // Import job data from JSON file
 const jobListings = jobsData.jobs;
+
+// Date utility functions
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+};
+
+const getDaysAgo = (dateString: string) => {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffTime = Math.abs(now.getTime() - date.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays;
+};
 
 const getCategoryIcon = (category) => {
   switch (category) {
@@ -181,6 +199,19 @@ const JobSearch = () => {
                       <Clock className={`w-3.5 h-3.5 flex-shrink-0 ${job.status === 'closed' ? 'text-gray-400' : 'text-brand-primary'}`} />
                       <span className={`font-medium font-inter ${job.status === 'closed' ? 'text-gray-400' : 'text-brand-primary'}`}>{job.type}</span>
                     </div>
+                  </div>
+                  
+                  {/* Date Information */}
+                  <div className="flex items-center gap-1.5 text-xs text-gray-500 mt-2">
+                    <Calendar className={`w-3 h-3 flex-shrink-0 ${job.status === 'closed' ? 'text-gray-400' : 'text-gray-500'}`} />
+                    <span className={`font-inter ${job.status === 'closed' ? 'text-gray-400' : 'text-gray-500'}`}>
+                      {job.status === 'closed' && job.closedDate 
+                        ? `Closed ${getDaysAgo(job.closedDate)} days ago`
+                        : job.postedDate 
+                          ? `Posted ${formatDate(job.postedDate)}`
+                          : 'Posted recently'
+                      }
+                    </span>
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0">
