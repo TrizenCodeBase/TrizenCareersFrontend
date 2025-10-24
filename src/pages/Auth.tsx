@@ -16,6 +16,7 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showPasswordRequirements, setShowPasswordRequirements] = useState(false);
+  const [activeTab, setActiveTab] = useState("signup");
   const { toast } = useToast();
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -62,6 +63,45 @@ const Auth = () => {
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate username
+    if (signupForm.username.length < 3 || signupForm.username.length > 30) {
+      toast({
+        title: "Invalid Username",
+        description: "Username must be between 3 and 30 characters.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    if (!/^[a-zA-Z0-9_]+$/.test(signupForm.username)) {
+      toast({
+        title: "Invalid Username",
+        description: "Username can only contain letters, numbers, and underscores.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Validate first name
+    if (signupForm.firstName.length < 2 || signupForm.firstName.length > 50) {
+      toast({
+        title: "Invalid First Name",
+        description: "First name must be between 2 and 50 characters.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Validate last name
+    if (signupForm.lastName.length < 2 || signupForm.lastName.length > 50) {
+      toast({
+        title: "Invalid Last Name",
+        description: "Last name must be between 2 and 50 characters.",
+        variant: "destructive"
+      });
+      return;
+    }
     
     // Check password requirements
     if (!isPasswordValid) {
@@ -117,8 +157,7 @@ const Auth = () => {
         });
         setShowPasswordRequirements(false);
         // Switch to login tab
-        const loginTab = document.querySelector('[data-value="login"]') as HTMLElement;
-        if (loginTab) loginTab.click();
+        setActiveTab("login");
       } else {
         toast({
           title: "Registration Failed",
@@ -191,7 +230,7 @@ const Auth = () => {
         <div className="text-center mb-8">
           <Link to="/" className="inline-block">
             <img 
-              src="/profile.png" 
+              src="/lovable-uploads/fb0bf098-66b0-4eb3-8842-f916a419a3d9.png" 
               alt="Trizen Logo" 
               className="h-16 w-auto filter brightness-0 invert mx-auto mb-4"
             />
@@ -208,7 +247,7 @@ const Auth = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="signup" className="w-full">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-2 bg-gray-100">
                 <TabsTrigger value="signup" className="font-inter">Sign Up</TabsTrigger>
                 <TabsTrigger value="login" className="font-inter">Login</TabsTrigger>
@@ -226,9 +265,13 @@ const Auth = () => {
                         type="text"
                         value={signupForm.firstName}
                         onChange={handleSignupChange}
+                        placeholder="2-50 characters"
                         required
                         className="font-inter"
                       />
+                      {signupForm.firstName && (signupForm.firstName.length < 2 || signupForm.firstName.length > 50) && (
+                        <p className="text-red-500 text-sm font-inter">First name must be between 2 and 50 characters</p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName" className="font-inter">Last Name</Label>
@@ -238,9 +281,13 @@ const Auth = () => {
                         type="text"
                         value={signupForm.lastName}
                         onChange={handleSignupChange}
+                        placeholder="2-50 characters"
                         required
                         className="font-inter"
                       />
+                      {signupForm.lastName && (signupForm.lastName.length < 2 || signupForm.lastName.length > 50) && (
+                        <p className="text-red-500 text-sm font-inter">Last name must be between 2 and 50 characters</p>
+                      )}
                     </div>
                   </div>
 
@@ -252,9 +299,16 @@ const Auth = () => {
                       type="text"
                       value={signupForm.username}
                       onChange={handleSignupChange}
+                      placeholder="3-30 characters, letters, numbers, underscores only"
                       required
                       className="font-inter"
                     />
+                    {signupForm.username && !/^[a-zA-Z0-9_]+$/.test(signupForm.username) && (
+                      <p className="text-red-500 text-sm font-inter">Username can only contain letters, numbers, and underscores</p>
+                    )}
+                    {signupForm.username && (signupForm.username.length < 3 || signupForm.username.length > 30) && (
+                      <p className="text-red-500 text-sm font-inter">Username must be between 3 and 30 characters</p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -391,10 +445,7 @@ const Auth = () => {
                 <div className="text-center text-sm text-gray-600 font-inter">
                   Already have an account?{" "}
                   <button 
-                    onClick={() => {
-                      const loginTab = document.querySelector('[data-value="login"]') as HTMLElement;
-                      if (loginTab) loginTab.click();
-                    }}
+                    onClick={() => setActiveTab("login")}
                     className="text-brand-primary hover:underline font-medium"
                   >
                     Sign in here
@@ -465,10 +516,7 @@ const Auth = () => {
                 <div className="text-center text-sm text-gray-600 font-inter">
                   Don't have an account?{" "}
                   <button 
-                    onClick={() => {
-                      const signupTab = document.querySelector('[data-value="signup"]') as HTMLElement;
-                      if (signupTab) signupTab.click();
-                    }}
+                    onClick={() => setActiveTab("signup")}
                     className="text-brand-primary hover:underline font-medium"
                   >
                     Sign up here

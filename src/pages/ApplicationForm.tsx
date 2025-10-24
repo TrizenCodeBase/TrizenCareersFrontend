@@ -1021,6 +1021,24 @@ const ApplicationForm = () => {
                           <option value="flexible">Flexible</option>
                         </select>
                       </FormField>
+
+                      <FormField fieldName="workPreference" label="Work Preference" required>
+                        <select
+                          id="workPreference"
+                          name="workPreference"
+                          value={application.workPreference}
+                          onChange={handleInputChange}
+                          required
+                          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
+                            fieldErrors.workPreference ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
+                          }`}
+                        >
+                          <option value="">Select your work preference</option>
+                          <option value="Hybrid">Hybrid</option>
+                          <option value="Remote">Remote</option>
+                          <option value="Office">Office</option>
+                        </select>
+                      </FormField>
                     </div>
 
                     {/* Motivation */}
