@@ -1,6 +1,143 @@
 {
   "jobs": [
     {
+      "id": "TV-MKT-SMM-2025-003",
+      "title": "Social Media Management Intern (Hybrid)",
+      "slug": "social-media-management-intern-hybrid",
+      "location": "Hybrid",
+      "type": "Internship",
+      "category": "Marketing",
+      "shortDescription": "Create engaging content and assist with social media campaigns to build our brand presence across multiple platforms.",
+      "description": "We are looking for a creative and enthusiastic Social Media Intern to support our marketing team in managing our company's social media presence. The role involves creating engaging content, assisting with social media campaigns, and helping build our brand presence across multiple platforms. This is a hybrid internship with opportunities to learn, grow, and gain hands-on experience in digital marketing and brand management. To learn more about our company, visit our website: www.trizenventures.com",
+      "tags": ["Social Media", "Content Creation", "Digital Marketing", "Brand Management", "Community Engagement", "Analytics"],
+      "requirements": [
+        "Passion for social media and digital marketing",
+        "Basic knowledge of social media platforms (LinkedIn, Instagram, Facebook, Twitter)",
+        "Good communication and writing skills",
+        "Creative mindset and willingness to learn",
+        "Familiarity with design tools like Canva or Adobe Creative Suite (a plus)",
+        "Interest in technology or AI/ML industry trends is an advantage"
+      ],
+      "responsibilities": [
+        "Assist in developing and executing social media strategies",
+        "Create and schedule posts, graphics, and videos for different platforms",
+        "Engage with followers by responding to comments and messages",
+        "Help monitor analytics and prepare simple reports on performance",
+        "Research trends and suggest creative content ideas",
+        "Collaborate with the marketing team to support campaign goals"
+      ],
+      "benefits": [
+        "Hybrid work setup (remote + office)",
+        "Certificate of Internship upon completion",
+        "Exposure to real-world marketing projects",
+        "Creative freedom in content creation",
+        "Opportunity to shape our brand voice",
+        "Guidance and mentorship from experienced professionals",
+        "Competitive internship stipend and benefits package",
+        "Opportunity for full-time employment based on performance"
+      ],
+      "selectionProcess": [
+        "Round 1: Assignment (content or social media task)",
+        "Round 2: Interview with the marketing team"
+      ],
+      "duration": "3 months",
+      "startDate": "Immediate",
+      "applicationDeadline": "21st October",
+      "postedDate": "2025-10-23"
+    },
+    {
+      "id": "TV-AIML-INT-2025-004",
+      "title": "AIML Intern",
+      "slug": "ai-ml-intern",
+      "location": "Hybrid",
+      "type": "Internship",
+      "category": "AI/ML",
+      "shortDescription": "Work on cutting-edge AI/ML projects and research with hands-on experience in machine learning, deep learning, and LLMs.",
+      "description": "Thank you for your interest in the AI/ML Internship role at Trizen Ventures LLP! We are looking for dedicated and passionate individuals to work on cutting-edge projects in Machine Learning, Artificial Intelligence, and related domains. This is a full-time, hybrid, 6 months paid internship opportunity with a chance of PPO (Pre-Placement Offer) after successful completion of the internship. Please ensure you fill out this application form accurately. Only shortlisted candidates will be contacted. To learn more about our company, visit our website: www.trizenventures.com",
+      "tags": ["Python", "Machine Learning", "Deep Learning", "TensorFlow", "PyTorch", "LLMs", "AI Tools"],
+      "requirements": [
+        "Knowledge of Machine Learning (ML) and Deep Learning (DL) algorithms",
+        "Experience with Large Language Models (LLMs) and their applications",
+        "Proficiency in Python and its libraries/frameworks (e.g., TensorFlow, PyTorch, Scikit-learn, NumPy, Pandas)",
+        "Research and academic writing skills, including experience in paper publishing",
+        "Familiarity with the latest AI tools and technologies",
+        "Dedication to full-time hybrid work"
+      ],
+      "responsibilities": [
+        "Work on cutting-edge AI/ML projects and research",
+        "Develop and implement machine learning models",
+        "Research and experiment with Large Language Models",
+        "Contribute to academic writing and paper publishing",
+        "Collaborate with the team on innovative AI solutions",
+        "Stay updated with the latest AI tools and technologies"
+      ],
+      "benefits": [
+        "Full-time hybrid work opportunity",
+        "6 months paid internship with competitive compensation",
+        "Chance of PPO (Pre-Placement Offer) after successful completion",
+        "Hands-on experience with cutting-edge AI/ML technologies",
+        "Opportunity to work on real-world projects",
+        "Mentorship from experienced professionals",
+        "Potential for full-time employment based on performance"
+      ],
+      "selectionProcess": [
+        "Candidates will have 2 rounds of selection",
+        "Assignment round and upon selecting from that round an Interview round"
+      ],
+      "duration": "6 months",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2025-10-23"
+    },
+    {
+      "id": "TV-WEB-MERN-2025-005",
+      "title": "MERN Stack Developer Intern",
+      "slug": "mern-stack-developer-intern",
+      "location": "Hybrid",
+      "type": "Internship",
+      "category": "Web Development",
+      "shortDescription": "Build modern web applications using MongoDB, Express.js, React.js, and Node.js with hands-on experience in full-stack development.",
+      "description": "Thank you for your interest in the MERN Stack Developer Internship at Trizen Ventures LLP! We are looking for dedicated and skilled developers to work on cutting-edge web application projects using the MERN stack (MongoDB, Express.js, React.js, Node.js). This is a full-time, hybrid, 6 months paid internship opportunity with a monthly stipend of 8K. Possible full-time conversion after 6 months of internship. Please ensure you fill out this application form accurately. Only shortlisted candidates will be contacted. To learn more about our company, visit our website: www.trizenventures.com",
+      "tags": ["MongoDB", "Express.js", "React.js", "Node.js", "JavaScript", "RESTful APIs", "Authentication"],
+      "requirements": [
+        "Proficiency in MongoDB, Express.js, React.js, and Node.js",
+        "Experience in secure web application development",
+        "Strong problem-solving and debugging skills",
+        "Knowledge of role-based access control, authentication, and version management",
+        "Familiarity with RESTful APIs, Single Sign-On (SSO), and HRMS integration is a plus",
+        "Experience with vibe coding and collaborative development",
+        "React Native experience is a plus",
+        "Dedication to full-time hybrid work"
+      ],
+      "responsibilities": [
+        "Develop and maintain web applications using MERN stack",
+        "Implement secure authentication and authorization systems",
+        "Create and integrate RESTful APIs",
+        "Work with databases and data management",
+        "Collaborate with team members on project development",
+        "Debug and troubleshoot application issues",
+        "Participate in code reviews and best practices"
+      ],
+      "benefits": [
+        "Full-time hybrid work opportunity",
+        "6 months paid internship with 8K monthly stipend",
+        "Possible full-time conversion after 6 months of internship",
+        "Hands-on experience with modern web technologies",
+        "Opportunity to work on real-world projects",
+        "Mentorship from experienced developers",
+        "Potential for future collaboration opportunities",
+        "Android development opportunities"
+      ],
+      "selectionProcess": [
+        "Candidates will have 2 rounds of selection",
+        "Assignment round and upon selecting from that round an Interview round"
+      ],
+      "duration": "6 months",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2025-10-23"
+    },
+    {
       "id": "TV-AIML-INT-2025-001",
       "title": "AIML Intern",
       "slug": "ai-ml-intern",
@@ -95,142 +232,6 @@
       "applicationDeadline": "October 10",
       "postedDate": "2025-10-04",
       "closedDate": "2025-10-04"
-    },
-    {
-      "id": "TV-MKT-SMM-2025-003",
-      "title": "Social Media Management Intern (Hybrid)",
-      "slug": "social-media-management-intern-hybrid",
-      "location": "Hybrid",
-      "type": "Internship",
-      "category": "Marketing",
-      "shortDescription": "Create engaging content and assist with social media campaigns to build our brand presence across multiple platforms.",
-      "description": "We are looking for a creative and enthusiastic Social Media Intern to support our marketing team in managing our company's social media presence. The role involves creating engaging content, assisting with social media campaigns, and helping build our brand presence across multiple platforms. This is a hybrid internship with opportunities to learn, grow, and gain hands-on experience in digital marketing and brand management. To learn more about our company, visit our website: www.trizenventures.com",
-      "tags": ["Social Media", "Content Creation", "Digital Marketing", "Brand Management", "Community Engagement", "Analytics"],
-      "requirements": [
-        "Passion for social media and digital marketing",
-        "Basic knowledge of social media platforms (LinkedIn, Instagram, Facebook, Twitter)",
-        "Good communication and writing skills",
-        "Creative mindset and willingness to learn",
-        "Familiarity with design tools like Canva or Adobe Creative Suite (a plus)",
-        "Interest in technology or AI/ML industry trends is an advantage"
-      ],
-      "responsibilities": [
-        "Assist in developing and executing social media strategies",
-        "Create and schedule posts, graphics, and videos for different platforms",
-        "Engage with followers by responding to comments and messages",
-        "Help monitor analytics and prepare simple reports on performance",
-        "Research trends and suggest creative content ideas",
-        "Collaborate with the marketing team to support campaign goals"
-      ],
-      "benefits": [
-        "Hybrid work setup (remote + office)",
-        "Certificate of Internship upon completion",
-        "Exposure to real-world marketing projects",
-        "Creative freedom in content creation",
-        "Opportunity to shape our brand voice",
-        "Guidance and mentorship from experienced professionals",
-        "Competitive internship stipend and benefits package",
-        "Opportunity for full-time employment based on performance"
-      ],
-      "selectionProcess": [
-        "Round 1: Assignment (content or social media task)",
-        "Round 2: Interview with the marketing team"
-      ],
-      "duration": "3 months",
-      "startDate": "Immediate",
-      "applicationDeadline": "21st October"
-    },
-    {
-      "id": "TV-AIML-INT-2025-004",
-      "title": "AIML Intern",
-      "slug": "ai-ml-intern",
-      "location": "Hybrid",
-      "type": "Internship",
-      "category": "AI/ML",
-      "shortDescription": "Work on cutting-edge AI/ML projects and research with hands-on experience in machine learning, deep learning, and LLMs.",
-      "description": "Thank you for your interest in the AI/ML Internship role at Trizen Ventures LLP! We are looking for dedicated and passionate individuals to work on cutting-edge projects in Machine Learning, Artificial Intelligence, and related domains. This is a full-time, hybrid, 6 months paid internship opportunity with a chance of PPO (Pre-Placement Offer) after successful completion of the internship. Please ensure you fill out this application form accurately. Only shortlisted candidates will be contacted. To learn more about our company, visit our website: www.trizenventures.com",
-      "tags": ["Python", "Machine Learning", "Deep Learning", "TensorFlow", "PyTorch", "LLMs", "AI Tools"],
-      "requirements": [
-        "Knowledge of Machine Learning (ML) and Deep Learning (DL) algorithms",
-        "Experience with Large Language Models (LLMs) and their applications",
-        "Proficiency in Python and its libraries/frameworks (e.g., TensorFlow, PyTorch, Scikit-learn, NumPy, Pandas)",
-        "Research and academic writing skills, including experience in paper publishing",
-        "Familiarity with the latest AI tools and technologies",
-        "Dedication to full-time hybrid work"
-      ],
-      "responsibilities": [
-        "Work on cutting-edge AI/ML projects and research",
-        "Develop and implement machine learning models",
-        "Research and experiment with Large Language Models",
-        "Contribute to academic writing and paper publishing",
-        "Collaborate with the team on innovative AI solutions",
-        "Stay updated with the latest AI tools and technologies"
-      ],
-      "benefits": [
-        "Full-time hybrid work opportunity",
-        "6 months paid internship with competitive compensation",
-        "Chance of PPO (Pre-Placement Offer) after successful completion",
-        "Hands-on experience with cutting-edge AI/ML technologies",
-        "Opportunity to work on real-world projects",
-        "Mentorship from experienced professionals",
-        "Potential for full-time employment based on performance"
-      ],
-      "selectionProcess": [
-        "Candidates will have 2 rounds of selection",
-        "Assignment round and upon selecting from that round an Interview round"
-      ],
-      "duration": "6 months",
-      "startDate": "Immediate",
-      "applicationDeadline": "Rolling basis",
-      "postedDate": "2025-10-23"
-    },
-    {
-      "id": "TV-WEB-MERN-2025-005",
-      "title": "MERN Stack Developer Intern",
-      "slug": "mern-stack-developer-intern",
-      "location": "Hybrid",
-      "type": "Internship",
-      "category": "Web Development",
-      "shortDescription": "Build modern web applications using MongoDB, Express.js, React.js, and Node.js with hands-on experience in full-stack development.",
-      "description": "Thank you for your interest in the MERN Stack Developer Internship at Trizen Ventures LLP! We are looking for dedicated and skilled developers to work on cutting-edge web application projects using the MERN stack (MongoDB, Express.js, React.js, Node.js). This is a full-time, hybrid, 6 months paid internship opportunity with a monthly stipend of 8K. Possible full-time conversion after 6 months of internship. Please ensure you fill out this application form accurately. Only shortlisted candidates will be contacted. To learn more about our company, visit our website: www.trizenventures.com",
-      "tags": ["MongoDB", "Express.js", "React.js", "Node.js", "JavaScript", "RESTful APIs", "Authentication"],
-      "requirements": [
-        "Proficiency in MongoDB, Express.js, React.js, and Node.js",
-        "Experience in secure web application development",
-        "Strong problem-solving and debugging skills",
-        "Knowledge of role-based access control, authentication, and version management",
-        "Familiarity with RESTful APIs, Single Sign-On (SSO), and HRMS integration is a plus",
-        "Experience with vibe coding and collaborative development",
-        "React Native experience is a plus",
-        "Dedication to full-time hybrid work"
-      ],
-      "responsibilities": [
-        "Develop and maintain web applications using MERN stack",
-        "Implement secure authentication and authorization systems",
-        "Create and integrate RESTful APIs",
-        "Work with databases and data management",
-        "Collaborate with team members on project development",
-        "Debug and troubleshoot application issues",
-        "Participate in code reviews and best practices"
-      ],
-      "benefits": [
-        "Full-time hybrid work opportunity",
-        "6 months paid internship with 8K monthly stipend",
-        "Possible full-time conversion after 6 months of internship",
-        "Hands-on experience with modern web technologies",
-        "Opportunity to work on real-world projects",
-        "Mentorship from experienced developers",
-        "Potential for future collaboration opportunities",
-        "Android development opportunities"
-      ],
-      "selectionProcess": [
-        "Candidates will have 2 rounds of selection",
-        "Assignment round and upon selecting from that round an Interview round"
-      ],
-      "duration": "6 months",
-      "startDate": "Immediate",
-      "applicationDeadline": "Rolling basis",
-      "postedDate": "2025-10-23"
     }
   ]
 }
