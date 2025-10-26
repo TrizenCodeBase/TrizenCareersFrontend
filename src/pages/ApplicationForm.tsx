@@ -667,7 +667,7 @@ const ApplicationForm = () => {
                             name="fullName"
                             value={application.fullName}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             required
                             className={fieldErrors.fullName ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                             placeholder="Enter your full name"
@@ -681,7 +681,7 @@ const ApplicationForm = () => {
                             type="email"
                             value={application.email}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             required
                             className={fieldErrors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                             placeholder="your.email@example.com"
@@ -695,7 +695,7 @@ const ApplicationForm = () => {
                             type="tel"
                             value={application.phone}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             required
                             className={fieldErrors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                             placeholder="+1 (555) 123-4567"
@@ -708,7 +708,7 @@ const ApplicationForm = () => {
                             name="location"
                             value={application.location}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="e.g., New York, NY or Remote"
                             required
                             className={fieldErrors.location ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
@@ -721,7 +721,7 @@ const ApplicationForm = () => {
                             name="linkedinProfile"
                             value={application.linkedinProfile}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="https://linkedin.com/in/yourprofile"
                             required
                             className={fieldErrors.linkedinProfile ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
@@ -734,7 +734,7 @@ const ApplicationForm = () => {
                             name="resumeLink"
                             value={application.resumeLink}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="https://drive.google.com/file/d/your-file-id/view?usp=sharing"
                             required
                             className={fieldErrors.resumeLink ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
@@ -754,7 +754,7 @@ const ApplicationForm = () => {
                             name="currentQualification"
                             value={application.currentQualification}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="e.g., B.Tech 3rd Year, MBA 1st Year"
                             required
                             className={fieldErrors.currentQualification ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
@@ -767,7 +767,7 @@ const ApplicationForm = () => {
                             name="collegeUniversity"
                             value={application.collegeUniversity}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="Enter your college or university name"
                             required
                             className={fieldErrors.collegeUniversity ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
@@ -867,7 +867,7 @@ const ApplicationForm = () => {
                             type="date"
                             value={application.preferredStartDate}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             required
                             className={fieldErrors.preferredStartDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                           />
@@ -879,7 +879,7 @@ const ApplicationForm = () => {
                             name="hoursPerWeek"
                             value={application.hoursPerWeek}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="e.g., 20-30 hours per week"
                             className={fieldErrors.hoursPerWeek ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                           />
@@ -966,7 +966,7 @@ const ApplicationForm = () => {
                             name="fullName"
                             value={application.fullName}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             required
                             className={fieldErrors.fullName ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                             placeholder="Enter your full name"
@@ -980,7 +980,7 @@ const ApplicationForm = () => {
                             type="email"
                             value={application.email}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             required
                             className={fieldErrors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                             placeholder="your.email@example.com"
@@ -994,7 +994,7 @@ const ApplicationForm = () => {
                             type="tel"
                             value={application.phone}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             required
                             className={fieldErrors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                             placeholder="+1 (555) 123-4567"
@@ -1007,7 +1007,7 @@ const ApplicationForm = () => {
                             name="location"
                             value={application.location}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="e.g., New York, NY or Remote"
                             required
                             className={fieldErrors.location ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
@@ -1027,7 +1027,7 @@ const ApplicationForm = () => {
                             name="portfolioUrl"
                             value={application.portfolioUrl}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="https://github.com/yourusername or https://yourwebsite.com"
                             required
                             className={fieldErrors.portfolioUrl ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
@@ -1040,7 +1040,7 @@ const ApplicationForm = () => {
                             name="linkedinProfile"
                             value={application.linkedinProfile}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="https://linkedin.com/in/yourprofile"
                             required
                             className={fieldErrors.linkedinProfile ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
@@ -1053,7 +1053,7 @@ const ApplicationForm = () => {
                             name="resumeLink"
                             value={application.resumeLink}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="https://drive.google.com/file/d/your-file-id/view?usp=sharing"
                             required
                             className={fieldErrors.resumeLink ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
@@ -1073,7 +1073,7 @@ const ApplicationForm = () => {
                             name="educationStatus"
                             value={application.educationStatus}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             required
                             className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
                               fieldErrors.educationStatus ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
@@ -1094,7 +1094,7 @@ const ApplicationForm = () => {
                             name="degreeDiscipline"
                             value={application.degreeDiscipline}
                             onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                            onBlur={handleInputBlur}
                             placeholder="e.g., Computer Science, Data Science, etc."
                             required
                             className={fieldErrors.degreeDiscipline ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
@@ -1191,6 +1191,19 @@ const ApplicationForm = () => {
                           <option value="Remote">Remote</option>
                           <option value="Office">Office</option>
                         </select>
+                      </FormField>
+
+                      <FormField fieldName="preferredStartDate" label="Preferred Start Date" required>
+                        <Input
+                          id="preferredStartDate"
+                          name="preferredStartDate"
+                          type="date"
+                          value={application.preferredStartDate}
+                          onChange={handleInputChange}
+                          onBlur={handleInputBlur}
+                          required
+                          className={fieldErrors.preferredStartDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                        />
                       </FormField>
                     </div>
 

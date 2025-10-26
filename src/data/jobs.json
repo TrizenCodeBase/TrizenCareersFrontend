@@ -11,12 +11,15 @@
       "description": "Thank you for your interest in the AI/ML Internship role at Trizen Ventures LLP! We are looking for dedicated and passionate individuals to work on cutting-edge projects in Machine Learning, Artificial Intelligence, and related domains. This is a full-time, hybrid, 6 months paid internship opportunity with possible PPO conversion after internship. Please ensure you fill out this application form accurately. Only shortlisted candidates will be contacted. To learn more about our company, visit our website: www.trizenventures.com",
       "tags": ["Python", "Machine Learning", "Deep Learning", "TensorFlow", "PyTorch", "LLMs", "AI Tools"],
       "requirements": [
-        "Knowledge of Machine Learning (ML) and Deep Learning (DL) algorithms",
-        "Experience with Large Language Models (LLMs) and their applications",
-        "Proficiency in Python and its libraries/frameworks (e.g., TensorFlow, PyTorch, Scikit-learn, NumPy, Pandas)",
-        "Research and academic writing skills, including experience in paper publishing",
-        "Familiarity with the latest AI tools and technologies",
-        "Dedication to full-time hybrid work"
+        "Knowledge of ML and DL algorithms, and hands-on experience with TensorFlow/PyTorch",
+        "Familiarity with LLMs, prompt engineering, and fine-tuning techniques",
+        "Experience in data preprocessing, model evaluation, and performance optimization",
+        "Knowledge of Python libraries — NumPy, Pandas, Scikit-learn, Matplotlib",
+        "Exposure to LangChain, Hugging Face, and vector databases (Pinecone, FAISS)",
+        "Research and academic writing experience, including paper publishing",
+        "Understanding of cloud ML environments (AWS/GCP/Azure) and API deployment (FastAPI/Flask)",
+        "Strong problem-solving, collaboration, and documentation skills",
+        "Dedication to full-time hybrid work and continuous learning"
       ],
       "responsibilities": [
         "Work on cutting-edge AI/ML projects and research",
