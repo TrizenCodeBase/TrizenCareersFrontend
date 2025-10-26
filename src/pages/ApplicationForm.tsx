@@ -78,7 +78,7 @@ const ApplicationForm = () => {
   const { jobId } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { isAuthenticated, token } = useAuth();
+  const { isAuthenticated, token, user } = useAuth();
   const { markJobAsApplied } = useApplication();
   
   const [job, setJob] = useState<{
@@ -106,7 +106,7 @@ const ApplicationForm = () => {
   const [application, setApplication] = useState<JobApplication>({
     jobId: jobId || "",
     fullName: "",
-    email: "",
+    email: user ? user.email || '' : "",
     phone: "",
     location: "",
     portfolioUrl: "",
@@ -132,6 +132,16 @@ const ApplicationForm = () => {
     workPreference: "",
     expectations: ""
   });
+
+  // Update application state when user data changes
+  useEffect(() => {
+    if (user) {
+      setApplication(prev => ({
+        ...prev,
+        email: user.email || ''
+      }));
+    }
+  }, [user]);
 
   useEffect(() => {
     // Extract jobId from URL format: TV-WEB-MERN-2025-002-mern-stack-developer-intern
@@ -680,11 +690,10 @@ const ApplicationForm = () => {
                             name="email"
                             type="email"
                             value={application.email}
-                            onChange={handleInputChange}
-                            onBlur={handleInputBlur}
+                            readOnly
                             required
-                            className={fieldErrors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                            placeholder="your.email@example.com"
+                            className="bg-gray-100 cursor-not-allowed"
+                            placeholder="Auto-filled from your profile"
                           />
                         </FormField>
 
@@ -979,11 +988,10 @@ const ApplicationForm = () => {
                             name="email"
                             type="email"
                             value={application.email}
-                            onChange={handleInputChange}
-                            onBlur={handleInputBlur}
+                            readOnly
                             required
-                            className={fieldErrors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                            placeholder="your.email@example.com"
+                            className="bg-gray-100 cursor-not-allowed"
+                            placeholder="Auto-filled from your profile"
                           />
                         </FormField>
 
@@ -1205,6 +1213,7 @@ const ApplicationForm = () => {
                           className={fieldErrors.preferredStartDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                         />
                       </FormField>
+gitadd /
                     </div>
 
                     {/* Motivation */}
