@@ -1213,7 +1213,6 @@ const ApplicationForm = () => {
                           className={fieldErrors.preferredStartDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                         />
                       </FormField>
-gitadd /
                     </div>
 
                     {/* Motivation */}
