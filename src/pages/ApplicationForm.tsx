@@ -44,6 +44,7 @@ interface JobApplication {
   duration: string;
   aiMlProjects: string;
   motivation: string;
+  expectedStipend: string;
   // Social Media Management Intern specific fields
   currentQualification?: string;
   collegeUniversity?: string;
@@ -118,6 +119,7 @@ const ApplicationForm = () => {
     duration: "",
     aiMlProjects: "",
     motivation: "",
+    expectedStipend: "",
     // Social Media Management Intern specific fields
     currentQualification: "",
     collegeUniversity: "",
@@ -212,6 +214,15 @@ const ApplicationForm = () => {
         if (!value.trim()) return 'Motivation is required';
         if (value.trim().length < 10) return 'Please provide a more detailed response (at least 10 characters)';
         break;
+      case 'expectedStipend':
+        if (!value.trim()) return 'Expected stipend amount is required';
+        if (!/^\d+$/.test(value.trim())) return 'Please enter a valid number (digits only)';
+        {
+          const amount = parseInt(value.trim());
+          if (amount < 0) return 'Stipend amount cannot be negative';
+          if (amount > 100000) return 'Please enter a realistic stipend amount';
+        }
+        break;
       case 'workPreference':
         if (!value.trim()) return 'Work preference is required';
         if (!['Hybrid', 'Remote', 'Office'].includes(value)) return 'Please select a valid work preference';
@@ -304,6 +315,7 @@ const ApplicationForm = () => {
       duration: "Preferred Duration",
       aiMlProjects: "AI/ML Projects & Experience",
       motivation: "Motivation to Join",
+      expectedStipend: "Expected Stipend Amount (₹)",
       // Social Media Management Intern specific fields
       currentQualification: "Current Qualification / Year of Study",
       collegeUniversity: "College / University Name",
@@ -336,6 +348,7 @@ const ApplicationForm = () => {
       duration: "Select your preferred internship duration",
       aiMlProjects: "Describe your AI/ML projects and experience (if none, write 'None')",
       motivation: "Explain why you're interested in this position and what you hope to learn",
+      expectedStipend: "Enter your expected monthly stipend amount in rupees (e.g., 5000, 10000)",
       // Social Media Management Intern specific fields
       currentQualification: "Enter your current qualification and year of study (e.g., B.Tech 3rd Year, MBA 1st Year)",
       collegeUniversity: "Enter the name of your college or university",
@@ -911,6 +924,20 @@ const ApplicationForm = () => {
                         />
                       </FormField>
 
+                      <FormField fieldName="expectedStipend" label="Expected Stipend Amount (₹)" required>
+                        <Input
+                          id="expectedStipend"
+                          name="expectedStipend"
+                          type="number"
+                          value={application.expectedStipend}
+                          onChange={handleInputChange}
+                          onBlur={handleInputBlur}
+                          placeholder="Enter your expected monthly stipend amount (e.g., 5000)"
+                          required
+                          className={fieldErrors.expectedStipend ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                        />
+                      </FormField>
+
                       <FormField fieldName="expectations" label="Expectations or Questions">
                         <Textarea
                           id="expectations"
@@ -1182,6 +1209,20 @@ const ApplicationForm = () => {
                           required
                           className={fieldErrors.motivation ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                           rows={4}
+                        />
+                      </FormField>
+
+                      <FormField fieldName="expectedStipend" label="Expected Stipend Amount (₹)" required>
+                        <Input
+                          id="expectedStipend"
+                          name="expectedStipend"
+                          type="number"
+                          value={application.expectedStipend}
+                          onChange={handleInputChange}
+                          onBlur={handleInputBlur}
+                          placeholder="Enter your expected monthly stipend amount (e.g., 5000)"
+                          required
+                          className={fieldErrors.expectedStipend ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                         />
                       </FormField>
                     </div>

@@ -245,10 +245,6 @@ const JobDetails = () => {
                   {job.title === "MERN Stack Developer Intern" && (
                     <>
                       <div className="flex items-center space-x-2">
-                        <DollarSign className="w-4 h-4" />
-                        <span>Stipend: 8K monthly</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
                         <TrendingUp className="w-4 h-4" />
                         <span>Possible FTE conversion after 6 months</span>
                       </div>
@@ -262,11 +258,11 @@ const JobDetails = () => {
                       </div>
                     </>
                   )}
-                  {job.title === "AIML Intern" && job.id === "TV-AIML-INT-2025-004" && (
+                  {job.title === "AIML Intern" && job.id === "TV-AIML-INT-2025-001" && (
                     <>
                       <div className="flex items-center space-x-2">
                         <TrendingUp className="w-4 h-4" />
-                        <span>Possible FTE conversion after 6 months</span>
+                        <span>Possible PPO conversion after internship</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <MapPin className="w-4 h-4" />
