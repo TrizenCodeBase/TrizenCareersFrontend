@@ -45,7 +45,8 @@
       "duration": "6 months",
       "startDate": "Immediate",
       "applicationDeadline": "Rolling basis",
-      "postedDate": "2025-10-23"
+      "postedDate": "2026-02-20",
+      "closedDate": "2026-03-05"
     },
     {
       "id": "TV-WEB-MERN-2025-005",
@@ -93,7 +94,8 @@
       "duration": "6 months",
       "startDate": "Immediate",
       "applicationDeadline": "Rolling basis",
-      "postedDate": "2025-10-23"
+      "postedDate": "2026-02-20",
+      "closedDate": "2026-03-05"
     },
     {
       "id": "TV-MKT-SMM-2025-003",
@@ -138,7 +140,8 @@
       "duration": "3 months",
       "startDate": "Immediate",
       "applicationDeadline": "21st October",
-      "postedDate": "2025-10-23"
+      "postedDate": "2026-02-20",
+      "closedDate": "2026-03-05"
     },
     {
       "id": "TV-WEB-MERN-2025-002",
@@ -188,8 +191,8 @@
       "duration": "6 months",
       "startDate": "Immediate",
       "applicationDeadline": "October 10",
-      "postedDate": "2025-10-04",
-      "closedDate": "2025-10-04"
+      "postedDate": "2026-02-20",
+      "closedDate": "2026-03-05"
     }
   ]
 }
