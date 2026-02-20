@@ -8,6 +8,7 @@ export const API_CONFIG = {
   ENDPOINTS: {
     HEALTH: `${API_BASE_URL}/api/health`,
     APPLICATIONS: `${API_BASE_URL}/api/v1/applications`,
+    APPLICATIONS_UPLOAD_RESUME: `${API_BASE_URL}/api/v1/applications/upload-resume`,
     USERS: {
       REGISTER: `${API_BASE_URL}/api/v1/users/register`,
       LOGIN: `${API_BASE_URL}/api/v1/users/login`,

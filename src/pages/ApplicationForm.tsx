@@ -24,7 +24,9 @@ import {
   Loader2,
   CheckCircle,
   ArrowLeft,
-  X
+  X,
+  Upload,
+  FileText
 } from "lucide-react";
 import jobsData from "@/data/jobs.json";
 
@@ -40,6 +42,7 @@ interface JobApplication {
   educationStatus: string;
   degreeDiscipline: string;
   researchPapers: string;
+  yearOfPassingOut?: string;
   internshipExperience: string;
   duration: string;
   aiMlProjects: string;
@@ -102,6 +105,8 @@ const ApplicationForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [showValidationErrors, setShowValidationErrors] = useState(false);
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeUploadError, setResumeUploadError] = useState<string | null>(null);
   
   const [application, setApplication] = useState<JobApplication>({
     jobId: jobId || "",
@@ -115,6 +120,7 @@ const ApplicationForm = () => {
     educationStatus: "",
     degreeDiscipline: "",
     researchPapers: "",
+    yearOfPassingOut: "",
     internshipExperience: "",
     duration: "",
     aiMlProjects: "",
@@ -185,8 +191,9 @@ const ApplicationForm = () => {
         }
         break;
       case 'resumeLink':
-        if (!value.trim()) return 'Resume link is required';
-        if (!/^https?:\/\/.+/.test(value)) return 'Please enter a valid URL (must start with http:// or https://)';
+        // Validated separately: either resumeFile or resumeLink (after upload)
+        if (!value.trim()) return 'Resume is required. Please upload your resume (PDF, DOC or DOCX).';
+        if (value.trim() && !/^https?:\/\/.+/.test(value)) return 'Please enter a valid URL (must start with http:// or https://)';
         break;
       case 'portfolioWorkSamples':
         if (!value.trim()) return 'Portfolio/work samples link is required';
@@ -210,6 +217,10 @@ const ApplicationForm = () => {
         break;
       case 'researchPapers':
         if (!value.trim()) return 'Research papers information is required';
+        break;
+      case 'yearOfPassingOut':
+        if (!value.trim()) return 'Year of passing out is required';
+        if (!['2024', '2025', '2026'].includes(value)) return 'Please select a valid year (2024, 2025, or 2026)';
         break;
       case 'internshipExperience':
         if (!value.trim()) return 'Internship experience is required';
@@ -308,6 +319,13 @@ const ApplicationForm = () => {
     }
   };
 
+  // Validate resume: either a file is selected or a link is already set (after upload)
+  const validateResume = useCallback((): string | null => {
+    if (resumeFile) return null;
+    if (application.resumeLink?.trim()) return null;
+    return 'Resume is required. Please upload your resume (PDF, DOC or DOCX, max 5MB).';
+  }, [resumeFile, application.resumeLink]);
+
   // Helper function to get field display name
   const getFieldDisplayName = (fieldName: string): string => {
     const fieldNames: { [key: string]: string } = {
@@ -317,10 +335,11 @@ const ApplicationForm = () => {
       location: "Location / City",
       portfolioUrl: "Portfolio/GitHub/Website URL",
       linkedinProfile: "LinkedIn Profile",
-      resumeLink: "Resume Link (Google Drive/Dropbox)",
+      resumeLink: "Resume",
       educationStatus: "Current Education Status",
       degreeDiscipline: "Degree/Discipline",
       researchPapers: "Research Papers/Publications",
+      yearOfPassingOut: "Year of Passing Out",
       internshipExperience: "Previous Internship/Work Experience",
       duration: "Preferred Duration",
       aiMlProjects: "AI/ML Projects & Experience",
@@ -350,10 +369,11 @@ const ApplicationForm = () => {
       location: "Enter your city and country (e.g., New York, NY or Remote)",
       portfolioUrl: "Enter a valid URL to your portfolio, GitHub profile, or website",
       linkedinProfile: "Enter your complete LinkedIn profile URL",
-      resumeLink: "Upload your resume to Google Drive/Dropbox and share with 'Anyone with the link' access. Paste the shareable link here.",
+      resumeLink: "Upload your resume (PDF, DOC or DOCX, max 5MB).",
       educationStatus: "Select your current education level",
       degreeDiscipline: "Enter your field of study or degree discipline",
       researchPapers: "List any research papers, publications, or academic projects (if none, write 'None')",
+      yearOfPassingOut: "Select the year you expect to or have completed your degree",
       internshipExperience: "Describe your previous work experience (if none, write 'None')",
       duration: "Select your preferred internship duration",
       aiMlProjects: "Describe your AI/ML projects and experience (if none, write 'None')",
@@ -416,6 +436,10 @@ const ApplicationForm = () => {
     return job?.id === "TV-MKT-SMM-2025-003";
   };
 
+  const isMernJob = () => {
+    return job?.id === "TV-WEB-MERN-2025-005" || job?.id === "TV-WEB-MERN-2025-002";
+  };
+
   const handleSubmitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -431,17 +455,60 @@ const ApplicationForm = () => {
     // Clear previous errors
     setFieldErrors({});
     setShowValidationErrors(false);
+    setResumeUploadError(null);
     setIsSubmitting(true);
 
     try {
-      console.log('Submitting application:', application);
+      // Validate resume: must have either uploaded file or existing link
+      const resumeError = validateResume();
+      if (resumeError) {
+        setFieldErrors(prev => ({ ...prev, resumeLink: resumeError }));
+        setShowValidationErrors(true);
+        setIsSubmitting(false);
+        toast({
+          title: "Resume required",
+          description: resumeError,
+          variant: "destructive"
+        });
+        return;
+      }
+
+      let resumeLinkToSubmit = application.resumeLink;
+
+      // If user selected a file, upload it first and get the URL
+      if (resumeFile) {
+        const formData = new FormData();
+        formData.append('resume', resumeFile);
+        const uploadRes = await fetch(API_CONFIG.ENDPOINTS.APPLICATIONS_UPLOAD_RESUME!, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${token}` },
+          body: formData
+        });
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok || !uploadData.data?.url) {
+          const errMsg = uploadData.error || 'Failed to upload resume. Please try again.';
+          setResumeUploadError(errMsg);
+          setFieldErrors(prev => ({ ...prev, resumeLink: errMsg }));
+          setIsSubmitting(false);
+          toast({
+            title: "Upload failed",
+            description: errMsg,
+            variant: "destructive"
+          });
+          return;
+        }
+        resumeLinkToSubmit = uploadData.data.url;
+      }
+
+      const payload = { ...application, resumeLink: resumeLinkToSubmit };
+      console.log('Submitting application:', payload);
       const response = await fetch(`${API_CONFIG.ENDPOINTS.APPLICATIONS}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(application)
+        body: JSON.stringify(payload)
       });
 
       if (response.ok) {
@@ -495,10 +562,10 @@ const ApplicationForm = () => {
           
           console.log('Validation error details:', errorData.details);
           
-          errorData.details.forEach((error: ExpressValidatorError) => {
-            // express-validator returns objects with 'path' and 'msg' properties
-            const fieldName = error.path;
-            const errorMessage = error.msg;
+          errorData.details.forEach((error: ExpressValidatorError & { field?: string; message?: string }) => {
+            // express-validator uses 'path' and 'msg'; custom validation may use 'field' and 'message'
+            const fieldName = error.path ?? error.field;
+            const errorMessage = error.msg ?? error.message;
             console.log('Processing error:', { fieldName, errorMessage, originalError: error });
             
             if (fieldName && errorMessage) {
@@ -737,17 +804,39 @@ const ApplicationForm = () => {
                           />
                         </FormField>
 
-                        <FormField fieldName="resumeLink" label="Resume Link (Google Drive/Dropbox)" required>
-                          <Input
-                            id="resumeLink"
-                            name="resumeLink"
-                            value={application.resumeLink}
-                            onChange={handleInputChange}
-                            onBlur={handleInputBlur}
-                            placeholder="https://drive.google.com/file/d/your-file-id/view?usp=sharing"
-                            required
-                            className={fieldErrors.resumeLink ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                          />
+                        <FormField fieldName="resumeLink" label="Resume" required>
+                          <div className="space-y-2">
+                            <div className={`flex items-center gap-3 p-3 border rounded-md bg-gray-50 ${fieldErrors.resumeLink ? "border-red-500" : "border-gray-300"}`}>
+                              <input
+                                id="resumeLink"
+                                name="resumeLink"
+                                type="file"
+                                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-brand-primary file:text-white file:cursor-pointer hover:file:opacity-90"
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0];
+                                  setResumeFile(file || null);
+                                  setResumeUploadError(null);
+                                  if (file) {
+                                    setApplication(prev => ({ ...prev, resumeLink: "" }));
+                                    setFieldErrors(prev => {
+                                      const next = { ...prev };
+                                      delete next.resumeLink;
+                                      return next;
+                                    });
+                                  }
+                                }}
+                              />
+                              {resumeFile && (
+                                <span className="text-sm text-gray-600 flex items-center gap-1">
+                                  <FileText className="h-4 w-4" />
+                                  {resumeFile.name}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-xs text-gray-500">PDF, DOC or DOCX. Max 5MB.</p>
+                            {resumeUploadError && <p className="text-sm text-red-600">{resumeUploadError}</p>}
+                          </div>
                         </FormField>
                       </div>
                     </div>
@@ -1055,17 +1144,39 @@ const ApplicationForm = () => {
                           />
                         </FormField>
 
-                        <FormField fieldName="resumeLink" label="Resume Link (Google Drive/Dropbox)" required>
-                          <Input
-                            id="resumeLink"
-                            name="resumeLink"
-                            value={application.resumeLink}
-                            onChange={handleInputChange}
-                            onBlur={handleInputBlur}
-                            placeholder="https://drive.google.com/file/d/your-file-id/view?usp=sharing"
-                            required
-                            className={fieldErrors.resumeLink ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                          />
+                        <FormField fieldName="resumeLink" label="Resume" required>
+                          <div className="space-y-2">
+                            <div className={`flex items-center gap-3 p-3 border rounded-md bg-gray-50 ${fieldErrors.resumeLink ? "border-red-500" : "border-gray-300"}`}>
+                              <input
+                                id="resumeLink-default"
+                                name="resumeLink"
+                                type="file"
+                                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-brand-primary file:text-white file:cursor-pointer hover:file:opacity-90"
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0];
+                                  setResumeFile(file || null);
+                                  setResumeUploadError(null);
+                                  if (file) {
+                                    setApplication(prev => ({ ...prev, resumeLink: "" }));
+                                    setFieldErrors(prev => {
+                                      const next = { ...prev };
+                                      delete next.resumeLink;
+                                      return next;
+                                    });
+                                  }
+                                }}
+                              />
+                              {resumeFile && (
+                                <span className="text-sm text-gray-600 flex items-center gap-1">
+                                  <FileText className="h-4 w-4" />
+                                  {resumeFile.name}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-xs text-gray-500">PDF, DOC or DOCX. Max 5MB.</p>
+                            {resumeUploadError && <p className="text-sm text-red-600">{resumeUploadError}</p>}
+                          </div>
                         </FormField>
                       </div>
                     </div>
@@ -1108,21 +1219,42 @@ const ApplicationForm = () => {
                             className={fieldErrors.degreeDiscipline ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                           />
                         </FormField>
+
+                        <FormField fieldName="yearOfPassingOut" label="Year of Passing Out" required>
+                          <select
+                            id="yearOfPassingOut"
+                            name="yearOfPassingOut"
+                            value={application.yearOfPassingOut || ""}
+                            onChange={handleInputChange}
+                            onBlur={handleInputBlur}
+                            required
+                            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
+                              fieldErrors.yearOfPassingOut ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
+                            }`}
+                          >
+                            <option value="">Select year of passing out</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                          </select>
+                        </FormField>
                       </div>
 
-                      <FormField fieldName="researchPapers" label="Research Papers/Publications" required>
-                        <Textarea
-                          id="researchPapers"
-                          name="researchPapers"
-                          value={application.researchPapers}
-                          onChange={handleInputChange}
-                          onBlur={handleInputBlur}
-                          placeholder="List any research papers, publications, or academic projects..."
-                          required
-                          className={fieldErrors.researchPapers ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                          rows={3}
-                        />
-                      </FormField>
+                      {!isMernJob() && (
+                        <FormField fieldName="researchPapers" label="Research Papers/Publications" required>
+                          <Textarea
+                            id="researchPapers"
+                            name="researchPapers"
+                            value={application.researchPapers}
+                            onChange={handleInputChange}
+                            onBlur={handleInputBlur}
+                            placeholder="List any research papers, publications, or academic projects..."
+                            required
+                            className={fieldErrors.researchPapers ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
+                            rows={3}
+                          />
+                        </FormField>
+                      )}
                     </div>
 
                     {/* Experience */}
@@ -1143,14 +1275,18 @@ const ApplicationForm = () => {
                         />
                       </FormField>
 
-                      <FormField fieldName="aiMlProjects" label="AI/ML Projects & Experience" required>
+                      <FormField
+                        fieldName="aiMlProjects"
+                        label={isMernJob() ? "MERN experience" : "AI/ML Projects & Experience"}
+                        required
+                      >
                         <Textarea
                           id="aiMlProjects"
                           name="aiMlProjects"
                           value={application.aiMlProjects}
                           onChange={handleInputChange}
                           onBlur={handleInputBlur}
-                          placeholder="Describe any AI/ML projects, coursework, or experience you have..."
+                          placeholder={isMernJob() ? "Describe your MERN stack projects, coursework, or experience..." : "Describe any AI/ML projects, coursework, or experience you have..."}
                           required
                           className={fieldErrors.aiMlProjects ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                           rows={4}
