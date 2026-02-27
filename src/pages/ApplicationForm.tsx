@@ -433,11 +433,16 @@ const ApplicationForm = () => {
 
   // Helper function to check if this is the Social Media Management Intern job
   const isSocialMediaJob = () => {
-    return job?.id === "TV-MKT-SMM-2025-003";
+    return job?.id === "TV-MKT-SMM-2025-003" || job?.id === "TV-MKT-SMM-2026-003";
   };
 
   const isMernJob = () => {
-    return job?.id === "TV-WEB-MERN-2025-005" || job?.id === "TV-WEB-MERN-2025-002";
+    return (
+      job?.id === "TV-WEB-MERN-2025-005" ||
+      job?.id === "TV-WEB-MERN-2025-002" ||
+      job?.id === "TV-WEB-MERN-2026-005" ||
+      job?.id === "TV-WEB-MERN-2026-002"
+    );
   };
 
   const handleSubmitApplication = async (e: React.FormEvent) => {
@@ -1277,7 +1282,7 @@ const ApplicationForm = () => {
 
                       <FormField
                         fieldName="aiMlProjects"
-                        label={isMernJob() ? "MERN experience" : "AI/ML Projects & Experience"}
+                        label={isMernJob() ? "MERN Projects Experience" : "AI/ML Projects & Experience"}
                         required
                       >
                         <Textarea
