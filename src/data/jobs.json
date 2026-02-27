@@ -49,7 +49,7 @@
       "closedDate": "2026-03-03"
     },
     {
-      "id": "TV-WEB-MERN-2025-005",
+      "id": "TV-WEB-MERN-2026-005",
       "title": "MERN Stack Developer Intern",
       "slug": "mern-stack-developer-intern",
       "location": "Hybrid",
@@ -97,52 +97,52 @@
       "postedDate": "2026-02-20",
       "closedDate": "2026-03-03"
     },
-    // {
-    //   "id": "TV-MKT-SMM-2026-003",
-    //   "title": "Social Media Management Intern (Hybrid)",
-    //   "slug": "social-media-management-intern-hybrid",
-    //   "location": "Hybrid",
-    //   "type": "Internship",
-    //   "category": "Marketing",
-    //   "shortDescription": "Create engaging content and assist with social media campaigns to build our brand presence across multiple platforms.",
-    //   "description": "We are looking for a creative and enthusiastic Social Media Intern to support our marketing team in managing our company's social media presence. The role involves creating engaging content, assisting with social media campaigns, and helping build our brand presence across multiple platforms. This is a hybrid internship with opportunities to learn, grow, and gain hands-on experience in digital marketing and brand management. To learn more about our company, visit our website: www.trizenventures.com",
-    //   "tags": ["Social Media", "Content Creation", "Digital Marketing", "Brand Management", "Community Engagement", "Analytics"],
-    //   "requirements": [
-    //     "Passion for social media and digital marketing",
-    //     "Basic knowledge of social media platforms (LinkedIn, Instagram, Facebook, Twitter)",
-    //     "Good communication and writing skills",
-    //     "Creative mindset and willingness to learn",
-    //     "Familiarity with design tools like Canva or Adobe Creative Suite (a plus)",
-    //     "Interest in technology or AI/ML industry trends is an advantage"
-    //   ],
-    //   "responsibilities": [
-    //     "Assist in developing and executing social media strategies",
-    //     "Create and schedule posts, graphics, and videos for different platforms",
-    //     "Engage with followers by responding to comments and messages",
-    //     "Help monitor analytics and prepare simple reports on performance",
-    //     "Research trends and suggest creative content ideas",
-    //     "Collaborate with the marketing team to support campaign goals"
-    //   ],
-    //   "benefits": [
-    //     "Hybrid work setup (remote + office)",
-    //     "Certificate of Internship upon completion",
-    //     "Exposure to real-world marketing projects",
-    //     "Creative freedom in content creation",
-    //     "Opportunity to shape our brand voice",
-    //     "Guidance and mentorship from experienced professionals",
-    //     "Competitive internship stipend and benefits package",
-    //     "Opportunity for full-time employment based on performance"
-    //   ],
-    //   "selectionProcess": [
-    //     "Round 1: Assignment (content or social media task)",
-    //     "Round 2: Interview with the marketing team"
-    //   ],
-    //   "duration": "3 months",
-    //   "startDate": "Immediate",
-    //   "applicationDeadline": "3rd March",
-    //   "postedDate": "2026-02-20",
-    //   "closedDate": "2026-03-03"
-    // },
+    {
+      "id": "TV-MKT-SMM-2026-003",
+      "title": "Social Media Management Intern (Hybrid)",
+      "slug": "social-media-management-intern-hybrid",
+      "location": "Hybrid",
+      "type": "Internship",
+      "category": "Marketing",
+      "shortDescription": "Create engaging content and assist with social media campaigns to build our brand presence across multiple platforms.",
+      "description": "We are looking for a creative and enthusiastic Social Media Intern to support our marketing team in managing our company's social media presence. The role involves creating engaging content, assisting with social media campaigns, and helping build our brand presence across multiple platforms. This is a hybrid internship with opportunities to learn, grow, and gain hands-on experience in digital marketing and brand management. To learn more about our company, visit our website: www.trizenventures.com",
+      "tags": ["Social Media", "Content Creation", "Digital Marketing", "Brand Management", "Community Engagement", "Analytics"],
+      "requirements": [
+        "Passion for social media and digital marketing",
+        "Basic knowledge of social media platforms (LinkedIn, Instagram, Facebook, Twitter)",
+        "Good communication and writing skills",
+        "Creative mindset and willingness to learn",
+        "Familiarity with design tools like Canva or Adobe Creative Suite (a plus)",
+        "Interest in technology or AI/ML industry trends is an advantage"
+      ],
+      "responsibilities": [
+        "Assist in developing and executing social media strategies",
+        "Create and schedule posts, graphics, and videos for different platforms",
+        "Engage with followers by responding to comments and messages",
+        "Help monitor analytics and prepare simple reports on performance",
+        "Research trends and suggest creative content ideas",
+        "Collaborate with the marketing team to support campaign goals"
+      ],
+      "benefits": [
+        "Hybrid work setup (remote + office)",
+        "Certificate of Internship upon completion",
+        "Exposure to real-world marketing projects",
+        "Creative freedom in content creation",
+        "Opportunity to shape our brand voice",
+        "Guidance and mentorship from experienced professionals",
+        "Competitive internship stipend and benefits package",
+        "Opportunity for full-time employment based on performance"
+      ],
+      "selectionProcess": [
+        "Round 1: Assignment (content or social media task)",
+        "Round 2: Interview with the marketing team"
+      ],
+      "duration": "3 months",
+      "startDate": "Immediate",
+      "applicationDeadline": "3rd March",
+      "postedDate": "2026-02-20",
+      "closedDate": "2026-03-03"
+    },
    {
       "id": "TV-WEB-MERN-2026-002",
       "title": "MERN Stack Developer Intern",
