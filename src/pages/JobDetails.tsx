@@ -254,7 +254,7 @@ const JobDetails = () => {
                       </div>
                       <div className="flex items-center space-x-2">
                         <Users className="w-4 h-4" />
-                        <span>Openings: 1 positions available</span>
+                        <span>Openings: 2 positions available</span>
                       </div>
                     </>
                   )}
