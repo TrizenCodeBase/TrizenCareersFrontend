@@ -558,7 +558,12 @@ const ApplicationForm = () => {
           description: "Thank you for your application. We'll review it and get back to you soon. A confirmation email has been sent to your inbox.",
         });
       } else {
-        const errorData = await response.json();
+        let errorData: { error?: string; message?: string; details?: unknown } = {};
+        try {
+          errorData = await response.json();
+        } catch {
+          errorData = { error: `Server error (${response.status}). Please try again later.` };
+        }
         console.error('Application submission error:', errorData);
         
         // Handle validation errors
@@ -599,10 +604,16 @@ const ApplicationForm = () => {
       }
     } catch (error) {
       console.error('Error submitting application:', error);
+      const isNetworkOrCors =
+        error instanceof TypeError &&
+        (error.message === 'Failed to fetch' || (error as Error).message?.toLowerCase().includes('network'));
+      const description = isNetworkOrCors
+        ? 'Unable to reach the server. Please check your connection, try again in a moment, or use a different network.'
+        : (error as Error).message || 'Failed to submit application. Please check your connection and try again.';
       toast({
-        title: "Network Error",
-        description: "Failed to submit application. Please check your connection and try again.",
-        variant: "destructive"
+        title: 'Network Error',
+        description,
+        variant: 'destructive'
       });
     } finally {
       setIsSubmitting(false);
