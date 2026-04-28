@@ -8,6 +8,13 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    proxy: {
+      '/api': {
+        target: 'https://trizencareersbackend.llp.trizenventures.com',
+        changeOrigin: true,
+        secure: true,
+      }
+    }
   },
   plugins: [
     react(),

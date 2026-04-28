@@ -1,14 +1,15 @@
 // Environment Configuration
 export const ENV_CONFIG = {
-  // API Base URL - defaults to production, can be overridden by environment variable
-  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'https://trizencareersbackend.llp.trizenventures.com',
+  // API Base URL - configure in .env file (VITE_API_BASE_URL)
+  // In development, leave empty to use Vite proxy (avoids CORS)
+  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || '',
 
-  // Email Service Configuration
+  // Email Service Configuration - configure in .env file
   EMAIL_SERVICE: {
-    BASE_URL: import.meta.env.VITE_EMAIL_SERVICE_URL || 'https://trizensupportemailservice.llp.trizenventures.com',
-    API_KEY: import.meta.env.VITE_EMAIL_SERVICE_API_KEY || 'trizen-support-email-2024-secure-key-xyz789',
-    FROM_EMAIL: import.meta.env.VITE_EMAIL_FROM || 'support@trizenventures.com',
-    FROM_NAME: import.meta.env.VITE_EMAIL_FROM_NAME || 'Trizen Ventures Careers'
+    BASE_URL: import.meta.env.VITE_EMAIL_SERVICE_URL,
+    API_KEY: import.meta.env.VITE_EMAIL_SERVICE_API_KEY,
+    FROM_EMAIL: import.meta.env.VITE_EMAIL_FROM,
+    FROM_NAME: import.meta.env.VITE_EMAIL_FROM_NAME
   },
 
   // Environment
@@ -22,3 +23,4 @@ export const ENV_CONFIG = {
 };
 
 export default ENV_CONFIG;
+
