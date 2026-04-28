@@ -12,27 +12,16 @@ Set these in CapRover app settings:
 
 ```
 NODE_ENV=production
-VITE_API_URL=https://your-backend-domain.com
+VITE_API_BASE_URL=https://trizencareer-api.llp.trizenventures.com
 ```
 
 ### Update API URL
-Before deploying, update the API URL in your frontend code:
-
-1. **Update JobDetails.tsx** (line ~130):
-   ```typescript
-   const response = await fetch('https://your-backend-domain.com/api/v1/applications', {
-   ```
-
-2. **Update Auth.tsx** (if using API calls):
-   ```typescript
-   const response = await fetch('https://your-backend-domain.com/api/v1/users/login', {
-   ```
+Before deploying, set `VITE_API_BASE_URL` (above). The app builds API endpoints from `src/config/api.ts`, so you do not need to hardcode URLs in components.
 
 ### Deployment Steps
 
 1. **Update API URLs**
-   - Replace all `http://localhost:5000` with your backend domain
-   - Commit changes
+   - For production, ensure `VITE_API_BASE_URL` is set in CapRover app settings and redeploy
 
 2. **Push to Git Repository**
    ```bash

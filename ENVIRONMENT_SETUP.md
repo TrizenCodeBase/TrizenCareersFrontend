@@ -7,7 +7,7 @@ The frontend application uses environment variables to configure the API endpoin
 ### Production Configuration
 
 The application is configured to use the production backend URL by default:
-- **API Base URL**: `https://trizencareersbackend.llp.trizenventures.com`
+- **API Base URL**: `https://trizencareer-api.llp.trizenventures.com`
 
 ### Development Configuration
 
@@ -22,7 +22,7 @@ VITE_API_BASE_URL=http://localhost:5000
 
 | Variable | Description | Default Value |
 |----------|-------------|---------------|
-| `VITE_API_BASE_URL` | Backend API base URL | `https://trizencareersbackend.llp.trizenventures.com` |
+| `VITE_API_BASE_URL` | Backend API base URL | `https://trizencareer-api.llp.trizenventures.com` |
 
 ### API Endpoints
 
@@ -51,6 +51,6 @@ const response = await fetch(API_CONFIG.ENDPOINTS.USERS.LOGIN, {
 
 ### Deployment
 
-For production deployment, the application will automatically use the production backend URL. No additional configuration is needed.
+For production deployment, the application will automatically default to `https://trizencareer-api.llp.trizenventures.com` if `VITE_API_BASE_URL` is not provided at build time.
 
 For custom deployments, set the `VITE_API_BASE_URL` environment variable to your backend URL.
