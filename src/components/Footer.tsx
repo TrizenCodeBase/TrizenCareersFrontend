@@ -181,7 +181,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="h-4 w-4 flex-shrink-0" />
-                  <a href="mailto:info@trizenventures.com" className="hover:text-white transition-colors">info@trizenventures.com</a>
+                  <a href="mailto:careers@trizenventures.com" className="hover:text-white transition-colors">careers@trizenventures.com</a>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Globe className="h-4 w-4 flex-shrink-0" />
