@@ -69,14 +69,16 @@ class EmailService {
   async sendJobApplicationConfirmation(data: JobApplicationEmailData, token: string): Promise<EmailResponse> {
     const { applicantName, applicantEmail, jobTitle, jobId, companyName } = data;
     
-    console.log('📧 Sending email directly to email service...');
-    
     try {
-      const response = await fetch(`${EMAIL_SERVICE_CONFIG.baseUrl}/api/support/send-custom`, {
+      // Use the backend proxy instead of calling the email service directly to avoid CORS issues
+      const backendUrl = ENV_CONFIG.API_BASE_URL || 'https://trizencareer-api.llp.trizenventures.com';
+      console.log('📧 Sending email via backend proxy:', `${backendUrl}/api/v1/support/send-email`);
+      
+      const response = await fetch(`${backendUrl}/api/v1/support/send-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': EMAIL_SERVICE_CONFIG.apiKey
+          'Authorization': `Bearer ${token}` // If authentication is required by backend
         },
         body: JSON.stringify({
           clientEmail: applicantEmail,
@@ -87,15 +89,19 @@ class EmailService {
         })
       });
 
-      console.log('📧 Email service response status:', response.status);
+      console.log('📧 Backend proxy response status:', response.status);
       const result = await response.json();
-      console.log('📧 Email service response data:', result);
+      console.log('📧 Backend proxy response data:', result);
       
       if (!response.ok) {
-        throw new Error(result.error || `HTTP error! status: ${response.status}`);
+        throw new Error(result.error || result.message || `HTTP error! status: ${response.status}`);
       }
 
-      return result;
+      return {
+        success: true,
+        message: 'Email sent successfully via proxy',
+        data: result
+      };
     } catch (error) {
       console.error('📧 Email service error:', error);
       return {
