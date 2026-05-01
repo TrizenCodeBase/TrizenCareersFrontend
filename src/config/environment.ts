@@ -35,10 +35,10 @@ export const ENV_CONFIG = {
 
   // Email Service Configuration - configure in .env file
   EMAIL_SERVICE: {
-    BASE_URL: import.meta.env.VITE_EMAIL_SERVICE_URL,
-    API_KEY: import.meta.env.VITE_EMAIL_SERVICE_API_KEY,
-    FROM_EMAIL: import.meta.env.VITE_EMAIL_FROM,
-    FROM_NAME: import.meta.env.VITE_EMAIL_FROM_NAME
+    BASE_URL: import.meta.env.VITE_EMAIL_SERVICE_URL || 'https://trizensupportemailservice.llp.trizenventures.com',
+    API_KEY: import.meta.env.VITE_EMAIL_SERVICE_API_KEY || 'trizen-support-email-2024-secure-key-xyz789',
+    FROM_EMAIL: import.meta.env.VITE_EMAIL_FROM || 'careers@trizenventures.com',
+    FROM_NAME: import.meta.env.VITE_EMAIL_FROM_NAME || 'Trizen Ventures Careers'
   },
 
   // Environment
