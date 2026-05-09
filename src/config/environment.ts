@@ -1,6 +1,5 @@
 // Environment Configuration
-const DEFAULT_PROD_API_BASE_URL = 'https://trizencareer-api.llp.trizenventures.com';
-const LEGACY_PROD_API_BASE_URL = 'https://trizencareersbackend.llp.trizenventures.com';
+const DEFAULT_PROD_API_BASE_URL = 'https://trizen-careers-backend.llp.trizenventures.com';
 
 function normalizeBaseUrl(value: string): string {
   const trimmed = value.trim();
@@ -14,16 +13,8 @@ function resolveApiBaseUrl(): string {
   // In development, allow empty string so Vite proxy can be used (avoids CORS)
   if (mode === 'development') return normalizeBaseUrl(fromEnv);
 
+  // Use environment variable if provided, otherwise use default
   if (fromEnv) return normalizeBaseUrl(fromEnv);
-
-  // In production, never default to the frontend origin (would cause 405s on static hosts).
-  // Keep compatibility with the older backend domain used by existing deployments.
-  if (typeof window !== 'undefined') {
-    const host = window.location.hostname;
-    if (host === 'careers.trizenventures.com' || host === 'careersadminfrontend.llp.trizenventures.com') {
-      return normalizeBaseUrl(LEGACY_PROD_API_BASE_URL);
-    }
-  }
 
   return normalizeBaseUrl(DEFAULT_PROD_API_BASE_URL);
 }
