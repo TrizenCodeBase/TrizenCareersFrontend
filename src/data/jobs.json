@@ -1,198 +1,110 @@
 {
   "jobs": [
     {
-      "id": "TV-AIML-INT-2026-001",
-      "title": "AIML Intern",
-      "slug": "ai-ml-intern",
-      "location": "Hybrid",
+      "id": "TV-AI-AUT-2026-001",
+      "title": "Associate AI & Automation Engineer",
+      "slug": "associate-ai-automation-engineer",
+      "location": "Remote / Hybrid",
+      "type": "Full-Time",
+      "category": "AI/ML",
+      "shortDescription": "Build real-world AI applications, workflow automations, and full-stack products with LLMs, RAG, and modern web technologies. Ideal for 0–1 years experience with prior internship exposure.",
+      "description": "We are looking for a passionate Associate AI & Automation Engineer who is excited about building real-world AI applications, workflow automations, and web-based products. You will work closely with the engineering team to develop AI-powered features, automate business processes, integrate LLMs, and contribute to full-stack product development. This role is ideal for candidates with prior internship experience who enjoy experimenting with AI technologies while also being comfortable building and integrating web applications. Position: Full-Time | Experience: 0–1 Years | Previous Internship Experience: Required | Mode: Remote / Hybrid | Compensation: Competitive (based on skills and experience). When applying, please share your resume, GitHub profile, LinkedIn profile, portfolio/projects (if available), and a brief description of your most interesting AI or web development project.",
+      "tags": ["LLMs", "RAG", "LangChain", "Automation", "React", "FastAPI", "Prompt Engineering", "Vector Databases"],
+      "requirements": [
+        "0–1 years of experience with at least one internship in AI, Software Development, Automation, Full Stack Development, or a related field",
+        "Basic understanding of Machine Learning and Generative AI concepts",
+        "Experience integrating APIs and automation workflows",
+        "Familiarity with Large Language Models (GPT, Claude, Gemini, Llama, etc.)",
+        "Understanding of Prompt Engineering concepts",
+        "Knowledge of AI agent frameworks such as LangChain, LangGraph, CrewAI, or similar",
+        "Understanding of RAG (Retrieval-Augmented Generation) fundamentals",
+        "Strong problem-solving and debugging skills with ability to learn new technologies quickly",
+        "Good communication, collaboration skills, and a self-driven mindset",
+        "Nice to have: Experience with vector databases (Pinecone, Weaviate, Chroma)",
+        "Nice to have: Experience with FastAPI, Express.js, React.js, Next.js, AWS/GCP/Azure, Docker, or GitHub Actions",
+        "Nice to have: Experience building AI agents, multi-agent systems, or contributions to open-source projects",
+        "Bonus: Prior work on AI Agents, Workflow Automation Systems, Full-Stack Web Applications, or Internal Productivity Tools"
+      ],
+      "responsibilities": [
+        "Build and maintain AI-powered applications using modern LLMs and AI frameworks",
+        "Develop workflow automations using APIs, AI agents, and no-code/low-code automation platforms",
+        "Create AI-driven features such as chatbots, document processing systems, search systems, and intelligent assistants",
+        "Work with Retrieval-Augmented Generation (RAG) systems and vector databases",
+        "Integrate third-party APIs and AI services into web applications",
+        "Develop and maintain frontend and backend components of web applications",
+        "Assist in prompt engineering, model evaluation, and AI experimentation",
+        "Collaborate with product and engineering teams to prototype and ship new features quickly",
+        "Research emerging AI tools, frameworks, and automation technologies"
+      ],
+      "benefits": [
+        "Full-time role with competitive compensation based on skills and experience",
+        "Remote / Hybrid work flexibility",
+        "Hands-on work on AI agents, automation systems, and full-stack products",
+        "Exposure to modern LLMs, RAG, and agent frameworks",
+        "Collaboration with product and engineering teams on fast-paced feature delivery",
+        "Opportunity to grow into advanced AI and platform engineering responsibilities"
+      ],
+      "selectionProcess": [
+        "Application review (resume, GitHub, LinkedIn, and portfolio)",
+        "Technical assignment focused on AI, automation, or full-stack skills",
+        "Interview with the engineering team"
+      ],
+      "duration": "Full-Time",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-06-02"
+    },
+    {
+      "id": "TV-AI-FS-2026-002",
+      "title": "AI & Full Stack Intern",
+      "slug": "ai-full-stack-intern",
+      "location": "Remote / Hybrid",
       "type": "Internship",
       "category": "AI/ML",
-      "shortDescription": "Work on cutting-edge AI/ML projects and research with hands-on experience in machine learning, deep learning, and LLMs.",
-      "description": "Thank you for your interest in the AI/ML Internship role at Trizen Ventures LLP! We are looking for dedicated and passionate individuals to work on cutting-edge projects in Machine Learning, Artificial Intelligence, and related domains. This is a full-time, hybrid, 6 months paid internship opportunity with possible PPO conversion after internship. Eligible applicants will be shared the assignment on a rolling basis shortly after submitting their application, so we encourage you to apply at the earliest. Please ensure you fill out this application form accurately. Only shortlisted candidates will be contacted. To learn more about our company, visit our website: www.trizenventures.com",
-      "tags": ["Python", "Machine Learning", "Deep Learning", "TensorFlow", "PyTorch", "LLMs", "AI Tools"],
+      "shortDescription": "Learn and build real-world AI and full-stack applications alongside experienced engineers. Ideal for students or recent graduates curious about AI, automation, and modern web development.",
+      "description": "We are looking for an enthusiastic AI & Full Stack Intern who is eager to learn and build real-world applications. This role is ideal for students or recent graduates who have basic knowledge of web development and are interested in exploring AI, automation, and modern software development. You will work alongside experienced engineers to build features, experiment with AI tools, integrate APIs, and contribute to both frontend and backend development. Duration: 3–6 Months | Mode: Remote / Hybrid | Stipend: Based on skills and project experience | Opportunity for a full-time role based on performance. When applying, please share your resume, GitHub profile (if available), LinkedIn profile (if available), portfolio/projects (if available), and a brief description of a project you have built or contributed to. We value curiosity, initiative, and a willingness to learn over extensive experience.",
+      "tags": ["JavaScript", "React", "Next.js", "APIs", "Git", "AI Tools", "Node.js", "Full Stack"],
       "requirements": [
-        "Knowledge of ML and DL algorithms, and hands-on experience with TensorFlow/PyTorch",
-        "Familiarity with LLMs, prompt engineering, and fine-tuning techniques",
-        "Experience in data preprocessing, model evaluation, and performance optimization",
-        "Knowledge of Python libraries — NumPy, Pandas, Scikit-learn, Matplotlib",
-        "Exposure to LangChain, Hugging Face, and vector databases (Pinecone, FAISS)",
-        "Research and academic writing experience, including paper publishing",
-        "Understanding of cloud ML environments (AWS/GCP/Azure) and API deployment (FastAPI/Flask)",
-        "Strong problem-solving, collaboration, and documentation skills",
-        "Dedication to full-time hybrid work and continuous learning"
+        "Basic understanding of JavaScript",
+        "Familiarity with React.js or Next.js",
+        "Basic understanding of APIs and web applications",
+        "Familiarity with Git and GitHub",
+        "Interest in AI, automation, and modern software development",
+        "Good problem-solving skills and willingness to learn",
+        "Ability to work independently and communicate effectively",
+        "Nice to have: Basic knowledge of Node.js or Python",
+        "Nice to have: Exposure to AI tools such as ChatGPT, Gemini, or Claude",
+        "Nice to have: Familiarity with MongoDB or PostgreSQL",
+        "Nice to have: Basic understanding of prompt engineering, React Native, Docker, or cloud platforms",
+        "Preferred projects: AI Chatbots, Personal AI Projects, Full-Stack Web Apps, Mobile Apps, Automation Tools, College or Hackathon Projects"
       ],
       "responsibilities": [
-        "Work on cutting-edge AI/ML projects and research",
-        "Develop and implement machine learning models",
-        "Research and experiment with Large Language Models",
-        "Contribute to academic writing and paper publishing",
-        "Collaborate with the team on innovative AI solutions",
-        "Stay updated with the latest AI tools and technologies"
+        "Assist in building AI-powered features and applications",
+        "Work on simple workflow automations and API integrations",
+        "Develop and maintain frontend components using modern web technologies",
+        "Support backend development and API implementation",
+        "Help integrate AI services such as OpenAI, Gemini, or similar platforms",
+        "Participate in debugging, testing, and improving application performance",
+        "Collaborate with team members to build and ship product features",
+        "Research and learn new technologies related to AI and software development"
       ],
       "benefits": [
-        "Full-time hybrid work opportunity",
-        "6 months paid internship with competitive compensation",
-        "Possible PPO conversion after internship",
-        "Hands-on experience with cutting-edge AI/ML technologies",
-        "Opportunity to work on real-world projects",
-        "Mentorship from experienced professionals",
-        "Potential for future collaboration opportunities"
+        "3–6 month internship with stipend based on skills and project experience",
+        "Remote / Hybrid work flexibility",
+        "Mentorship from experienced engineers",
+        "Hands-on experience with AI tools and full-stack development",
+        "Opportunity for a full-time role based on performance",
+        "Strong focus on learning, building, and shipping real product features"
       ],
       "selectionProcess": [
-        "Candidates will have 2 rounds of selection",
-        "Assignment round and upon selecting from that round an Interview round"
+        "Application review (resume, GitHub, LinkedIn, and project description)",
+        "Technical assignment or take-home task",
+        "Interview with the engineering team"
       ],
-      "duration": "6 months",
+      "duration": "3-6 months",
       "startDate": "Immediate",
-      "applicationDeadline": "20th March",
-      "postedDate": "2026-02-20",
-      "closedDate": "2026-03-03"
-    },
-    {
-      "id": "TV-WEB-MERN-2026-005",
-      "title": "MERN Stack Developer Intern",
-      "slug": "mern-stack-developer-intern",
-      "location": "Hybrid",
-      "type": "Internship",
-      "category": "Web Development",
-      "shortDescription": "Build modern web applications using MongoDB, Express.js, React.js, and Node.js with hands-on experience in full-stack development.",
-      "description": "Thank you for your interest in the MERN Stack Developer Internship at Trizen Ventures LLP! We are looking for dedicated and skilled developers to work on cutting-edge web application projects using the MERN stack (MongoDB, Express.js, React.js, Node.js). This is a full-time, hybrid, 6 months paid internship opportunity. Eligible applicants will be shared the assignment on a rolling basis shortly after submitting their application, so we encourage you to apply at the earliest. Possible full-time conversion after 6 months of internship. Please ensure you fill out this application form accurately. Only shortlisted candidates will be contacted. To learn more about our company, visit our website: www.trizenventures.com",
-      "tags": ["MongoDB", "Express.js", "React.js", "Node.js", "JavaScript", "RESTful APIs", "Authentication"],
-      "requirements": [
-        "Proficiency in MongoDB, Express.js, React.js, and Node.js",
-        "Experience in secure web application development",
-        "Strong problem-solving and debugging skills",
-        "Knowledge of role-based access control, authentication, and version management",
-        "Familiarity with RESTful APIs, Single Sign-On (SSO), and HRMS integration is a plus",
-        "Experience with vibe coding and collaborative development",
-        "React Native experience is a plus",
-        "Dedication to full-time hybrid work"
-      ],
-      "responsibilities": [
-        "Develop and maintain web applications using MERN stack",
-        "Implement secure authentication and authorization systems",
-        "Create and integrate RESTful APIs",
-        "Work with databases and data management",
-        "Collaborate with team members on project development",
-        "Debug and troubleshoot application issues",
-        "Participate in code reviews and best practices"
-      ],
-      "benefits": [
-        "Full-time hybrid work opportunity",
-        "6 months paid internship",
-        "Possible full-time conversion after 6 months of internship",
-        "Hands-on experience with modern web technologies",
-        "Opportunity to work on real-world projects",
-        "Mentorship from experienced developers",
-        "Potential for future collaboration opportunities",
-        "Android development opportunities"
-      ],
-      "selectionProcess": [
-        "Candidates will have 2 rounds of selection",
-        "Assignment round and upon selecting from that round an Interview round"
-      ],
-      "duration": "6 months",
-      "startDate": "Immediate",
-      "applicationDeadline": "30th April",
-      "postedDate": "2026-02-20",
-      "closedDate": "2026-04-30"
-    },
-    {
-      "id": "TV-MKT-SMM-2026-003",
-      "title": "Social Media Management Intern (Hybrid)",
-      "slug": "social-media-management-intern-hybrid",
-      "location": "Hybrid",
-      "type": "Internship",
-      "category": "Marketing",
-      "shortDescription": "Create engaging content and assist with social media campaigns to build our brand presence across multiple platforms.",
-      "description": "We are looking for a creative and enthusiastic Social Media Intern to support our marketing team in managing our company's social media presence. The role involves creating engaging content, assisting with social media campaigns, and helping build our brand presence across multiple platforms. This is a hybrid internship with opportunities to learn, grow, and gain hands-on experience in digital marketing and brand management. Eligible applicants will be shared the assignment on a rolling basis shortly after submitting their application, so we encourage you to apply at the earliest. To learn more about our company, visit our website: www.trizenventures.com",
-      "tags": ["Social Media", "Content Creation", "Digital Marketing", "Brand Management", "Community Engagement", "Analytics"],
-      "requirements": [
-        "Passion for social media and digital marketing",
-        "Basic knowledge of social media platforms (LinkedIn, Instagram, Facebook, Twitter)",
-        "Good communication and writing skills",
-        "Creative mindset and willingness to learn",
-        "Familiarity with design tools like Canva or Adobe Creative Suite (a plus)",
-        "Interest in technology or AI/ML industry trends is an advantage"
-      ],
-      "responsibilities": [
-        "Assist in developing and executing social media strategies",
-        "Create and schedule posts, graphics, and videos for different platforms",
-        "Engage with followers by responding to comments and messages",
-        "Help monitor analytics and prepare simple reports on performance",
-        "Research trends and suggest creative content ideas",
-        "Collaborate with the marketing team to support campaign goals"
-      ],
-      "benefits": [
-        "Hybrid work setup (remote + office)",
-        "Certificate of Internship upon completion",
-        "Exposure to real-world marketing projects",
-        "Creative freedom in content creation",
-        "Opportunity to shape our brand voice",
-        "Guidance and mentorship from experienced professionals",
-        "Competitive internship stipend and benefits package",
-        "Opportunity for full-time employment based on performance"
-      ],
-      "selectionProcess": [
-        "Round 1: Assignment (content or social media task)",
-        "Round 2: Interview with the marketing team"
-      ],
-      "duration": "3 months",
-      "startDate": "Immediate",
-      "applicationDeadline": "20th March",
-      "postedDate": "2026-02-20",
-      "closedDate": "2026-03-03"
-    },
-   {
-      "id": "TV-WEB-MERN-2026-002",
-      "title": "MERN Stack Developer Intern",
-      "slug": "mern-stack-developer-intern",
-      "location": "Hybrid",
-      "type": "Internship",
-      "category": "Web Development",
-      "status": "closed",
-      "shortDescription": "Build modern web applications using MongoDB, Express.js, React.js, and Node.js with hands-on experience in full-stack development.",
-      "description": "Thank you for your interest in the MERN Stack Developer Internship at Trizen Ventures LLP! We are looking for dedicated and skilled developers to work on cutting-edge web application projects using the MERN stack (MongoDB, Express.js, React.js, Node.js). This is a full-time, hybrid, 6 months paid internship opportunity with a monthly stipend of 8K. Eligible applicants will be shared the assignment on a rolling basis shortly after submitting their application, so we encourage you to apply at the earliest. Possible full-time conversion after 6 months of internship. Please ensure you fill out this application form accurately. Only shortlisted candidates will be contacted. To learn more about our company, visit our website: www.trizenventures.com",
-      "tags": ["MongoDB", "Express.js", "React.js", "Node.js", "JavaScript", "RESTful APIs", "Authentication"],
-      "requirements": [
-        "Only 2023, 2024, and 2025 graduates are eligible to apply",
-        "Proficiency in MongoDB, Express.js, React.js, and Node.js",
-        "Experience in secure web application development",
-        "Strong problem-solving and debugging skills",
-        "Knowledge of role-based access control, authentication, and version management",
-        "Familiarity with RESTful APIs, Single Sign-On (SSO), and HRMS integration is a plus",
-        "Experience with vibe coding and collaborative development",
-        "React Native experience is a plus",
-        "Dedication to full-time hybrid work"
-      ],
-      "responsibilities": [
-        "Develop and maintain web applications using MERN stack",
-        "Implement secure authentication and authorization systems",
-        "Create and integrate RESTful APIs",
-        "Work with databases and data management",
-        "Collaborate with team members on project development",
-        "Debug and troubleshoot application issues",
-        "Participate in code reviews and best practices"
-      ],
-      "benefits": [
-        "Full-time hybrid work opportunity",
-        "6 months paid internship with 8K monthly stipend",
-        "Possible full-time conversion after 6 months of internship",
-        "Hands-on experience with modern web technologies",
-        "Opportunity to work on real-world projects",
-        "Mentorship from experienced developers",
-        "Potential for future collaboration opportunities",
-        "Android development opportunities"
-      ],
-      "selectionProcess": [
-        "Candidates will have 2 rounds of selection",
-        "Assignment round and upon selecting from that round an Interview round"
-      ],
-      "duration": "6 months",
-      "startDate": "Immediate",
-      "applicationDeadline": "20th March",
-      "postedDate": "2026-02-20",
-      "closedDate": "2026-03-03"
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-06-02"
     }
   ]
 }
