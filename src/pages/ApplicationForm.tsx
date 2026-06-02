@@ -41,7 +41,6 @@ interface JobApplication {
   resumeLink: string;
   educationStatus: string;
   degreeDiscipline: string;
-  researchPapers: string;
   yearOfPassingOut?: string;
   internshipExperience: string;
   duration: string;
@@ -119,7 +118,6 @@ const ApplicationForm = () => {
     resumeLink: "",
     educationStatus: "",
     degreeDiscipline: "",
-    researchPapers: "",
     yearOfPassingOut: "",
     internshipExperience: "",
     duration: "",
@@ -214,9 +212,6 @@ const ApplicationForm = () => {
         break;
       case 'degreeDiscipline':
         if (!value.trim()) return 'Degree discipline is required';
-        break;
-      case 'researchPapers':
-        if (!value.trim()) return 'Research papers information is required';
         break;
       case 'yearOfPassingOut':
         if (!value.trim()) return 'Year of passing out is required';
@@ -338,7 +333,6 @@ const ApplicationForm = () => {
       resumeLink: "Resume",
       educationStatus: "Current Education Status",
       degreeDiscipline: "Degree/Discipline",
-      researchPapers: "Research Papers/Publications",
       yearOfPassingOut: "Year of Passing Out",
       internshipExperience: "Previous Internship/Work Experience",
       duration: "Preferred Duration",
@@ -372,7 +366,6 @@ const ApplicationForm = () => {
       resumeLink: "Upload your resume (PDF, DOC or DOCX, max 5MB).",
       educationStatus: "Select your current education level",
       degreeDiscipline: "Enter your field of study or degree discipline",
-      researchPapers: "List any research papers, publications, or academic projects (if none, write 'None')",
       yearOfPassingOut: "Select the year you expect to or have completed your degree",
       internshipExperience: "Describe your previous work experience (if none, write 'None')",
       duration: "Select your preferred internship duration",
@@ -1256,21 +1249,6 @@ const ApplicationForm = () => {
                         </FormField>
                       </div>
 
-                      {!isMernJob() && (
-                        <FormField fieldName="researchPapers" label="Research Papers/Publications" required>
-                          <Textarea
-                            id="researchPapers"
-                            name="researchPapers"
-                            value={application.researchPapers}
-                            onChange={handleInputChange}
-                            onBlur={handleInputBlur}
-                            placeholder="List any research papers, publications, or academic projects..."
-                            required
-                            className={fieldErrors.researchPapers ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
-                            rows={3}
-                          />
-                        </FormField>
-                      )}
                     </div>
 
                     {/* Experience */}
