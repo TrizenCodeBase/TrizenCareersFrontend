@@ -8,7 +8,8 @@
       "type": "Full-Time",
       "category": "AI/ML",
       "shortDescription": "Build real-world AI applications, workflow automations, and full-stack products with LLMs, RAG, and modern web technologies. Ideal for 0–1 years experience with prior internship exposure.",
-      "description": "We are looking for a passionate Associate AI & Automation Engineer who is excited about building real-world AI applications, workflow automations, and web-based products. You will work closely with the engineering team to develop AI-powered features, automate business processes, integrate LLMs, and contribute to full-stack product development. This role is ideal for candidates with prior internship experience who enjoy experimenting with AI technologies while also being comfortable building and integrating web applications. Position: Full-Time | Experience: 0–1 Years | Previous Internship Experience: Required | Mode: Remote / Hybrid | Compensation: Competitive (based on skills and experience). When applying, please share your resume, GitHub profile, LinkedIn profile, portfolio/projects (if available), and a brief description of your most interesting AI or web development project.",
+      "description": "We are looking for a passionate Associate AI & Automation Engineer who is excited about building real-world AI applications, workflow automations, and web-based products. You will work closely with the engineering team to develop AI-powered features, automate business processes, integrate LLMs, and contribute to full-stack product development.\n\nThis role is ideal for candidates with prior internship experience who enjoy experimenting with AI technologies while also being comfortable building and integrating web applications.",
+      "applicationPrompt": "Your resume, GitHub profile, LinkedIn profile, portfolio or projects (if available), and a brief description of your most interesting AI or web development project.",
       "tags": ["LLMs", "RAG", "LangChain", "Automation", "React", "FastAPI", "Prompt Engineering", "Vector Databases"],
       "requirements": [
         "0–1 years of experience with at least one internship in AI, Software Development, Automation, Full Stack Development, or a related field",
@@ -62,7 +63,8 @@
       "type": "Internship",
       "category": "AI/ML",
       "shortDescription": "Learn and build real-world AI and full-stack applications alongside experienced engineers. Ideal for students or recent graduates curious about AI, automation, and modern web development.",
-      "description": "We are looking for an enthusiastic AI & Full Stack Intern who is eager to learn and build real-world applications. This role is ideal for students or recent graduates who have basic knowledge of web development and are interested in exploring AI, automation, and modern software development. You will work alongside experienced engineers to build features, experiment with AI tools, integrate APIs, and contribute to both frontend and backend development. Duration: 3–6 Months | Mode: Remote / Hybrid | Stipend: Based on skills and project experience | Opportunity for a full-time role based on performance. When applying, please share your resume, GitHub profile (if available), LinkedIn profile (if available), portfolio/projects (if available), and a brief description of a project you have built or contributed to. We value curiosity, initiative, and a willingness to learn over extensive experience.",
+      "description": "We are looking for an enthusiastic AI & Full Stack Intern who is eager to learn and build real-world applications. You will work alongside experienced engineers to build features, experiment with AI tools, integrate APIs, and contribute to both frontend and backend development.\n\nThis role is ideal for students or recent graduates with basic web development knowledge who are curious about AI, automation, and modern software development. We value curiosity, initiative, and a willingness to learn over extensive experience.",
+      "applicationPrompt": "Your resume, GitHub profile (if available), LinkedIn profile (if available), portfolio or projects (if available), and a brief description of a project you have built or contributed to.",
       "tags": ["JavaScript", "React", "Next.js", "APIs", "Git", "AI Tools", "Node.js", "Full Stack"],
       "requirements": [
         "Basic understanding of JavaScript",
@@ -105,6 +107,309 @@
       "startDate": "Immediate",
       "applicationDeadline": "Rolling basis",
       "postedDate": "2026-06-02"
+    },
+    {
+      "id": "TV-MKT-GME-2026-003",
+      "title": "Growth Marketing Executive",
+      "slug": "growth-marketing-executive",
+      "location": "Hyderabad (Hybrid)",
+      "type": "Full-Time",
+      "category": "Marketing",
+      "shortDescription": "Drive customer acquisition, lead generation, partnerships, and business growth across multiple projects. 1+ year experience in growth or digital marketing required.",
+      "description": "We're looking for a Growth Marketing Executive who can help us acquire customers, generate leads, build partnerships, and drive business growth across multiple projects and industries.\n\nYou'll plan and run acquisition campaigns, optimize paid channels, nurture leads, and experiment with new growth strategies while working closely with founders, content, and design teams.",
+      "applicationPrompt": "Campaigns you've worked on, tools you've used, and results achieved (leads generated, conversions, ROAS, growth metrics, etc.).",
+      "tags": ["Growth Marketing", "Meta Ads", "Google Ads", "Lead Generation", "Analytics", "Partnerships", "WhatsApp Marketing"],
+      "requirements": [
+        "1+ year experience in Growth Marketing, Digital Marketing, Business Development, or a related role",
+        "Hands-on experience with Meta Ads and Google Ads",
+        "Understanding of lead generation and customer acquisition strategies",
+        "Comfortable working with Excel/Google Sheets and analytics tools",
+        "Strong communication, execution, and problem-solving skills",
+        "Self-driven and eager to learn in a fast-paced environment",
+        "Bonus: Startup or agency experience",
+        "Bonus: Experience with WhatsApp marketing and referral campaigns",
+        "Bonus: Familiarity with CRM tools",
+        "Bonus: Experience with local marketing, partnerships, or community growth"
+      ],
+      "responsibilities": [
+        "Plan and execute customer acquisition campaigns",
+        "Run and optimize Meta & Google Ads",
+        "Generate and nurture leads through various channels",
+        "Execute WhatsApp, referral, and community marketing initiatives",
+        "Build partnerships and identify new growth opportunities",
+        "Track campaign performance and improve conversion rates",
+        "Work closely with content, design, and business teams",
+        "Experiment with new growth channels and marketing strategies"
+      ],
+      "benefits": [
+        "Work directly with founders",
+        "High ownership and real business impact",
+        "Exposure to multiple projects and industries",
+        "Fast-paced environment with significant learning opportunities",
+        "Competitive compensation based on experience"
+      ],
+      "selectionProcess": [
+        "Application review (resume, campaigns, tools, and results/metrics shared)",
+        "Assignment or case discussion on growth strategy",
+        "Interview with the marketing and leadership team"
+      ],
+      "duration": "Full-Time",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-06-12"
+    },
+    {
+      "id": "TV-MKT-CSM-2026-004",
+      "title": "Content & Social Media Executive",
+      "slug": "content-social-media-executive",
+      "location": "Hyderabad (Hybrid)",
+      "type": "Full-Time",
+      "category": "Marketing",
+      "shortDescription": "Create engaging content and manage social channels across Instagram, LinkedIn, and more. 1+ year in content or social media management required.",
+      "description": "We're looking for a creative Content & Social Media Executive who can create engaging content, manage social media channels, and help grow brands across digital platforms.\n\nYou'll own content calendars, create reels and short-form video, write social copy, and collaborate with marketing and design teams to grow brand presence.",
+      "applicationPrompt": "Social media pages you've managed, content samples or reels/portfolio, and one campaign or piece of content you're proud of and why.",
+      "tags": ["Content Creation", "Social Media", "Instagram", "Reels", "Canva", "CapCut", "Meta Business Suite"],
+      "requirements": [
+        "1+ year experience in Content Creation or Social Media Management",
+        "Strong understanding of Instagram and short-form video content",
+        "Good writing and communication skills",
+        "Basic video editing and content design skills",
+        "Ability to work independently and generate content ideas",
+        "Familiarity with Canva, CapCut, Meta Business Suite, and AI content tools is a plus",
+        "Bonus: Experience growing social media pages",
+        "Bonus: Portfolio of reels, posts, or campaigns",
+        "Bonus: Startup or agency experience",
+        "Bonus: Basic photography or videography skills"
+      ],
+      "responsibilities": [
+        "Create and manage content for Instagram, Facebook, LinkedIn, and other social platforms",
+        "Plan and maintain monthly content calendars",
+        "Create reels, short videos, posts, and stories",
+        "Write captions, social copy, and campaign content",
+        "Coordinate with designers and marketing teams",
+        "Track content performance and identify growth opportunities",
+        "Stay updated with trends and viral content formats"
+      ],
+      "benefits": [
+        "Work directly with founders and growth teams",
+        "Creative freedom and ownership",
+        "Opportunity to work across multiple brands and projects",
+        "Fast-paced environment with continuous learning",
+        "Competitive compensation based on experience"
+      ],
+      "selectionProcess": [
+        "Application review (resume, managed pages, and portfolio/samples)",
+        "Content or social media assignment",
+        "Interview with the marketing team"
+      ],
+      "duration": "Full-Time",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-06-12"
+    },
+    {
+      "id": "TV-MKT-GMI-2026-005",
+      "title": "Growth Marketing Intern",
+      "slug": "growth-marketing-intern",
+      "location": "Hyderabad (Hybrid)",
+      "type": "Internship",
+      "category": "Marketing",
+      "shortDescription": "Learn customer acquisition, digital campaigns, and business growth alongside founders in a fast-paced startup environment. Ideal for students passionate about marketing and startups.",
+      "description": "We're looking for a Growth Marketing Intern who is excited about startups, customer acquisition, marketing campaigns, and business growth.\n\nYou'll assist with digital campaigns, lead generation, outreach, and performance tracking while learning how real growth marketing works in a fast-paced startup environment.",
+      "applicationPrompt": "Projects, internships, or activities you've worked on, why you're interested in growth marketing, and any marketing campaign, event, or initiative you've helped organize.",
+      "tags": ["Growth Marketing", "Meta Ads", "Google Ads", "Lead Generation", "Startups", "Analytics", "WhatsApp Marketing"],
+      "requirements": [
+        "Strong interest in Marketing, Growth, Business Development, or Startups",
+        "Good communication and analytical skills",
+        "Comfortable using Google Sheets and online tools",
+        "Curious mindset and willingness to learn",
+        "Ability to take ownership and execute tasks independently",
+        "Bonus: Basic understanding of Meta Ads or Google Ads",
+        "Bonus: Experience with college clubs, events, or student communities",
+        "Bonus: Familiarity with AI tools such as ChatGPT",
+        "Bonus: Previous internship or project experience"
+      ],
+      "responsibilities": [
+        "Assist in executing marketing campaigns across digital and offline channels",
+        "Support Meta Ads and Google Ads campaigns",
+        "Help with lead generation and outreach activities",
+        "Assist with WhatsApp, referral, and community marketing initiatives",
+        "Research potential growth opportunities and partnerships",
+        "Track campaign performance and prepare basic reports",
+        "Work closely with founders, content creators, and designers"
+      ],
+      "benefits": [
+        "Hands-on startup experience",
+        "Exposure to real marketing and growth campaigns",
+        "Opportunity to work directly with founders",
+        "Practical understanding of customer acquisition and business growth",
+        "Stipend based on skills and experience",
+        "Opportunity for a full-time role based on performance"
+      ],
+      "selectionProcess": [
+        "Application review (resume, projects, and interest in growth marketing)",
+        "Assignment or practical task",
+        "Interview with the marketing team"
+      ],
+      "duration": "3-6 months",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-06-12"
+    },
+    {
+      "id": "TV-MKT-CSMI-2026-006",
+      "title": "Content & Social Media Intern",
+      "slug": "content-social-media-intern",
+      "location": "Hyderabad (Hybrid)",
+      "type": "Internship",
+      "category": "Marketing",
+      "shortDescription": "Create content, follow trends, and help brands grow on Instagram, LinkedIn, and more. Ideal for creative students interested in social media and content creation.",
+      "description": "We're looking for a Content & Social Media Intern who enjoys creating content, following trends, and helping brands grow online.\n\nYou'll help create posts, reels, stories, and short-form videos while learning content planning, trend research, and social performance basics.",
+      "applicationPrompt": "Your portfolio or social media page, content you've created (posts, reels, videos, designs), and one creator or brand whose content you admire and why.",
+      "tags": ["Content Creation", "Social Media", "Instagram", "Reels", "Canva", "CapCut", "Short-form Video"],
+      "requirements": [
+        "Strong interest in content creation and social media",
+        "Good communication and writing skills",
+        "Basic knowledge of Instagram and short-form video content",
+        "Creative mindset with attention to detail",
+        "Willingness to learn and experiment",
+        "Bonus: Familiarity with Canva or CapCut",
+        "Bonus: Personal content page, Instagram page, YouTube channel, or portfolio",
+        "Bonus: Basic video editing skills",
+        "Bonus: Experience managing college or community social media pages"
+      ],
+      "responsibilities": [
+        "Assist in creating content for Instagram, LinkedIn, Facebook, and other platforms",
+        "Help create reels, posts, stories, and short-form videos",
+        "Write captions and social media copy",
+        "Support content planning and content calendar management",
+        "Research content trends and viral formats",
+        "Monitor social media performance and engagement",
+        "Work closely with marketing and design teams"
+      ],
+      "benefits": [
+        "Hands-on content creation experience",
+        "Exposure to real brand-building and marketing campaigns",
+        "Opportunity to build a professional portfolio",
+        "Direct mentorship and feedback",
+        "Stipend based on skills and experience",
+        "Opportunity for a full-time role based on performance"
+      ],
+      "selectionProcess": [
+        "Application review (resume, portfolio, and sample content)",
+        "Content or social media assignment",
+        "Interview with the marketing team"
+      ],
+      "duration": "3-6 months",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-06-12"
+    },
+    {
+      "id": "TV-WEB-MERN-2026-007",
+      "title": "Full Stack Developer (MERN + React Native)",
+      "slug": "full-stack-developer-mern-react-native",
+      "location": "Hyderabad (Hybrid)",
+      "type": "Full-Time",
+      "category": "Web Development",
+      "shortDescription": "Build, maintain, and scale modern web and mobile applications using the MERN stack and React Native. 1+ year experience required.",
+      "description": "We're looking for a Full Stack Developer who can build, maintain, and scale modern web and mobile applications. You'll work on real-world products across multiple industries and collaborate closely with founders, designers, and other developers.",
+      "applicationPrompt": "Your resume, GitHub profile, LinkedIn profile, portfolio or project links, and a brief description of projects you've built and your contributions.",
+      "tags": ["MongoDB", "Express.js", "React.js", "Node.js", "React Native", "REST APIs", "JavaScript", "TypeScript"],
+      "requirements": [
+        "1+ year experience with the MERN stack",
+        "Strong understanding of JavaScript and modern React",
+        "Experience building REST APIs using Node.js and Express",
+        "Experience working with MongoDB",
+        "Good debugging and problem-solving skills",
+        "Understanding of authentication, authorization, and security best practices",
+        "Ability to work independently and take ownership",
+        "Familiarity with React Native and mobile app development",
+        "Bonus: Hands-on React Native development experience",
+        "Bonus: Experience publishing Android or iOS applications",
+        "Bonus: TypeScript experience",
+        "Bonus: Experience with AWS, Docker, or CI/CD",
+        "Bonus: Startup or agency experience"
+      ],
+      "responsibilities": [
+        "Build and maintain applications using MongoDB, Express.js, React.js, and Node.js",
+        "Develop and integrate REST APIs",
+        "Work with databases, authentication, and authorization systems",
+        "Build and maintain React Native mobile applications",
+        "Collaborate with designers, developers, and product teams",
+        "Debug, optimize, and improve application performance",
+        "Participate in code reviews and technical discussions"
+      ],
+      "benefits": [
+        "Work directly with founders and product teams",
+        "Exposure to multiple products and industries",
+        "High ownership and real technical impact",
+        "Opportunity to work on both web and mobile applications",
+        "Fast-paced environment with significant learning opportunities",
+        "Competitive compensation based on experience"
+      ],
+      "selectionProcess": [
+        "Application review (resume, GitHub, LinkedIn, and portfolio)",
+        "Technical assignment",
+        "Interview with the engineering team"
+      ],
+      "duration": "Full-Time",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-06-12"
+    },
+    {
+      "id": "TV-WEB-MERN-2026-008",
+      "title": "Full Stack Developer Intern (MERN + React Native)",
+      "slug": "full-stack-developer-intern-mern-react-native",
+      "location": "Hyderabad (Hybrid)",
+      "type": "Internship",
+      "category": "Web Development",
+      "shortDescription": "Hands-on internship building real-world web and mobile apps with the MERN stack and React Native. Ideal for students, fresh graduates, or self-taught developers.",
+      "description": "We're looking for a passionate Full Stack Developer Intern who wants hands-on experience building real-world web and mobile applications. This role is ideal for students, fresh graduates, or self-taught developers looking to strengthen their full-stack development skills.",
+      "applicationPrompt": "Your resume, GitHub profile, LinkedIn profile, portfolio or project links (if available), and any MERN or React Native projects you've built.",
+      "tags": ["MongoDB", "Express.js", "React.js", "Node.js", "React Native", "Git", "JavaScript", "Mobile"],
+      "requirements": [
+        "Basic understanding of MongoDB, Express.js, React.js, and Node.js",
+        "Good understanding of JavaScript fundamentals",
+        "Familiarity with Git and GitHub",
+        "Interest in React Native and mobile app development",
+        "Strong willingness to learn and improve",
+        "Good problem-solving skills",
+        "Bonus: Previous internship experience (optional)",
+        "Bonus: Personal projects using MERN stack",
+        "Bonus: React Native projects or mobile app development experience",
+        "Bonus: Published Android applications",
+        "Bonus: Open-source contributions",
+        "Bonus: Knowledge of TypeScript"
+      ],
+      "responsibilities": [
+        "Assist in building applications using MongoDB, Express.js, React.js, and Node.js",
+        "Develop frontend and backend features",
+        "Work with REST APIs and databases",
+        "Fix bugs and improve application performance",
+        "Contribute to React Native mobile applications",
+        "Collaborate with developers on ongoing projects",
+        "Learn modern development workflows and best practices"
+      ],
+      "benefits": [
+        "Hands-on experience working on real products",
+        "Exposure to both web and mobile application development",
+        "Mentorship from experienced developers",
+        "Opportunity to build a strong portfolio",
+        "Stipend based on skills and experience",
+        "Potential full-time opportunity based on performance"
+      ],
+      "selectionProcess": [
+        "Application review (resume, GitHub, and project links)",
+        "Technical assignment",
+        "Interview with the engineering team"
+      ],
+      "duration": "3-6 months",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-06-12"
     }
   ]
+  
 }

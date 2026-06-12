@@ -26,6 +26,8 @@ import {
   TrendingUp
 } from "lucide-react";
 import jobsData from "@/data/jobs.json";
+import { JobDescriptionContent } from "@/components/jobs/JobDescriptionContent";
+import { normalizeJobId } from "@/components/application/jobTypes";
 
 const JobDetails = () => {
   const { jobId } = useParams();
@@ -42,6 +44,8 @@ const JobDetails = () => {
     type: string;
     category: string;
     description: string;
+    shortDescription?: string;
+    applicationPrompt?: string;
     tags: string[];
     requirements: string[];
     responsibilities: string[];
@@ -56,8 +60,9 @@ const JobDetails = () => {
 
   useEffect(() => {
     // Extract jobId from URL format: TV-WEB-MERN-2025-002-mern-stack-developer-intern
-    const actualJobId = jobId?.split('-').slice(0, 5).join('-'); // Get TV-WEB-MERN-2025-002
-    const foundJob = jobsData.jobs.find(j => j.id === actualJobId);
+    const actualJobId = normalizeJobId(jobId) || "";
+    const allJobs = [...jobsData.jobs, ...(jobsData.archivedJobs || [])];
+    const foundJob = allJobs.find(j => j.id === actualJobId);
     if (foundJob) {
       setJob(foundJob);
     } else {
@@ -139,7 +144,11 @@ const JobDetails = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 leading-relaxed">{job.description}</p>
+                <JobDescriptionContent
+                  description={job.description}
+                  shortDescription={job.shortDescription}
+                  applicationPrompt={job.applicationPrompt}
+                />
               </CardContent>
             </Card>
 
@@ -311,10 +320,7 @@ const JobDetails = () => {
                   </Button>
                 ) : (
                   <Button 
-                    onClick={() => {
-                      // Open application form in a new tab
-                      window.open(`/application/${jobId}`, '_blank');
-                    }}
+                    onClick={() => navigate(`/application/${jobId}`)}
                     className="w-full bg-brand-primary hover:bg-brand-primary/90"
                   >
                     Apply Now

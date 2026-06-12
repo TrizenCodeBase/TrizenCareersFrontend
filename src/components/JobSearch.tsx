@@ -21,8 +21,8 @@ import { useNavigate } from "react-router-dom";
 import { useApplication } from "@/contexts/ApplicationContext";
 import jobsData from "@/data/jobs.json";
 
-// Import job data from JSON file
-const jobListings = jobsData.jobs;
+// Active + archived listings (archived roles show as closed)
+const jobListings = [...jobsData.jobs, ...(jobsData.archivedJobs || [])];
 
 // Date utility functions
 const formatDate = (dateString: string) => {

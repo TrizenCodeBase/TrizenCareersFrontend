@@ -29,6 +29,11 @@ import {
   FileText
 } from "lucide-react";
 import jobsData from "@/data/jobs.json";
+import { ACTIVE_JOB_IDS, getJobFormType, isEngineeringFullTimeJob, isEngineeringInternJob, isMarketingIntern, isMernJob, isMernInternJob, normalizeJobId, requiresYearOfPassingOut } from "@/components/application/jobTypes";
+import { validateApplicationByJobType } from "@/components/application/validateApplicationByJobType";
+import { uploadApplicationFile } from "@/components/application/uploadApplicationFile";
+import { GrowthMarketingFormSection } from "@/components/application/GrowthMarketingFormSection";
+import { ContentSocialMediaFormSection } from "@/components/application/ContentSocialMediaFormSection";
 
 interface JobApplication {
   jobId: string;
@@ -58,6 +63,19 @@ interface JobApplication {
   hoursPerWeek?: string;
   workPreference?: string;
   expectations?: string;
+  // Growth marketing fields
+  campaignsWorkedOn?: string;
+  marketingToolsUsed?: string;
+  resultsAchieved?: string;
+  projectsOrActivities?: string;
+  growthMarketingInterest?: string;
+  campaignOrEventOrganized?: string;
+  // Content & social media fields
+  socialMediaPageUrl?: string;
+  contentSamplesLink?: string;
+  contentCreated?: string;
+  proudContentOrCampaign?: string;
+  managedPages?: string;
 }
 
 interface ValidationError {
@@ -98,6 +116,7 @@ const ApplicationForm = () => {
     duration: string;
     startDate: string;
     applicationDeadline: string;
+    status?: string;
   } | null>(null);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -106,6 +125,8 @@ const ApplicationForm = () => {
   const [showValidationErrors, setShowValidationErrors] = useState(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [resumeUploadError, setResumeUploadError] = useState<string | null>(null);
+  const [portfolioSampleFile, setPortfolioSampleFile] = useState<File | null>(null);
+  const [portfolioUploadError, setPortfolioUploadError] = useState<string | null>(null);
   
   const [application, setApplication] = useState<JobApplication>({
     jobId: jobId || "",
@@ -134,8 +155,22 @@ const ApplicationForm = () => {
     preferredStartDate: "",
     hoursPerWeek: "",
     workPreference: "",
-    expectations: ""
+    expectations: "",
+    campaignsWorkedOn: "",
+    marketingToolsUsed: "",
+    resultsAchieved: "",
+    projectsOrActivities: "",
+    growthMarketingInterest: "",
+    campaignOrEventOrganized: "",
+    socialMediaPageUrl: "",
+    contentSamplesLink: "",
+    contentCreated: "",
+    proudContentOrCampaign: "",
+    managedPages: ""
   });
+
+  const resolvedJobId = normalizeJobId(job?.id || jobId);
+  const jobFormType = getJobFormType(resolvedJobId);
 
   // Update application state when user data changes
   useEffect(() => {
@@ -149,11 +184,21 @@ const ApplicationForm = () => {
 
   useEffect(() => {
     // Extract jobId from URL format: TV-WEB-MERN-2025-002-mern-stack-developer-intern
-    const actualJobId = jobId?.split('-').slice(0, 5).join('-'); // Get TV-WEB-MERN-2025-002
-    const foundJob = jobsData.jobs.find(j => j.id === actualJobId);
+    const actualJobId = normalizeJobId(jobId) || "";
+    const allJobs = [...jobsData.jobs, ...(jobsData.archivedJobs || [])];
+    const foundJob = allJobs.find(j => j.id === actualJobId);
     if (foundJob) {
+      if (foundJob.status === 'closed') {
+        toast({
+          title: "Applications Closed",
+          description: "This position is no longer accepting applications.",
+          variant: "destructive"
+        });
+        navigate(`/jobs/${jobId}`);
+        return;
+      }
       setJob(foundJob);
-      setApplication(prev => ({ ...prev, jobId: actualJobId || "" }));
+      setApplication(prev => ({ ...prev, jobId: actualJobId }));
     } else {
       toast({
         title: "Job Not Found",
@@ -194,10 +239,48 @@ const ApplicationForm = () => {
         if (value.trim() && !/^https?:\/\/.+/.test(value)) return 'Please enter a valid URL (must start with http:// or https://)';
         break;
       case 'portfolioWorkSamples':
+        if (portfolioSampleFile) return null;
+        if (jobFormType === 'growth-marketing' && !value.trim()) return null;
         if (!value.trim()) return 'Portfolio/work samples link is required';
         if (!/^https?:\/\/.+/.test(value)) return 'Please enter a valid URL (must start with http:// or https://)';
         break;
+      case 'socialMediaPageUrl':
+        if (!value.trim()) return 'Social media page URL is required';
+        if (!/^https?:\/\/.+/.test(value)) return 'Please enter a valid URL (must start with http:// or https://)';
+        break;
+      case 'contentSamplesLink':
+        if (value.trim() && !/^https?:\/\/.+/.test(value)) return 'Please enter a valid URL (must start with http:// or https://)';
+        break;
+      case 'campaignsWorkedOn':
+        if (!value.trim()) return 'Campaigns worked on is required';
+        break;
+      case 'marketingToolsUsed':
+        if (!value.trim()) return 'Marketing tools used is required';
+        break;
+      case 'resultsAchieved':
+        if (!value.trim()) return 'Results achieved is required';
+        break;
+      case 'projectsOrActivities':
+        if (!value.trim()) return 'Projects or activities is required';
+        break;
+      case 'growthMarketingInterest':
+        if (!value.trim()) return 'Please share why you are interested in growth marketing';
+        break;
+      case 'campaignOrEventOrganized':
+        if (!value.trim()) return 'Please describe a campaign, event, or initiative you helped organize';
+        break;
+      case 'contentCreated':
+        if (!value.trim()) return 'Please describe content you have created';
+        break;
+      case 'proudContentOrCampaign':
+        if (!value.trim()) return 'This field is required';
+        if (value.trim().length < 10) return 'Please provide a more detailed response (at least 10 characters)';
+        break;
+      case 'managedPages':
+        if (!value.trim()) return 'Please list social media pages you have managed';
+        break;
       case 'portfolioUrl':
+        if (jobFormType === 'growth-marketing' && !value.trim()) return null;
         if (!value.trim()) return 'Portfolio URL is required';
         if (!/^https?:\/\/.+/.test(value)) return 'Please enter a valid URL (must start with http:// or https://)';
         break;
@@ -214,6 +297,7 @@ const ApplicationForm = () => {
         if (!value.trim()) return 'Degree discipline is required';
         break;
       case 'yearOfPassingOut':
+        if (!requiresYearOfPassingOut(resolvedJobId)) return null;
         if (!value.trim()) return 'Year of passing out is required';
         if (!['2024', '2025', '2026'].includes(value)) return 'Please select a valid year (2024, 2025, or 2026)';
         break;
@@ -221,6 +305,7 @@ const ApplicationForm = () => {
         if (!value.trim()) return 'Internship experience is required';
         break;
       case 'duration':
+        if (!isEngineeringInternJob(resolvedJobId)) return null;
         if (!value.trim()) return 'Duration is required';
         break;
       case 'aiMlProjects':
@@ -346,6 +431,17 @@ const ApplicationForm = () => {
       socialMediaPlatforms: "Social Media Platforms Familiar With",
       contentCreationSkills: "Content Creation Skills",
       portfolioWorkSamples: "Portfolio or Work Samples",
+      socialMediaPageUrl: "Social Media Page URL",
+      contentSamplesLink: "Additional Content Samples Link",
+      contentCreated: "Content Created",
+      proudContentOrCampaign: "Proud Content / Admired Creator",
+      managedPages: "Managed Social Media Pages",
+      campaignsWorkedOn: "Campaigns Worked On",
+      marketingToolsUsed: "Marketing Tools Used",
+      resultsAchieved: "Results Achieved",
+      projectsOrActivities: "Projects or Activities",
+      growthMarketingInterest: "Interest in Growth Marketing",
+      campaignOrEventOrganized: "Campaign or Event Organized",
       preferredStartDate: "Preferred Start Date",
       hoursPerWeek: "Duration / Hours Per Week",
       workPreference: "Work Preference",
@@ -424,19 +520,7 @@ const ApplicationForm = () => {
     );
   }, [fieldErrors]);
 
-  // Helper function to check if this is the Social Media Management Intern job
-  const isSocialMediaJob = () => {
-    return job?.id === "TV-MKT-SMM-2025-003" || job?.id === "TV-MKT-SMM-2026-003";
-  };
-
-  const isMernJob = () => {
-    return (
-      job?.id === "TV-WEB-MERN-2025-005" ||
-      job?.id === "TV-WEB-MERN-2025-002" ||
-      job?.id === "TV-WEB-MERN-2026-005" ||
-      job?.id === "TV-WEB-MERN-2026-002"
-    );
-  };
+  const isLegacySocialMediaJob = () => jobFormType === 'legacy-smm';
 
   const handleSubmitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -454,6 +538,7 @@ const ApplicationForm = () => {
     setFieldErrors({});
     setShowValidationErrors(false);
     setResumeUploadError(null);
+    setPortfolioUploadError(null);
     setIsSubmitting(true);
 
     try {
@@ -472,33 +557,77 @@ const ApplicationForm = () => {
       }
 
       let resumeLinkToSubmit = application.resumeLink;
+      let portfolioWorkSamplesToSubmit = application.portfolioWorkSamples;
 
-      // If user selected a file, upload it first and get the URL
       if (resumeFile) {
-        const formData = new FormData();
-        formData.append('resume', resumeFile);
-        const uploadRes = await fetch(API_CONFIG.ENDPOINTS.APPLICATIONS_UPLOAD_RESUME!, {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${token}` },
-          body: formData
-        });
-        const uploadData = await uploadRes.json();
-        if (!uploadRes.ok || !uploadData.data?.url) {
-          const errMsg = uploadData.error || 'Failed to upload resume. Please try again.';
+        try {
+          resumeLinkToSubmit = await uploadApplicationFile(resumeFile, token || '');
+        } catch (uploadError) {
+          const errMsg = uploadError instanceof Error ? uploadError.message : 'Failed to upload resume. Please try again.';
           setResumeUploadError(errMsg);
           setFieldErrors(prev => ({ ...prev, resumeLink: errMsg }));
           setIsSubmitting(false);
-          toast({
-            title: "Upload failed",
-            description: errMsg,
-            variant: "destructive"
-          });
+          toast({ title: "Upload failed", description: errMsg, variant: "destructive" });
           return;
         }
-        resumeLinkToSubmit = uploadData.data.url;
       }
 
-      const payload = { ...application, resumeLink: resumeLinkToSubmit };
+      if (portfolioSampleFile) {
+        try {
+          portfolioWorkSamplesToSubmit = await uploadApplicationFile(portfolioSampleFile, token || '');
+        } catch (uploadError) {
+          const errMsg = uploadError instanceof Error ? uploadError.message : 'Failed to upload portfolio sample. Please try again.';
+          setPortfolioUploadError(errMsg);
+          setFieldErrors(prev => ({ ...prev, portfolioWorkSamples: errMsg }));
+          setIsSubmitting(false);
+          toast({ title: "Upload failed", description: errMsg, variant: "destructive" });
+          return;
+        }
+      }
+
+      const submissionJobId = normalizeJobId(job?.id || application.jobId || jobId) || application.jobId;
+
+      if (!(ACTIVE_JOB_IDS as readonly string[]).includes(submissionJobId)) {
+        setIsSubmitting(false);
+        toast({
+          title: "Unsupported Position",
+          description: "This job is not accepting applications. Please choose an open role from the careers page.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      const submissionValues = {
+        ...application,
+        jobId: submissionJobId,
+        resumeLink: resumeLinkToSubmit,
+        portfolioWorkSamples: portfolioWorkSamplesToSubmit
+      };
+
+      const clientValidationErrors = validateApplicationByJobType(
+        getJobFormType(submissionJobId),
+        submissionValues,
+        {
+          hasResumeFile: Boolean(resumeFile),
+          hasPortfolioFile: Boolean(portfolioSampleFile),
+          isIntern: isMarketingIntern(submissionJobId),
+          jobId: submissionJobId
+        }
+      );
+
+      if (Object.keys(clientValidationErrors).length > 0) {
+        setFieldErrors(clientValidationErrors);
+        setShowValidationErrors(true);
+        setIsSubmitting(false);
+        toast({
+          title: "Validation Failed",
+          description: "Please fix the highlighted fields below and try again.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      const payload = submissionValues;
       console.log('Submitting application:', payload);
       const response = await fetch(`${API_CONFIG.ENDPOINTS.APPLICATIONS}`, {
         method: 'POST',
@@ -739,8 +868,48 @@ const ApplicationForm = () => {
                   </Alert>
                 )}
 
-                {isSocialMediaJob() ? (
-                  // Social Media Management Intern Form
+                {jobFormType === 'growth-marketing' ? (
+                  <GrowthMarketingFormSection
+                    application={application}
+                    fieldErrors={fieldErrors}
+                    FormField={FormField}
+                    handleInputChange={handleInputChange}
+                    handleInputBlur={handleInputBlur}
+                    handleCheckboxChange={handleCheckboxChange}
+                    resumeFile={resumeFile}
+                    setResumeFile={setResumeFile}
+                    resumeUploadError={resumeUploadError}
+                    setResumeUploadError={setResumeUploadError}
+                    portfolioSampleFile={portfolioSampleFile}
+                    setPortfolioSampleFile={setPortfolioSampleFile}
+                    portfolioUploadError={portfolioUploadError}
+                    setPortfolioUploadError={setPortfolioUploadError}
+                    setApplication={setApplication}
+                    setFieldErrors={setFieldErrors}
+                    isIntern={isMarketingIntern(resolvedJobId)}
+                  />
+                ) : jobFormType === 'content-social' ? (
+                  <ContentSocialMediaFormSection
+                    application={application}
+                    fieldErrors={fieldErrors}
+                    FormField={FormField}
+                    handleInputChange={handleInputChange}
+                    handleInputBlur={handleInputBlur}
+                    handleCheckboxChange={handleCheckboxChange}
+                    resumeFile={resumeFile}
+                    setResumeFile={setResumeFile}
+                    resumeUploadError={resumeUploadError}
+                    setResumeUploadError={setResumeUploadError}
+                    portfolioSampleFile={portfolioSampleFile}
+                    setPortfolioSampleFile={setPortfolioSampleFile}
+                    portfolioUploadError={portfolioUploadError}
+                    setPortfolioUploadError={setPortfolioUploadError}
+                    setApplication={setApplication}
+                    setFieldErrors={setFieldErrors}
+                    isIntern={isMarketingIntern(resolvedJobId)}
+                  />
+                ) : isLegacySocialMediaJob() ? (
+                  // Legacy Social Media Management Intern Form
                   <>
                     {/* Step 1: Personal Details */}
                     <div className="space-y-6">
@@ -1229,24 +1398,26 @@ const ApplicationForm = () => {
                           />
                         </FormField>
 
-                        <FormField fieldName="yearOfPassingOut" label="Year of Passing Out" required>
-                          <select
-                            id="yearOfPassingOut"
-                            name="yearOfPassingOut"
-                            value={application.yearOfPassingOut || ""}
-                            onChange={handleInputChange}
-                            onBlur={handleInputBlur}
-                            required
-                            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
-                              fieldErrors.yearOfPassingOut ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
-                            }`}
-                          >
-                            <option value="">Select year of passing out</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                          </select>
-                        </FormField>
+                        {requiresYearOfPassingOut(resolvedJobId) && (
+                          <FormField fieldName="yearOfPassingOut" label="Year of Passing Out" required>
+                            <select
+                              id="yearOfPassingOut"
+                              name="yearOfPassingOut"
+                              value={application.yearOfPassingOut || ""}
+                              onChange={handleInputChange}
+                              onBlur={handleInputBlur}
+                              required
+                              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
+                                fieldErrors.yearOfPassingOut ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
+                              }`}
+                            >
+                              <option value="">Select year of passing out</option>
+                              <option value="2024">2024</option>
+                              <option value="2025">2025</option>
+                              <option value="2026">2026</option>
+                            </select>
+                          </FormField>
+                        )}
                       </div>
 
                     </div>
@@ -1255,7 +1426,11 @@ const ApplicationForm = () => {
                     <div className="space-y-6">
                       <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Experience</h3>
                       
-                      <FormField fieldName="internshipExperience" label="Previous Internship/Work Experience" required>
+                      <FormField
+                        fieldName="internshipExperience"
+                        label={isEngineeringFullTimeJob(resolvedJobId) ? "Previous Work Experience" : "Previous Internship/Work Experience"}
+                        required
+                      >
                         <Textarea
                           id="internshipExperience"
                           name="internshipExperience"
@@ -1271,7 +1446,7 @@ const ApplicationForm = () => {
 
                       <FormField
                         fieldName="aiMlProjects"
-                        label={isMernJob() ? "MERN Projects Experience" : "AI/ML Projects & Experience"}
+                        label={isMernJob(resolvedJobId) ? "MERN / React Native Projects & Experience" : "AI/ML Projects & Experience"}
                         required
                       >
                         <Textarea
@@ -1280,7 +1455,7 @@ const ApplicationForm = () => {
                           value={application.aiMlProjects}
                           onChange={handleInputChange}
                           onBlur={handleInputBlur}
-                          placeholder={isMernJob() ? "Describe your MERN stack projects, coursework, or experience..." : "Describe any AI/ML projects, coursework, or experience you have..."}
+                          placeholder={isMernJob(resolvedJobId) ? "Describe your MERN stack, React Native, or mobile projects and your contributions..." : "Describe any AI/ML projects, coursework, or experience you have..."}
                           required
                           className={fieldErrors.aiMlProjects ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}
                           rows={4}
@@ -1292,25 +1467,27 @@ const ApplicationForm = () => {
                     <div className="space-y-6">
                       <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Preferences</h3>
                       
-                      <FormField fieldName="duration" label="Preferred Duration" required>
-                        <select
-                          id="duration"
-                          name="duration"
-                          value={application.duration}
-                          onChange={handleInputChange}
-                          onBlur={handleInputBlur}
-                          required
-                          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
-                            fieldErrors.duration ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
-                          }`}
-                        >
-                          <option value="">Select preferred duration</option>
-                          <option value="2-months">2 months</option>
-                          <option value="3-months">3 months</option>
-                          <option value="6-months">6 months</option>
-                          <option value="flexible">Flexible</option>
-                        </select>
-                      </FormField>
+                      {isEngineeringInternJob(resolvedJobId) && (
+                        <FormField fieldName="duration" label="Preferred Duration" required>
+                          <select
+                            id="duration"
+                            name="duration"
+                            value={application.duration}
+                            onChange={handleInputChange}
+                            onBlur={handleInputBlur}
+                            required
+                            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${
+                              fieldErrors.duration ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300"
+                            }`}
+                          >
+                            <option value="">Select preferred duration</option>
+                            <option value="2-months">2 months</option>
+                            <option value="3-months">3 months</option>
+                            <option value="6-months">6 months</option>
+                            <option value="flexible">Flexible</option>
+                          </select>
+                        </FormField>
+                      )}
 
                       <FormField fieldName="workPreference" label="Work Preference" required>
                         <select
@@ -1349,7 +1526,11 @@ const ApplicationForm = () => {
                     <div className="space-y-6">
                       <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Motivation</h3>
                       
-                      <FormField fieldName="motivation" label="Why are you interested in this internship?" required>
+                      <FormField
+                        fieldName="motivation"
+                        label={isEngineeringFullTimeJob(resolvedJobId) ? "Why are you interested in this role?" : "Why are you interested in this internship?"}
+                        required
+                      >
                         <Textarea
                           id="motivation"
                           name="motivation"
@@ -1363,7 +1544,11 @@ const ApplicationForm = () => {
                         />
                       </FormField>
 
-                      <FormField fieldName="expectedStipend" label="Expected Stipend Amount (₹)" required>
+                      <FormField
+                        fieldName="expectedStipend"
+                        label={isEngineeringFullTimeJob(resolvedJobId) ? "Expected Compensation (₹/month)" : "Expected Stipend Amount (₹)"}
+                        required
+                      >
                         <Input
                           id="expectedStipend"
                           name="expectedStipend"
