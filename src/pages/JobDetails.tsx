@@ -146,7 +146,6 @@ const JobDetails = () => {
               <CardContent>
                 <JobDescriptionContent
                   description={job.description}
-                  shortDescription={job.shortDescription}
                   applicationPrompt={job.applicationPrompt}
                 />
               </CardContent>
