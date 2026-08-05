@@ -1,8 +1,8 @@
 import type { JobFormType } from './jobTypes';
 import { isEngineeringInternJob, isMernFullTimeJob, isMernInternJob, requiresYearOfPassingOut } from './jobTypes';
-import type { MarketingApplicationFields, FieldErrors } from './types';
+import type { MarketingApplicationFields, GenAiApplicationFields, FieldErrors } from './types';
 
-type ApplicationValues = MarketingApplicationFields & {
+type ApplicationValues = MarketingApplicationFields & GenAiApplicationFields & {
   fullName: string;
   email: string;
   phone: string;
@@ -50,6 +50,39 @@ export function validateApplicationByJobType(
   requireString(errors, 'phone', values.phone, 'Phone number is required');
   requireString(errors, 'location', values.location, 'Location is required');
   requireString(errors, 'linkedinProfile', values.linkedinProfile, 'LinkedIn profile is required');
+
+  if (jobFormType === 'genai') {
+    if (!options.hasResumeFile && isBlank(values.resumeLink)) {
+      errors.resumeLink = 'Resume is required. Please upload your resume (PDF, DOC or DOCX).';
+    }
+
+    requireUrl(errors, 'portfolioUrl', values.portfolioUrl, 'GitHub or portfolio link is required');
+    requireString(errors, 'totalAiExperience', values.totalAiExperience, 'Total AI/ML experience is required');
+    requireString(errors, 'agenticExperience', values.agenticExperience, 'Agentic systems experience is required');
+    requireString(errors, 'currentTitle', values.currentTitle, 'Current job title is required');
+    requireString(errors, 'highestDegree', values.highestDegree, 'Highest qualification is required');
+    requireString(errors, 'availabilityToStart', values.availabilityToStart, 'Start availability is required');
+    requireString(errors, 'cloudPlatform', values.cloudPlatform, 'Cloud platform is required');
+    requireString(errors, 'devopsProficiency', values.devopsProficiency, 'Docker/Kubernetes/CI-CD level is required');
+    requireString(errors, 'systemExperience', values.systemExperience, 'Please describe a RAG or multi-agent system you built');
+    requireString(errors, 'timezone', values.timezone, 'Working timezone is required');
+    requireString(errors, 'contractCommitment', values.contractCommitment, 'Please confirm your availability for the 3-month contract');
+    requireString(errors, 'expectedMonthlyRate', values.expectedMonthlyRate, 'Expected rate per month is required');
+
+    if (!isBlank(values.expectedMonthlyRate) && !/^\d+$/.test(values.expectedMonthlyRate!.trim())) {
+      errors.expectedMonthlyRate = 'Enter the monthly amount in digits only (e.g., 150000)';
+    }
+
+    if (!values.agentFrameworks?.length) {
+      errors.agentFrameworks = 'Select at least one agent framework';
+    }
+    if (!values.llmPlatforms?.length) {
+      errors.llmPlatforms = 'Select at least one LLM platform';
+    }
+
+    return errors;
+  }
+
   requireString(errors, 'motivation', values.motivation, 'Motivation is required');
   requireString(errors, 'expectedStipend', values.expectedStipend, 'Expected amount is required');
   requireString(errors, 'preferredStartDate', values.preferredStartDate, 'Preferred start date is required');

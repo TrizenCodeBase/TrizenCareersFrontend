@@ -25,6 +25,28 @@ export interface MarketingApplicationFields {
   expectedStipend?: string;
 }
 
+export interface GenAiApplicationFields {
+  portfolioUrl?: string;
+  totalAiExperience?: string;
+  agenticExperience?: string;
+  currentTitle?: string;
+  currentCompany?: string;
+  highestDegree?: string;
+  availabilityToStart?: string;
+  agentFrameworks?: string[];
+  llmPlatforms?: string[];
+  vectorDatabases?: string[];
+  planningApproaches?: string[];
+  cloudPlatform?: string;
+  devopsProficiency?: string;
+  systemExperience?: string;
+  timezone?: string;
+  contractCommitment?: string;
+  expectedMonthlyRate?: string;
+  applicationSource?: string;
+  coverNote?: string;
+}
+
 export interface FieldErrors {
   [key: string]: string;
 }
@@ -61,4 +83,26 @@ export interface MarketingFormSectionProps {
   setApplication: Dispatch<SetStateAction<MarketingApplicationFields & Record<string, unknown>>>;
   setFieldErrors: Dispatch<SetStateAction<FieldErrors>>;
   isIntern: boolean;
+}
+
+export interface GenAiFormSectionProps {
+  application: GenAiApplicationFields & {
+    fullName: string;
+    email: string;
+    phone: string;
+    location: string;
+    linkedinProfile: string;
+    resumeLink: string;
+  };
+  fieldErrors: FieldErrors;
+  FormField: FormFieldComponent;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+  handleInputBlur: (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+  handleCheckboxChange: (fieldName: string, value: string, checked: boolean) => void;
+  resumeFile: File | null;
+  setResumeFile: (file: File | null) => void;
+  resumeUploadError: string | null;
+  setResumeUploadError: (error: string | null) => void;
+  setApplication: Dispatch<SetStateAction<GenAiApplicationFields & Record<string, unknown>>>;
+  setFieldErrors: Dispatch<SetStateAction<FieldErrors>>;
 }
