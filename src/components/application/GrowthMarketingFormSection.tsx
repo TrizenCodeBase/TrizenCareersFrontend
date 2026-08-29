@@ -17,7 +17,8 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
     setPortfolioUploadError,
     setApplication,
     setFieldErrors,
-    isIntern
+    isIntern,
+    isBusinessDevelopment = false
   } = props;
 
   return (
@@ -26,18 +27,24 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
 
       <div className="space-y-6">
         <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">
-          {isIntern ? 'Projects & Interest' : 'Campaign Experience'}
+          {isIntern ? 'Projects & Interest' : isBusinessDevelopment ? 'Business Development Experience' : 'Campaign Experience'}
         </h3>
 
         {!isIntern && (
-          <FormField fieldName="campaignsWorkedOn" label="Campaigns You've Worked On" required>
+          <FormField
+            fieldName="campaignsWorkedOn"
+            label={isBusinessDevelopment ? "Prospecting & Client Acquisition Experience" : "Campaigns You've Worked On"}
+            required
+          >
             <Textarea
               id="campaignsWorkedOn"
               name="campaignsWorkedOn"
               value={application.campaignsWorkedOn || ''}
               onChange={handleInputChange}
               onBlur={handleInputBlur}
-              placeholder="Describe campaigns you've planned or executed (channels, goals, audience, etc.)"
+              placeholder={isBusinessDevelopment
+                ? "Describe how you've researched prospects, approached decision-makers, and developed opportunities"
+                : "Describe campaigns you've planned or executed (channels, goals, audience, etc.)"}
               required
               className={fieldErrors.campaignsWorkedOn ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
               rows={4}
@@ -98,7 +105,9 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
             value={application.marketingToolsUsed || ''}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
-            placeholder="e.g., Meta Ads, Google Ads, Google Analytics, HubSpot, Excel, WhatsApp campaigns"
+            placeholder={isBusinessDevelopment
+              ? "e.g., LinkedIn Sales Navigator, email outreach tools, CRM platforms, Upwork, Excel"
+              : "e.g., Meta Ads, Google Ads, Google Analytics, HubSpot, Excel, WhatsApp campaigns"}
             required
             className={fieldErrors.marketingToolsUsed ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
             rows={3}
@@ -106,14 +115,20 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
         </FormField>
 
         {!isIntern && (
-          <FormField fieldName="resultsAchieved" label="Results Achieved (metrics)" required>
+          <FormField
+            fieldName="resultsAchieved"
+            label={isBusinessDevelopment ? "Opportunities & Results Achieved" : "Results Achieved (metrics)"}
+            required
+          >
             <Textarea
               id="resultsAchieved"
               name="resultsAchieved"
               value={application.resultsAchieved || ''}
               onChange={handleInputChange}
               onBlur={handleInputBlur}
-              placeholder="Share leads generated, conversions, ROAS, growth %, or other measurable outcomes"
+              placeholder={isBusinessDevelopment
+                ? "Share qualified leads, meetings booked, proposals sent, projects closed, or revenue generated"
+                : "Share leads generated, conversions, ROAS, growth %, or other measurable outcomes"}
               required
               className={fieldErrors.resultsAchieved ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
               rows={4}
@@ -123,16 +138,18 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
       </div>
 
       <div className="space-y-6">
-        <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Portfolio & Work Samples</h3>
+        <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">
+          {isBusinessDevelopment ? 'Case Studies & Work Samples' : 'Portfolio & Work Samples'}
+        </h3>
 
-        <FormField fieldName="portfolioUrl" label="Portfolio / Case Studies URL (optional)">
+        <FormField fieldName="portfolioUrl" label={isBusinessDevelopment ? "Case Studies / LinkedIn URL (optional)" : "Portfolio / Case Studies URL (optional)"}>
           <Input
             id="portfolioUrl"
             name="portfolioUrl"
             value={application.portfolioUrl || ''}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
-            placeholder="https://notion.so/your-case-studies or https://yourwebsite.com"
+            placeholder={isBusinessDevelopment ? "Share a case study or relevant professional profile" : "https://notion.so/your-case-studies or https://yourwebsite.com"}
             className={fieldErrors.portfolioUrl ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
           />
         </FormField>
@@ -145,7 +162,9 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
               value={application.portfolioWorkSamples || ''}
               onChange={handleInputChange}
               onBlur={handleInputBlur}
-              placeholder="https://drive.google.com/... (campaign decks, screenshots, reports)"
+              placeholder={isBusinessDevelopment
+                ? "Share proposals, outreach samples, pipeline reports, or client case studies"
+                : "https://drive.google.com/... (campaign decks, screenshots, reports)"}
               className={fieldErrors.portfolioWorkSamples ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
             />
             <div className="flex items-center gap-3 p-3 border rounded-md bg-gray-50 border-gray-300">

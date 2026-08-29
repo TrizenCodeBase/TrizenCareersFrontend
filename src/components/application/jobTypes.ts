@@ -1,6 +1,6 @@
 export const LEGACY_SMM_JOB_IDS = ['TV-MKT-SMM-2025-003', 'TV-MKT-SMM-2026-003'] as const;
 export const CONTENT_SOCIAL_MEDIA_JOB_IDS = ['TV-MKT-CSM-2026-004', 'TV-MKT-CSMI-2026-006'] as const;
-export const GROWTH_MARKETING_JOB_IDS = ['TV-MKT-GME-2026-003', 'TV-MKT-GMI-2026-005'] as const;
+export const GROWTH_MARKETING_JOB_IDS = ['TV-MKT-GME-2026-003', 'TV-MKT-GMI-2026-005', 'TV-SLS-BDE-2026-009'] as const;
 export const MERN_INTERN_JOB_IDS = [
   'TV-WEB-MERN-2025-005',
   'TV-WEB-MERN-2025-002',
@@ -25,6 +25,7 @@ export const ENGINEERING_INTERN_JOB_IDS = [
 
 /** Active listings from jobs.json (open roles) */
 export const ACTIVE_JOB_IDS = [
+  'TV-SLS-BDE-2026-009',
   'TV-AI-AUT-2026-001',
   'TV-AI-FS-2026-002',
   'TV-MKT-GME-2026-003',

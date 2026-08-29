@@ -887,6 +887,7 @@ const ApplicationForm = () => {
                     setApplication={setApplication}
                     setFieldErrors={setFieldErrors}
                     isIntern={isMarketingIntern(resolvedJobId)}
+                    isBusinessDevelopment={resolvedJobId === 'TV-SLS-BDE-2026-009'}
                   />
                 ) : jobFormType === 'content-social' ? (
                   <ContentSocialMediaFormSection

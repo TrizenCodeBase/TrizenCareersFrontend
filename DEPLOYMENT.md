@@ -12,7 +12,7 @@ Set these in CapRover app settings:
 
 ```
 NODE_ENV=production
-VITE_API_BASE_URL=https://trizencareer-api.llp.trizenventures.com
+VITE_API_BASE_URL=https://trizen-careers-backend.llp.trizenventures.com
 ```
 
 ### Update API URL

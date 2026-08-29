@@ -71,7 +71,7 @@ class EmailService {
     
     try {
       // Use the backend proxy instead of calling the email service directly to avoid CORS issues
-      const backendUrl = ENV_CONFIG.API_BASE_URL || 'https://trizencareer-api.llp.trizenventures.com';
+      const backendUrl = ENV_CONFIG.API_BASE_URL || 'https://trizen-careers-backend.llp.trizenventures.com';
       console.log('📧 Sending email via backend proxy:', `${backendUrl}/api/v1/support/send-email`);
       
       const response = await fetch(`${backendUrl}/api/v1/support/send-email`, {

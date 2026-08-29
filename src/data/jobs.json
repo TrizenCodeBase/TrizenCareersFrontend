@@ -1,6 +1,54 @@
 {
   "jobs": [
     {
+      "id": "TV-SLS-BDE-2026-009",
+      "title": "Business Development Executive – IT Services",
+      "slug": "business-development-executive-it-services",
+      "location": "Remote / Hybrid",
+      "type": "Full-Time",
+      "category": "Business Development",
+      "shortDescription": "Identify prospects, generate qualified opportunities, and close software development projects across AI, SaaS, ERP, web, mobile, automation, and custom software services.",
+      "description": "We are looking for a Business Development Executive to identify potential clients, generate qualified opportunities, and bring new software development projects to the company.\n\nOur services include AI solutions, SaaS products, ERP systems, web development, mobile applications, automation, and custom software development.\n\nThe ideal candidate can independently handle the complete client acquisition journey: Find Prospects → Reach Out → Understand Requirements → Follow Up → Generate Opportunities → Close Projects → Onboard Clients.\n\nThis is not a data-entry or mass-messaging role. The primary focus is bringing qualified software projects and new business to the company.",
+      "applicationPrompt": "Your resume and LinkedIn profile, along with a brief example of how you have identified, nurtured, or converted a prospect into a qualified opportunity or client.",
+      "tags": ["IT Sales", "Business Development", "Lead Generation", "Client Acquisition", "Prospecting", "Negotiation", "SaaS", "AI Solutions"],
+      "requirements": [
+        "0–2 years of experience in Business Development, IT Sales, Lead Generation, or Client Acquisition",
+        "Strong communication and negotiation skills",
+        "Good research and prospecting skills",
+        "Comfortable communicating with founders, business owners, and decision-makers",
+        "Basic understanding of AI, SaaS, ERP, web, mobile, and software development services",
+        "Strong follow-up and organizational skills",
+        "Self-driven and target-oriented"
+      ],
+      "responsibilities": [
+        "Identify potential clients and relevant decision-makers",
+        "Generate qualified leads through LinkedIn, email, referrals, business platforms, and other channels",
+        "Reach out to prospects with personalized communication",
+        "Understand client requirements, budgets, timelines, and business problems",
+        "Schedule and manage discovery meetings",
+        "Follow up consistently with prospects and manage the sales pipeline",
+        "Coordinate with the technical team for project scope, estimates, and proposals",
+        "Negotiate and convert opportunities into paid projects",
+        "Maintain accurate lead, follow-up, and pipeline records",
+        "Build client relationships for repeat business and referrals"
+      ],
+      "benefits": [
+        "Competitive salary based on experience and performance",
+        "Ownership of the complete business development and client acquisition cycle",
+        "Exposure to AI, SaaS, ERP, web, mobile, automation, and custom software projects",
+        "Opportunity to work directly with decision-makers and the technical team"
+      ],
+      "selectionProcess": [
+        "Application review",
+        "Business development case discussion or practical assignment",
+        "Interview with the leadership team"
+      ],
+      "duration": "Full-Time",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-08-29"
+    },
+    {
       "id": "TV-AI-AUT-2026-001",
       "title": "Associate AI & Automation Engineer",
       "slug": "associate-ai-automation-engineer",

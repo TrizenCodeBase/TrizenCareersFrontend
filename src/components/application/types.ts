@@ -61,4 +61,5 @@ export interface MarketingFormSectionProps {
   setApplication: Dispatch<SetStateAction<MarketingApplicationFields & Record<string, unknown>>>;
   setFieldErrors: Dispatch<SetStateAction<FieldErrors>>;
   isIntern: boolean;
+  isBusinessDevelopment?: boolean;
 }
