@@ -11,6 +11,8 @@ export const MERN_INTERN_JOB_IDS = [
 export const MERN_FULLTIME_JOB_IDS = ['TV-WEB-MERN-2026-007'] as const;
 export const MERN_JOB_IDS = [...MERN_INTERN_JOB_IDS, ...MERN_FULLTIME_JOB_IDS] as const;
 
+export const GENAI_JOB_IDS = ['TV-AI-GEN-2026-009'] as const;
+
 export const ENGINEERING_FULLTIME_JOB_IDS = [
   'TV-AI-AUT-2026-001',
   'TV-WEB-MERN-2026-007'
@@ -26,6 +28,7 @@ export const ENGINEERING_INTERN_JOB_IDS = [
 /** Active listings from jobs.json (open roles) */
 export const ACTIVE_JOB_IDS = [
   'TV-SLS-BDE-2026-009',
+  'TV-AI-GEN-2026-009',
   'TV-AI-AUT-2026-001',
   'TV-AI-FS-2026-002',
   'TV-MKT-GME-2026-003',
@@ -36,14 +39,20 @@ export const ACTIVE_JOB_IDS = [
   'TV-WEB-MERN-2026-008'
 ] as const;
 
-export type JobFormType = 'legacy-smm' | 'content-social' | 'growth-marketing' | 'engineering';
+export type JobFormType = 'legacy-smm' | 'content-social' | 'growth-marketing' | 'genai' | 'engineering';
 
 export function getJobFormType(jobId: string | undefined): JobFormType {
   if (!jobId) return 'engineering';
   if ((LEGACY_SMM_JOB_IDS as readonly string[]).includes(jobId)) return 'legacy-smm';
   if ((CONTENT_SOCIAL_MEDIA_JOB_IDS as readonly string[]).includes(jobId)) return 'content-social';
   if ((GROWTH_MARKETING_JOB_IDS as readonly string[]).includes(jobId)) return 'growth-marketing';
+  if ((GENAI_JOB_IDS as readonly string[]).includes(jobId)) return 'genai';
   return 'engineering';
+}
+
+export function isGenAiJob(jobId: string | undefined): boolean {
+  if (!jobId) return false;
+  return (GENAI_JOB_IDS as readonly string[]).includes(jobId);
 }
 
 export function isMarketingIntern(jobId: string | undefined): boolean {
@@ -78,6 +87,7 @@ export function isEngineeringInternJob(jobId: string | undefined): boolean {
 /** Year of passing out is collected for interns and MERN full-time, not AI automation full-time. */
 export function requiresYearOfPassingOut(jobId: string | undefined): boolean {
   if (!jobId) return true;
+  if (isGenAiJob(jobId)) return false;
   if (isMernFullTimeJob(jobId)) return true;
   if (isEngineeringFullTimeJob(jobId)) return false;
   return true;

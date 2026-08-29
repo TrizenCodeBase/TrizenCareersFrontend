@@ -1,6 +1,69 @@
 {
   "jobs": [
     {
+      "id": "TV-AI-GEN-2026-009",
+      "title": "AI Engineer – GenAI & Multi-Agent Systems (3-Month Contract)",
+      "slug": "ai-engineer-genai-multi-agent-systems",
+      "location": "Remote / Hybrid",
+      "type": "Contract (3 Months)",
+      "category": "AI/ML",
+      "shortDescription": "3-month contract role: design and deploy LLM-powered multi-agent systems—RAG, tool-using agents, orchestration, and enterprise copilots. 3–10 years in GenAI with strong Python and agent frameworks. Full-time engagement for the contract period.",
+      "description": "We are hiring for a fixed 3-month contract engagement (not a permanent full-time position). We are looking for a highly skilled AI Engineer specializing in Generative AI and Multi-Agent Systems to design and deploy intelligent, autonomous solutions during this contract period.\n\nThis role focuses on building LLM-powered, agent-driven architectures that can reason, collaborate, and execute complex workflows across enterprise systems. You will work on cutting-edge Agentic AI frameworks, enabling systems that go beyond prediction to decision-making, orchestration, and autonomous execution.\n\nContract duration: 3 months | Engagement: Full-time for the duration of the contract | Start: As soon as possible.",
+      "applicationPrompt": "Your resume, GitHub profile, LinkedIn profile, portfolio or agent/LLM projects, and a brief description of a multi-agent, RAG, or GenAI system you have built or contributed to.",
+      "tags": ["3-Month Contract", "GenAI", "Multi-Agent Systems", "LangChain", "CrewAI", "AutoGen", "RAG", "LLMOps", "Python", "Vector Databases", "Azure OpenAI"],
+      "requirements": [
+        "Available for a 3-month contract engagement (full-time for the contract period)",
+        "Bachelor's or Master's in Computer Science, AI, or a related field",
+        "3–10 years of experience in AI/ML with a strong focus on Generative AI",
+        "Strong Python development skills",
+        "Hands-on experience with LLMs and GenAI frameworks (OpenAI, Hugging Face Transformers)",
+        "Experience with agent frameworks: LangChain, AutoGen, CrewAI, Semantic Kernel, or similar",
+        "Experience building RAG pipelines and working with vector databases (FAISS, Pinecone, Weaviate, or similar)",
+        "Experience building API-driven, tool-integrated AI agents",
+        "Strong understanding of prompt engineering, chain-of-thought reasoning, and tool augmentation",
+        "Solid context management and token optimization practices",
+        "Experience with cloud platforms (Azure OpenAI preferred; AWS or GCP acceptable)",
+        "Knowledge of Docker, Kubernetes, and CI/CD pipelines",
+        "Preferred: Multi-agent orchestration with role-based coordination",
+        "Preferred: Agent planning patterns (ReAct, Plan-and-Execute, Tree-of-Thought)",
+        "Preferred: LLM evaluation frameworks (RAGAS, TruLens, Promptfoo)",
+        "Preferred: Graph-based reasoning or knowledge graphs",
+        "Preferred: Enterprise copilots or autonomous systems in production",
+        "Preferred: Domain experience in industrial, energy, or IoT environments"
+      ],
+      "responsibilities": [
+        "Design and build multi-agent AI systems capable of planning, reasoning, and task execution",
+        "Develop applications using LLMs (GPT, Claude, Llama, etc.) with advanced prompt engineering and orchestration",
+        "Implement agentic workflows (planner → executor → critic → memory loops)",
+        "Build RAG pipelines with vector databases for enterprise knowledge grounding",
+        "Develop tool-using agents that integrate with APIs, databases, and enterprise systems",
+        "Architect and deploy AI copilots and autonomous assistants for business workflows",
+        "Optimize LLM performance using fine-tuning, prompt chaining, and caching strategies",
+        "Implement short-term and long-term memory (vector stores, knowledge graphs)",
+        "Design multi-agent collaboration protocols (hierarchical, swarm, role-based agents)",
+        "Deploy scalable solutions using MLOps and LLMOps (monitoring, evaluation, guardrails)",
+        "Ensure AI safety, governance, and responsible AI practices"
+      ],
+      "benefits": [
+        "3-month contract with competitive compensation based on experience",
+        "Full-time engagement for the 3-month contract period",
+        "Remote / Hybrid work flexibility",
+        "Work on production agentic AI, RAG, and multi-agent orchestration",
+        "Modern GenAI stack: LangChain, CrewAI, AutoGen, Azure OpenAI, vector DBs",
+        "Direct impact on autonomous task completion and workflow automation KPIs",
+        "Collaboration with product and business stakeholders on real enterprise workflows"
+      ],
+      "selectionProcess": [
+        "Application review (resume, GitHub, LinkedIn, and GenAI/agent portfolio)",
+        "Technical deep-dive on agents, RAG, or system design",
+        "Interview with the engineering and leadership team"
+      ],
+      "duration": "3 months (contract)",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-08-05"
+    },
+    {
       "id": "TV-SLS-BDE-2026-009",
       "title": "Business Development Executive – IT Services",
       "slug": "business-development-executive-it-services",

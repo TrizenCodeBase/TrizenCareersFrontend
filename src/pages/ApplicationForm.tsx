@@ -34,6 +34,7 @@ import { validateApplicationByJobType } from "@/components/application/validateA
 import { uploadApplicationFile } from "@/components/application/uploadApplicationFile";
 import { GrowthMarketingFormSection } from "@/components/application/GrowthMarketingFormSection";
 import { ContentSocialMediaFormSection } from "@/components/application/ContentSocialMediaFormSection";
+import { GenAiFormSection } from "@/components/application/GenAiFormSection";
 
 interface JobApplication {
   jobId: string;
@@ -76,6 +77,25 @@ interface JobApplication {
   contentCreated?: string;
   proudContentOrCampaign?: string;
   managedPages?: string;
+  // GenAI & multi-agent contract role fields
+  totalAiExperience?: string;
+  agenticExperience?: string;
+  currentTitle?: string;
+  currentCompany?: string;
+  highestDegree?: string;
+  availabilityToStart?: string;
+  agentFrameworks?: string[];
+  llmPlatforms?: string[];
+  vectorDatabases?: string[];
+  planningApproaches?: string[];
+  cloudPlatform?: string;
+  devopsProficiency?: string;
+  systemExperience?: string;
+  timezone?: string;
+  contractCommitment?: string;
+  expectedMonthlyRate?: string;
+  applicationSource?: string;
+  coverNote?: string;
 }
 
 interface ValidationError {
@@ -166,7 +186,25 @@ const ApplicationForm = () => {
     contentSamplesLink: "",
     contentCreated: "",
     proudContentOrCampaign: "",
-    managedPages: ""
+    managedPages: "",
+    totalAiExperience: "",
+    agenticExperience: "",
+    currentTitle: "",
+    currentCompany: "",
+    highestDegree: "",
+    availabilityToStart: "",
+    agentFrameworks: [],
+    llmPlatforms: [],
+    vectorDatabases: [],
+    planningApproaches: [],
+    cloudPlatform: "",
+    devopsProficiency: "",
+    systemExperience: "",
+    timezone: "",
+    contractCommitment: "",
+    expectedMonthlyRate: "",
+    applicationSource: "",
+    coverNote: ""
   });
 
   const resolvedJobId = normalizeJobId(job?.id || jobId);
@@ -281,6 +319,7 @@ const ApplicationForm = () => {
         break;
       case 'portfolioUrl':
         if (jobFormType === 'growth-marketing' && !value.trim()) return null;
+        if (jobFormType === 'genai' && !value.trim()) return 'GitHub or portfolio link is required';
         if (!value.trim()) return 'Portfolio URL is required';
         if (!/^https?:\/\/.+/.test(value)) return 'Please enter a valid URL (must start with http:// or https://)';
         break;
@@ -333,6 +372,41 @@ const ApplicationForm = () => {
         break;
       case 'hoursPerWeek':
         if (!value.trim()) return 'Hours per week is required';
+        break;
+      case 'expectedMonthlyRate':
+        if (!value.trim()) return 'Expected rate per month is required';
+        if (!/^\d+$/.test(value.trim())) return 'Enter the monthly amount in digits only (e.g., 150000)';
+        break;
+      case 'systemExperience':
+        if (!value.trim()) return 'Please describe a RAG or multi-agent system you built';
+        if (value.trim().length < 20) return 'Please provide a more detailed response (at least 20 characters)';
+        break;
+      case 'totalAiExperience':
+        if (!value.trim()) return 'Total AI/ML experience is required';
+        break;
+      case 'agenticExperience':
+        if (!value.trim()) return 'Agentic systems experience is required';
+        break;
+      case 'currentTitle':
+        if (!value.trim()) return 'Current job title is required';
+        break;
+      case 'highestDegree':
+        if (!value.trim()) return 'Highest qualification is required';
+        break;
+      case 'availabilityToStart':
+        if (!value.trim()) return 'Start availability is required';
+        break;
+      case 'cloudPlatform':
+        if (!value.trim()) return 'Cloud platform is required';
+        break;
+      case 'devopsProficiency':
+        if (!value.trim()) return 'Docker/Kubernetes/CI-CD level is required';
+        break;
+      case 'timezone':
+        if (!value.trim()) return 'Working timezone is required';
+        break;
+      case 'contractCommitment':
+        if (!value.trim()) return 'Please confirm your availability for the 3-month contract';
         break;
       default:
         return null;
@@ -445,7 +519,25 @@ const ApplicationForm = () => {
       preferredStartDate: "Preferred Start Date",
       hoursPerWeek: "Duration / Hours Per Week",
       workPreference: "Work Preference",
-      expectations: "Expectations or Questions"
+      expectations: "Expectations or Questions",
+      totalAiExperience: "Total AI / ML Experience",
+      agenticExperience: "Experience with Agentic Systems",
+      currentTitle: "Current Job Title",
+      currentCompany: "Current Company",
+      highestDegree: "Highest Qualification",
+      availabilityToStart: "Available to Start From",
+      agentFrameworks: "Agent Frameworks",
+      llmPlatforms: "LLM Platforms",
+      vectorDatabases: "Vector Databases",
+      planningApproaches: "Agent Planning Approaches",
+      cloudPlatform: "Primary Cloud Platform",
+      devopsProficiency: "Docker / Kubernetes / CI-CD Level",
+      systemExperience: "RAG or Multi-Agent System Built",
+      timezone: "Working Timezone",
+      contractCommitment: "3-Month Contract Availability",
+      expectedMonthlyRate: "Expected Rate per Month (₹)",
+      applicationSource: "How You Heard About the Role",
+      coverNote: "Why You Are a Fit"
     };
     return fieldNames[fieldName] || fieldName;
   };
@@ -478,7 +570,14 @@ const ApplicationForm = () => {
       preferredStartDate: "Select your preferred start date for the internship",
       hoursPerWeek: "Enter how many hours per week you can commit (optional)",
       workPreference: "Select your preferred work arrangement",
-      expectations: "Share any expectations or questions you have about this internship (optional)"
+      expectations: "Share any expectations or questions you have about this internship (optional)",
+      expectedMonthlyRate: "Enter the amount you expect per month in rupees (e.g., 150000). Do not enter hourly or weekly rates.",
+      systemExperience: "Describe the approach, tools, and outcome of a RAG or multi-agent system you built",
+      agentFrameworks: "Select every agent framework you have hands-on experience with",
+      llmPlatforms: "Select every LLM platform you have worked with",
+      contractCommitment: "Confirm whether you are available for the full 3-month contract",
+      timezone: "Select the timezone you normally work in",
+      availabilityToStart: "Select the earliest date you can start the contract"
     };
     return guidance[fieldName] || "Please provide valid information for this field";
   };
@@ -868,7 +967,22 @@ const ApplicationForm = () => {
                   </Alert>
                 )}
 
-                {jobFormType === 'growth-marketing' ? (
+                {jobFormType === 'genai' ? (
+                  <GenAiFormSection
+                    application={application}
+                    fieldErrors={fieldErrors}
+                    FormField={FormField}
+                    handleInputChange={handleInputChange}
+                    handleInputBlur={handleInputBlur}
+                    handleCheckboxChange={handleCheckboxChange}
+                    resumeFile={resumeFile}
+                    setResumeFile={setResumeFile}
+                    resumeUploadError={resumeUploadError}
+                    setResumeUploadError={setResumeUploadError}
+                    setApplication={setApplication}
+                    setFieldErrors={setFieldErrors}
+                  />
+                ) : jobFormType === 'growth-marketing' ? (
                   <GrowthMarketingFormSection
                     application={application}
                     fieldErrors={fieldErrors}
