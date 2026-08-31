@@ -18,7 +18,8 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
     setApplication,
     setFieldErrors,
     isIntern,
-    isBusinessDevelopment = false
+    isBusinessDevelopment = false,
+    isTelecallingOutreach = false
   } = props;
 
   return (
@@ -27,7 +28,13 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
 
       <div className="space-y-6">
         <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">
-          {isIntern ? 'Projects & Interest' : isBusinessDevelopment ? 'Business Development Experience' : 'Campaign Experience'}
+          {isTelecallingOutreach
+            ? 'Outreach & Communication Experience'
+            : isIntern
+              ? 'Projects & Interest'
+              : isBusinessDevelopment
+                ? 'Business Development Experience'
+                : 'Campaign Experience'}
         </h3>
 
         {!isIntern && (
@@ -54,42 +61,60 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
 
         {isIntern && (
           <>
-            <FormField fieldName="projectsOrActivities" label="Projects, Internships, or Activities" required>
+            <FormField
+              fieldName="projectsOrActivities"
+              label={isTelecallingOutreach ? "Calling, Outreach, or Customer-Facing Experience" : "Projects, Internships, or Activities"}
+              required
+            >
               <Textarea
                 id="projectsOrActivities"
                 name="projectsOrActivities"
                 value={application.projectsOrActivities || ''}
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
-                placeholder="Share relevant college projects, internships, clubs, or marketing activities"
+                placeholder={isTelecallingOutreach
+                  ? "Share any telecalling, sales, healthcare, recruitment, support, or customer-facing experience"
+                  : "Share relevant college projects, internships, clubs, or marketing activities"}
                 required
                 className={fieldErrors.projectsOrActivities ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                 rows={4}
               />
             </FormField>
 
-            <FormField fieldName="growthMarketingInterest" label="Why Growth Marketing?" required>
+            <FormField
+              fieldName="growthMarketingInterest"
+              label={isTelecallingOutreach ? "Why Telecalling & Outreach?" : "Why Growth Marketing?"}
+              required
+            >
               <Textarea
                 id="growthMarketingInterest"
                 name="growthMarketingInterest"
                 value={application.growthMarketingInterest || ''}
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
-                placeholder="Why are you interested in growth marketing and startups?"
+                placeholder={isTelecallingOutreach
+                  ? "Why are you interested in outbound communication, lead generation, and customer onboarding?"
+                  : "Why are you interested in growth marketing and startups?"}
                 required
                 className={fieldErrors.growthMarketingInterest ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                 rows={3}
               />
             </FormField>
 
-            <FormField fieldName="campaignOrEventOrganized" label="Campaign, Event, or Initiative You've Helped Organize" required>
+            <FormField
+              fieldName="campaignOrEventOrganized"
+              label={isTelecallingOutreach ? "Handling Calls & Follow-Ups" : "Campaign, Event, or Initiative You've Helped Organize"}
+              required
+            >
               <Textarea
                 id="campaignOrEventOrganized"
                 name="campaignOrEventOrganized"
                 value={application.campaignOrEventOrganized || ''}
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
-                placeholder="Describe any marketing campaign, college event, or growth initiative you contributed to"
+                placeholder={isTelecallingOutreach
+                  ? "Describe how you would handle a cold call, explain a service or digital solution, and follow up with an interested prospect"
+                  : "Describe any marketing campaign, college event, or growth initiative you contributed to"}
                 required
                 className={fieldErrors.campaignOrEventOrganized ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
                 rows={3}
@@ -105,7 +130,9 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
             value={application.marketingToolsUsed || ''}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
-            placeholder={isBusinessDevelopment
+            placeholder={isTelecallingOutreach
+              ? "e.g., CRM, phone dialers, WhatsApp, email, Google Sheets, or messaging tools"
+              : isBusinessDevelopment
               ? "e.g., LinkedIn Sales Navigator, email outreach tools, CRM platforms, Upwork, Excel"
               : "e.g., Meta Ads, Google Ads, Google Analytics, HubSpot, Excel, WhatsApp campaigns"}
             required
@@ -139,17 +166,24 @@ export function GrowthMarketingFormSection(props: MarketingFormSectionProps) {
 
       <div className="space-y-6">
         <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">
-          {isBusinessDevelopment ? 'Case Studies & Work Samples' : 'Portfolio & Work Samples'}
+          {isTelecallingOutreach ? 'Supporting Information' : isBusinessDevelopment ? 'Case Studies & Work Samples' : 'Portfolio & Work Samples'}
         </h3>
 
-        <FormField fieldName="portfolioUrl" label={isBusinessDevelopment ? "Case Studies / LinkedIn URL (optional)" : "Portfolio / Case Studies URL (optional)"}>
+        <FormField
+          fieldName="portfolioUrl"
+          label={isTelecallingOutreach ? "LinkedIn / Professional Profile (optional)" : isBusinessDevelopment ? "Case Studies / LinkedIn URL (optional)" : "Portfolio / Case Studies URL (optional)"}
+        >
           <Input
             id="portfolioUrl"
             name="portfolioUrl"
             value={application.portfolioUrl || ''}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
-            placeholder={isBusinessDevelopment ? "Share a case study or relevant professional profile" : "https://notion.so/your-case-studies or https://yourwebsite.com"}
+            placeholder={isTelecallingOutreach
+              ? "Share your LinkedIn or another relevant professional profile"
+              : isBusinessDevelopment
+                ? "Share a case study or relevant professional profile"
+                : "https://notion.so/your-case-studies or https://yourwebsite.com"}
             className={fieldErrors.portfolioUrl ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
           />
         </FormField>

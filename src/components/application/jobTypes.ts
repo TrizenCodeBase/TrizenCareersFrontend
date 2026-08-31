@@ -1,6 +1,6 @@
 export const LEGACY_SMM_JOB_IDS = ['TV-MKT-SMM-2025-003', 'TV-MKT-SMM-2026-003'] as const;
-export const CONTENT_SOCIAL_MEDIA_JOB_IDS = ['TV-MKT-CSM-2026-004', 'TV-MKT-CSMI-2026-006'] as const;
-export const GROWTH_MARKETING_JOB_IDS = ['TV-MKT-GME-2026-003', 'TV-MKT-GMI-2026-005', 'TV-SLS-BDE-2026-009'] as const;
+export const CONTENT_SOCIAL_MEDIA_JOB_IDS = ['TV-MKT-CSM-2026-004', 'TV-MKT-CSMI-2026-006', 'TV-MKT-SDMH-2026-011'] as const;
+export const GROWTH_MARKETING_JOB_IDS = ['TV-MKT-GME-2026-003', 'TV-MKT-GMI-2026-005', 'TV-SLS-BDE-2026-009', 'TV-SLS-HOT-2026-010'] as const;
 export const MERN_INTERN_JOB_IDS = [
   'TV-WEB-MERN-2025-005',
   'TV-WEB-MERN-2025-002',
@@ -27,6 +27,7 @@ export const ENGINEERING_INTERN_JOB_IDS = [
 
 /** Active listings from jobs.json (open roles) */
 export const ACTIVE_JOB_IDS = [
+  'TV-SLS-HOT-2026-010',
   'TV-SLS-BDE-2026-009',
   'TV-AI-GEN-2026-009',
   'TV-AI-AUT-2026-001',
@@ -34,7 +35,7 @@ export const ACTIVE_JOB_IDS = [
   'TV-MKT-GME-2026-003',
   'TV-MKT-CSM-2026-004',
   'TV-MKT-GMI-2026-005',
-  'TV-MKT-CSMI-2026-006',
+  'TV-MKT-SDMH-2026-011',
   'TV-WEB-MERN-2026-007',
   'TV-WEB-MERN-2026-008'
 ] as const;
@@ -56,7 +57,7 @@ export function isGenAiJob(jobId: string | undefined): boolean {
 }
 
 export function isMarketingIntern(jobId: string | undefined): boolean {
-  return jobId === 'TV-MKT-GMI-2026-005' || jobId === 'TV-MKT-CSMI-2026-006';
+  return jobId === 'TV-MKT-GMI-2026-005' || jobId === 'TV-MKT-CSMI-2026-006' || jobId === 'TV-MKT-SDMH-2026-011' || jobId === 'TV-SLS-HOT-2026-010';
 }
 
 export function isMernJob(jobId: string | undefined): boolean {

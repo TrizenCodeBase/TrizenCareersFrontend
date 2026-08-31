@@ -84,6 +84,8 @@ export interface MarketingFormSectionProps {
   setFieldErrors: Dispatch<SetStateAction<FieldErrors>>;
   isIntern: boolean;
   isBusinessDevelopment?: boolean;
+  isTelecallingOutreach?: boolean;
+  isHealthcareMarketing?: boolean;
 }
 
 export interface GenAiFormSectionProps {

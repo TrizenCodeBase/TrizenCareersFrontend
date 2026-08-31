@@ -1,6 +1,52 @@
 {
   "jobs": [
     {
+      "id": "TV-SLS-HOT-2026-010",
+      "title": "Telecalling & Outreach Intern",
+      "slug": "telecalling-outreach-intern",
+      "location": "Remote / Hybrid",
+      "type": "Internship",
+      "category": "Business Development",
+      "shortDescription": "Support outbound communication, lead generation, prospect follow-ups, and customer onboarding across businesses and professional communities.",
+      "description": "We are looking for a Telecalling & Outreach Intern to support outbound communication, lead generation, follow-ups, and customer onboarding activities.\n\nThe role may involve interacting with businesses and professionals across industries, including the healthcare sector.\n\nThe ideal candidate can independently handle the complete outreach journey: Identify Leads → Call → Explain → Follow Up → Generate Interest → Support Onboarding.",
+      "applicationPrompt": "Your resume and LinkedIn profile, along with a brief note about any telecalling, sales, lead generation, customer outreach, or onboarding experience.",
+      "tags": ["Telecalling", "Outreach", "Cold Calling", "Lead Generation", "Customer Onboarding", "CRM", "WhatsApp", "Hindi"],
+      "requirements": [
+        "Good verbal communication skills in English and Hindi",
+        "Comfortable making outbound and cold calls",
+        "Strong follow-up and interpersonal skills",
+        "Basic understanding of sales, lead generation, or customer outreach is a plus",
+        "Comfortable using calling, CRM, and messaging tools",
+        "Good organizational and record-keeping skills",
+        "Self-driven and willing to work with daily targets"
+      ],
+      "responsibilities": [
+        "Make outbound calls to potential customers, businesses, and relevant decision-makers",
+        "Introduce company services or digital solutions and identify interested prospects",
+        "Follow up with leads through phone, WhatsApp, email, or other communication channels",
+        "Share relevant information, presentations, or product demos with interested prospects",
+        "Maintain accurate records of calls, leads, follow-ups, and responses",
+        "Assist interested users or businesses during the initial onboarding process",
+        "Coordinate with internal teams for qualified leads and further discussions",
+        "Work toward daily outreach and lead-generation targets"
+      ],
+      "benefits": [
+        "Competitive stipend based on skills and performance",
+        "Hands-on experience in outbound communication, lead generation, and customer onboarding",
+        "Exposure to businesses and professionals across multiple industries, including healthcare",
+        "Opportunity to develop professional telecalling, follow-up, and CRM skills"
+      ],
+      "selectionProcess": [
+        "Application review",
+        "Communication and telecalling discussion",
+        "Interview with the outreach and onboarding team"
+      ],
+      "duration": "Internship",
+      "startDate": "Immediate",
+      "applicationDeadline": "Rolling basis",
+      "postedDate": "2026-08-31"
+    },
+    {
       "id": "TV-AI-GEN-2026-009",
       "title": "AI Engineer – GenAI & Multi-Agent Systems (3-Month Contract)",
       "slug": "ai-engineer-genai-multi-agent-systems",
@@ -373,53 +419,54 @@
       "postedDate": "2026-06-12"
     },
     {
-      "id": "TV-MKT-CSMI-2026-006",
-      "title": "Content & Social Media Intern",
-      "slug": "content-social-media-intern",
-      "location": "Hyderabad (Hybrid)",
+      "id": "TV-MKT-SDMH-2026-011",
+      "title": "Social Media & Digital Marketing Intern – Healthcare",
+      "slug": "social-media-digital-marketing-intern-healthcare",
+      "location": "Remote / Hybrid",
       "type": "Internship",
       "category": "Marketing",
-      "shortDescription": "Create content, follow trends, and help brands grow on Instagram, LinkedIn, and more. Ideal for creative students interested in social media and content creation.",
-      "description": "We're looking for a Content & Social Media Intern who enjoys creating content, following trends, and helping brands grow online.\n\nYou'll help create posts, reels, stories, and short-form videos while learning content planning, trend research, and social performance basics.",
-      "applicationPrompt": "Your portfolio or social media page, content you've created (posts, reels, videos, designs), and one creator or brand whose content you admire and why.",
-      "tags": ["Content Creation", "Social Media", "Instagram", "Reels", "Canva", "CapCut", "Short-form Video"],
+      "shortDescription": "Support user acquisition, healthcare content marketing, Meta campaigns, and community outreach targeting doctors and medical professionals.",
+      "description": "We are looking for a Social Media & Digital Marketing Intern to support user acquisition, content marketing, and community outreach for a healthcare technology platform.\n\nThe ideal candidate can independently handle the complete marketing journey: Research Audience → Create Content → Run Campaigns → Engage Communities → Generate Leads → Track Results.",
+      "applicationPrompt": "Your resume, portfolio or social media page, examples of content or campaigns you have worked on, and a brief note about your interest in healthcare marketing and user acquisition.",
+      "tags": ["Healthcare Marketing", "Social Media", "Meta Ads", "Content Marketing", "User Acquisition", "Community Outreach", "Analytics", "Lead Generation"],
       "requirements": [
-        "Strong interest in content creation and social media",
-        "Good communication and writing skills",
-        "Basic knowledge of Instagram and short-form video content",
-        "Creative mindset with attention to detail",
-        "Willingness to learn and experiment",
-        "Bonus: Familiarity with Canva or CapCut",
-        "Bonus: Personal content page, Instagram page, YouTube channel, or portfolio",
-        "Bonus: Basic video editing skills",
-        "Bonus: Experience managing college or community social media pages"
+        "Basic understanding of social media marketing and digital advertising",
+        "Familiarity with Instagram, Facebook, Meta Ads, and content creation",
+        "Familiarity with Meta Ads Manager, social media analytics, or Google Analytics is a plus",
+        "Good communication and creative thinking skills",
+        "Comfortable researching and engaging online communities",
+        "Interest in understanding the healthcare and medical recruitment ecosystem",
+        "Ability to communicate professionally with doctors and healthcare communities",
+        "Basic awareness of digital privacy, confidentiality, and responsible healthcare communication is a plus",
+        "Strong learning ability and interest in growth and digital marketing"
       ],
       "responsibilities": [
-        "Assist in creating content for Instagram, LinkedIn, Facebook, and other platforms",
-        "Help create reels, posts, stories, and short-form videos",
-        "Write captions and social media copy",
-        "Support content planning and content calendar management",
-        "Research content trends and viral formats",
-        "Monitor social media performance and engagement",
-        "Work closely with marketing and design teams"
+        "Create and manage content for Instagram, Facebook, Telegram, and other relevant platforms",
+        "Develop content targeting doctors, medical professionals, and healthcare communities",
+        "Create healthcare-focused content while maintaining accuracy, professionalism, and appropriate communication",
+        "Assist in running and optimizing Meta advertising campaigns for user acquisition",
+        "Track campaign performance, leads, engagement, sign-ups, and conversions",
+        "Identify and engage relevant medical communities, groups, and professional networks",
+        "Support outreach to medical colleges, interns, junior doctors, RMOs, and specialist communities",
+        "Understand different healthcare audience segments to improve campaign targeting",
+        "Research content trends and growth opportunities within the healthcare sector",
+        "Coordinate with the internal team on campaigns and acquisition strategies"
       ],
       "benefits": [
-        "Hands-on content creation experience",
-        "Exposure to real brand-building and marketing campaigns",
-        "Opportunity to build a professional portfolio",
-        "Direct mentorship and feedback",
-        "Stipend based on skills and experience",
-        "Opportunity for a full-time role based on performance"
+        "Competitive stipend based on skills and performance",
+        "Hands-on experience in healthcare marketing and user acquisition",
+        "Exposure to Meta advertising, campaign analytics, and community growth",
+        "Opportunity to build a portfolio of responsible healthcare-focused campaigns"
       ],
       "selectionProcess": [
-        "Application review (resume, portfolio, and sample content)",
-        "Content or social media assignment",
-        "Interview with the marketing team"
+        "Application review (resume, portfolio, and sample content or campaigns)",
+        "Healthcare content or user-acquisition assignment",
+        "Interview with the marketing and growth team"
       ],
-      "duration": "3-6 months",
+      "duration": "Internship",
       "startDate": "Immediate",
       "applicationDeadline": "Rolling basis",
-      "postedDate": "2026-06-12"
+      "postedDate": "2026-08-31"
     },
     {
       "id": "TV-WEB-MERN-2026-007",

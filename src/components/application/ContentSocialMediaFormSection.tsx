@@ -6,7 +6,7 @@ import { FileText } from 'lucide-react';
 import { PersonalDetailsSection } from './PersonalDetailsSection';
 import type { MarketingFormSectionProps } from './types';
 
-const SOCIAL_PLATFORMS = ['Instagram', 'LinkedIn', 'Facebook', 'YouTube', 'Twitter/X', 'Other'];
+const SOCIAL_PLATFORMS = ['Instagram', 'LinkedIn', 'Facebook', 'Telegram', 'YouTube', 'Twitter/X', 'Other'];
 const CONTENT_SKILLS = ['Writing', 'Reels / Short Video', 'Graphics', 'Canva', 'CapCut', 'Photography', 'Other'];
 
 export function ContentSocialMediaFormSection(props: MarketingFormSectionProps) {
@@ -23,7 +23,8 @@ export function ContentSocialMediaFormSection(props: MarketingFormSectionProps) 
     setPortfolioUploadError,
     setApplication,
     setFieldErrors,
-    isIntern
+    isIntern,
+    isHealthcareMarketing = false
   } = props;
 
   return (
@@ -156,7 +157,9 @@ export function ContentSocialMediaFormSection(props: MarketingFormSectionProps) 
       </div>
 
       <div className="space-y-6">
-        <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Skills & Content Experience</h3>
+        <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">
+          {isHealthcareMarketing ? 'Healthcare Marketing & Content Experience' : 'Skills & Content Experience'}
+        </h3>
 
         <FormField fieldName="socialMediaPlatforms" label="Platforms You're Comfortable With" required>
           <div className="grid grid-cols-2 gap-2">
@@ -198,7 +201,7 @@ export function ContentSocialMediaFormSection(props: MarketingFormSectionProps) 
 
         <FormField
           fieldName="contentCreated"
-          label={isIntern ? "Content You've Created (posts, reels, designs)" : "Types of Content You've Created"}
+          label={isHealthcareMarketing ? "Healthcare or Professional Content Experience" : isIntern ? "Content You've Created (posts, reels, designs)" : "Types of Content You've Created"}
           required
         >
           <Textarea
@@ -207,7 +210,9 @@ export function ContentSocialMediaFormSection(props: MarketingFormSectionProps) 
             value={application.contentCreated || ''}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
-            placeholder="Describe posts, reels, videos, carousels, or designs you've created"
+            placeholder={isHealthcareMarketing
+              ? "Describe content, campaigns, or community outreach you have created; include any healthcare or professional audiences"
+              : "Describe posts, reels, videos, carousels, or designs you've created"}
             required
             className={fieldErrors.contentCreated ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
             rows={4}
@@ -217,7 +222,9 @@ export function ContentSocialMediaFormSection(props: MarketingFormSectionProps) 
         <FormField
           fieldName="proudContentOrCampaign"
           label={
-            isIntern
+            isHealthcareMarketing
+              ? 'Healthcare Audience & Campaign Approach'
+              : isIntern
               ? 'Creator or Brand You Admire (and why)'
               : "Campaign or Content You're Proud Of (and why)"
           }
@@ -230,7 +237,9 @@ export function ContentSocialMediaFormSection(props: MarketingFormSectionProps) 
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             placeholder={
-              isIntern
+              isHealthcareMarketing
+                ? 'Explain how you would research doctors or medical communities, create responsible content, run a campaign, and track results'
+                : isIntern
                 ? 'Share a creator/brand whose content inspires you and what you learn from them'
                 : "Share one campaign or piece of content you're proud of and what made it successful"
             }
@@ -292,14 +301,16 @@ export function ContentSocialMediaFormSection(props: MarketingFormSectionProps) 
           </FormField>
         </div>
 
-        <FormField fieldName="motivation" label="Why do you want to join Trizen?" required>
+        <FormField fieldName="motivation" label={isHealthcareMarketing ? "Why are you interested in healthcare digital marketing?" : "Why do you want to join Trizen?"} required>
           <Textarea
             id="motivation"
             name="motivation"
             value={application.motivation || ''}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
-            placeholder="What draws you to this content & social media role?"
+            placeholder={isHealthcareMarketing
+              ? "Tell us what interests you about healthcare marketing, user acquisition, and medical communities"
+              : "What draws you to this content & social media role?"}
             required
             className={fieldErrors.motivation ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
             rows={4}

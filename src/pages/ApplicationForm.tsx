@@ -1002,6 +1002,7 @@ const ApplicationForm = () => {
                     setFieldErrors={setFieldErrors}
                     isIntern={isMarketingIntern(resolvedJobId)}
                     isBusinessDevelopment={resolvedJobId === 'TV-SLS-BDE-2026-009'}
+                    isTelecallingOutreach={resolvedJobId === 'TV-SLS-HOT-2026-010'}
                   />
                 ) : jobFormType === 'content-social' ? (
                   <ContentSocialMediaFormSection
@@ -1022,6 +1023,7 @@ const ApplicationForm = () => {
                     setApplication={setApplication}
                     setFieldErrors={setFieldErrors}
                     isIntern={isMarketingIntern(resolvedJobId)}
+                    isHealthcareMarketing={resolvedJobId === 'TV-MKT-SDMH-2026-011'}
                   />
                 ) : isLegacySocialMediaJob() ? (
                   // Legacy Social Media Management Intern Form
