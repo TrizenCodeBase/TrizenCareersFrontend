@@ -1,8 +1,8 @@
 import type { JobFormType } from './jobTypes';
-import { isEngineeringInternJob, isMernFullTimeJob, isMernInternJob, requiresYearOfPassingOut } from './jobTypes';
-import type { MarketingApplicationFields, GenAiApplicationFields, FieldErrors } from './types';
+import { isEngineeringInternJob, isHackathonEligibleJob, isMernFullTimeJob, isMernInternJob, requiresYearOfPassingOut } from './jobTypes';
+import type { MarketingApplicationFields, GenAiApplicationFields, HackathonApplicationFields, FieldErrors } from './types';
 
-type ApplicationValues = MarketingApplicationFields & GenAiApplicationFields & {
+type ApplicationValues = MarketingApplicationFields & GenAiApplicationFields & HackathonApplicationFields & {
   fullName: string;
   email: string;
   phone: string;
@@ -50,6 +50,15 @@ export function validateApplicationByJobType(
   requireString(errors, 'phone', values.phone, 'Phone number is required');
   requireString(errors, 'location', values.location, 'Location is required');
   requireString(errors, 'linkedinProfile', values.linkedinProfile, 'LinkedIn profile is required');
+
+  if (isHackathonEligibleJob(options.jobId)) {
+    requireString(errors, 'fromHackathon', values.fromHackathon, 'Please tell us whether you took part in the hackathon');
+    if (values.fromHackathon === 'yes') {
+      requireString(errors, 'hackathonTeamName', values.hackathonTeamName, 'Please enter your hackathon team name');
+      requireString(errors, 'hackathonResult', values.hackathonResult, 'Please select whether you were a winner or a participant');
+      requireString(errors, 'hackathonProblemStatementTitle', values.hackathonProblemStatementTitle, 'Please tell us which problem statement you worked on');
+    }
+  }
 
   if (jobFormType === 'genai') {
     if (!options.hasResumeFile && isBlank(values.resumeLink)) {

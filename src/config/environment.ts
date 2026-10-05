@@ -19,10 +19,20 @@ function resolveApiBaseUrl(): string {
   return normalizeBaseUrl(DEFAULT_PROD_API_BASE_URL);
 }
 
+function resolveHackathonApiBaseUrl(): string {
+  const fromEnv = (import.meta.env.VITE_HACKATHON_API_URL as string | undefined) ?? '';
+  if (fromEnv) return normalizeBaseUrl(fromEnv);
+  return import.meta.env.MODE === 'development' ? 'http://localhost:4000' : '';
+}
+
 export const ENV_CONFIG = {
   // API Base URL - configure in .env file (VITE_API_BASE_URL)
   // In development, leave empty to use Vite proxy (avoids CORS)
   API_BASE_URL: resolveApiBaseUrl(),
+
+  // Hyderabad Founder Circle backend (hackathon problem statements) - VITE_HACKATHON_API_URL.
+  // When empty, applicants type their problem statement instead of picking from the list.
+  HACKATHON_API_BASE_URL: resolveHackathonApiBaseUrl(),
 
   // Email Service Configuration - configure in .env file
   EMAIL_SERVICE: {

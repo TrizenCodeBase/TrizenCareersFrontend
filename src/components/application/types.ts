@@ -47,6 +47,14 @@ export interface GenAiApplicationFields {
   coverNote?: string;
 }
 
+export interface HackathonApplicationFields {
+  fromHackathon?: string;
+  hackathonTeamName?: string;
+  hackathonResult?: string;
+  hackathonProblemStatementId?: string;
+  hackathonProblemStatementTitle?: string;
+}
+
 export interface FieldErrors {
   [key: string]: string;
 }

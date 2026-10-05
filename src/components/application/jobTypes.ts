@@ -40,6 +40,20 @@ export const ACTIVE_JOB_IDS = [
   'TV-WEB-MERN-2026-008'
 ] as const;
 
+/** Intern roles that ask whether the applicant took part in the AI HACK X MRDU hackathon. */
+export const HACKATHON_INTERN_JOB_IDS = [
+  'TV-SLS-HOT-2026-010',
+  'TV-AI-FS-2026-002',
+  'TV-MKT-GMI-2026-005',
+  'TV-MKT-SDMH-2026-011',
+  'TV-WEB-MERN-2026-008'
+] as const;
+
+export function isHackathonEligibleJob(jobId: string | undefined): boolean {
+  if (!jobId) return false;
+  return (HACKATHON_INTERN_JOB_IDS as readonly string[]).includes(jobId);
+}
+
 export type JobFormType = 'legacy-smm' | 'content-social' | 'growth-marketing' | 'genai' | 'engineering';
 
 export function getJobFormType(jobId: string | undefined): JobFormType {

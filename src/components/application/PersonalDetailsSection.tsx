@@ -55,10 +55,11 @@ export function PersonalDetailsSection({
             name="email"
             type="email"
             value={application.email}
-            readOnly
+            onChange={handleInputChange}
+            onBlur={handleInputBlur}
             required
-            className="bg-gray-100 cursor-not-allowed"
-            placeholder="Auto-filled from your profile"
+            className={fieldErrors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+            placeholder="your.email@example.com"
           />
         </FormField>
 

@@ -56,10 +56,11 @@ export function GenAiFormSection({
               name="email"
               type="email"
               value={application.email}
-              readOnly
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
               required
-              className="bg-gray-100 cursor-not-allowed"
-              placeholder="Auto-filled from your profile"
+              className={inputClass(Boolean(fieldErrors.email))}
+              placeholder="your.email@example.com"
             />
           </FormField>
 
