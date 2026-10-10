@@ -16,13 +16,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Code, Palette, Database, Brain, Globe, Megaphone, Lock, Calendar } from "lucide-react";
+import { MapPin, Clock, Code, Palette, Database, Brain, Globe, Megaphone, Lock, Calendar, Briefcase } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useApplication } from "@/contexts/ApplicationContext";
-import jobsData from "@/data/jobs.json";
+import { getJobs, Job } from "@/services/jobService";
+import initialJobsData from "@/data/jobs.json";
 
-// Active + archived listings (archived roles show as closed)
-const jobListings = [...jobsData.jobs, ...(jobsData.archivedJobs || [])];
+// Default fallback listings
+const defaultJobs: Job[] = [
+  ...(((initialJobsData as any).jobs || []).map((j: any) => ({ ...j, status: j.status || 'published' }))),
+  ...(((initialJobsData as any).archivedJobs || []).map((j: any) => ({ ...j, status: 'closed' }))),
+];
 
 // Date utility functions
 const formatDate = (dateString: string) => {
@@ -42,23 +46,15 @@ const getDaysAgo = (dateString: string) => {
   return diffDays;
 };
 
-const getCategoryIcon = (category) => {
-  switch (category) {
-    case "Engineering":
-      return <Code className="w-4 h-4" />;
-    case "Design":
-      return <Palette className="w-4 h-4" />;
-    case "Data":
-      return <Database className="w-4 h-4" />;
-    case "AI/ML":
-      return <Brain className="w-4 h-4" />;
-    case "Web Development":
-      return <Globe className="w-4 h-4" />;
-    case "Marketing":
-      return <Megaphone className="w-4 h-4" />;
-    default:
-      return null;
-  }
+const getCategoryIcon = (category: string) => {
+  if (!category) return <Briefcase className="w-4 h-4" />;
+  if (category.includes("Database") || category.includes("Data")) return <Database className="w-4 h-4" />;
+  if (category.includes("AI") || category.includes("ML") || category.includes("Machine Learning")) return <Brain className="w-4 h-4" />;
+  if (category.includes("Engineering")) return <Code className="w-4 h-4" />;
+  if (category.includes("Design")) return <Palette className="w-4 h-4" />;
+  if (category.includes("Web")) return <Globe className="w-4 h-4" />;
+  if (category.includes("Marketing")) return <Megaphone className="w-4 h-4" />;
+  return <Briefcase className="w-4 h-4" />;
 };
 
 const JobSearch = () => {
@@ -67,10 +63,23 @@ const JobSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedLocation, setSelectedLocation] = useState("all");
-  const [filteredJobs, setFilteredJobs] = useState(jobListings);
+  const [allJobs, setAllJobs] = useState<Job[]>(defaultJobs);
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>(defaultJobs);
 
   useEffect(() => {
-    let filtered = jobListings;
+    let isMounted = true;
+    getJobs().then((jobs) => {
+      if (isMounted && jobs && jobs.length > 0) {
+        setAllJobs(jobs);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let filtered = allJobs;
 
     if (searchTerm) {
       filtered = filtered.filter((job) =>
@@ -88,11 +97,11 @@ const JobSearch = () => {
     }
 
     setFilteredJobs(filtered);
-  }, [searchTerm, selectedCategory, selectedLocation]);
+  }, [allJobs, searchTerm, selectedCategory, selectedLocation]);
 
   // Get unique categories and locations from the data
-  const categories = ["all", ...new Set(jobListings.map(job => job.category))];
-  const locations = ["all", ...new Set(jobListings.map(job => job.location))];
+  const categories = ["all", ...new Set(allJobs.map(job => job.category))];
+  const locations = ["all", ...new Set(allJobs.map(job => job.location))];
 
   const handleViewJob = (jobId: string, slug: string) => {
     navigate(`/jobs/${jobId}-${slug}`);
@@ -151,7 +160,7 @@ const JobSearch = () => {
                 setSearchTerm("");
                 setSelectedCategory("all");
                 setSelectedLocation("all");
-                setFilteredJobs(jobListings);
+                setFilteredJobs(allJobs);
               }}
               variant="outline"
               className="border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white font-inter"

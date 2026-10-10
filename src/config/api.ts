@@ -14,6 +14,8 @@ export const API_CONFIG = {
     HEALTH: join(API_BASE_URL, '/api/health'),
     APPLICATIONS: join(API_BASE_URL, '/api/v1/applications'),
     APPLICATIONS_UPLOAD_RESUME: join(API_BASE_URL, '/api/v1/applications/upload-resume'),
+    JOBS: join(API_BASE_URL, '/api/v1/jobs'),
+    jobById: (id: string) => join(API_BASE_URL, `/api/v1/jobs/${encodeURIComponent(id)}`),
     USERS: {
       REGISTER: join(API_BASE_URL, '/api/v1/users/register'),
       LOGIN: join(API_BASE_URL, '/api/v1/users/login'),

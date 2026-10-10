@@ -19,7 +19,7 @@ import {
   Upload,
   FileText
 } from "lucide-react";
-import jobsData from "@/data/jobs.json";
+import { getJobByIdOrSlug } from "@/services/jobService";
 import { ACTIVE_JOB_IDS, getJobFormType, isEngineeringFullTimeJob, isEngineeringInternJob, isHackathonEligibleJob, isMarketingIntern, isMernJob, isMernInternJob, normalizeJobId, requiresYearOfPassingOut } from "@/components/application/jobTypes";
 import { validateApplicationByJobType } from "@/components/application/validateApplicationByJobType";
 import { uploadApplicationFile } from "@/components/application/uploadApplicationFile";
@@ -230,30 +230,36 @@ export const ApplicationFormPanel = ({ jobId, onClose }: ApplicationFormPanelPro
   }, [user]);
 
   useEffect(() => {
-    // Extract jobId from URL format: TV-WEB-MERN-2025-002-mern-stack-developer-intern
+    let isMounted = true;
     const actualJobId = normalizeJobId(jobId) || "";
-    const allJobs = [...jobsData.jobs, ...(jobsData.archivedJobs || [])];
-    const foundJob = allJobs.find(j => j.id === actualJobId);
-    if (foundJob) {
-      if (foundJob.status === 'closed') {
+
+    getJobByIdOrSlug(actualJobId || jobId || "").then((foundJob) => {
+      if (!isMounted) return;
+      if (foundJob) {
+        if (foundJob.status === 'closed') {
+          toast({
+            title: "Applications Closed",
+            description: "This position is no longer accepting applications.",
+            variant: "destructive"
+          });
+          onClose();
+          return;
+        }
+        setJob(foundJob as any);
+        setApplication(prev => ({ ...prev, jobId: foundJob.id || actualJobId }));
+      } else {
         toast({
-          title: "Applications Closed",
-          description: "This position is no longer accepting applications.",
+          title: "Job Not Found",
+          description: "The job you're looking for doesn't exist.",
           variant: "destructive"
         });
         onClose();
-        return;
       }
-      setJob(foundJob);
-      setApplication(prev => ({ ...prev, jobId: actualJobId }));
-    } else {
-      toast({
-        title: "Job Not Found",
-        description: "The job you're looking for doesn't exist.",
-        variant: "destructive"
-      });
-      onClose();
-    }
+    });
+
+    return () => {
+      isMounted = false;
+    };
   }, [jobId, toast, onClose]);
 
   const scrollToErrors = () => {

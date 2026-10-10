@@ -25,17 +25,10 @@ import {
   MapPin,
   Sparkles,
 } from "lucide-react";
-import jobsData from "@/data/jobs.json";
 import { JobDescriptionContent } from "@/components/jobs/JobDescriptionContent";
 import { ApplicationFormPanel } from "@/components/application/ApplicationFormPanel";
 import { normalizeJobId } from "@/components/application/jobTypes";
-
-type Job = (typeof jobsData.jobs)[number] & { status?: string };
-
-const allJobs: Job[] = [
-  ...jobsData.jobs,
-  ...((jobsData as { archivedJobs?: Job[] }).archivedJobs ?? []),
-];
+import { getJobByIdOrSlug, Job } from "@/services/jobService";
 
 const NICE_TO_HAVE_PREFIX = /^(nice to have|bonus|preferred(?: projects)?):\s*/i;
 
@@ -107,18 +100,30 @@ const JobDetails = () => {
   const { isJobApplied } = useApplication();
   const [job, setJob] = useState<Job | null>(null);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const foundJob = allJobs.find((j) => j.id === normalizeJobId(jobId));
-    if (foundJob) {
-      setJob(foundJob);
-    } else {
-      toast({
-        title: "Job Not Found",
-        description: "The job you're looking for doesn't exist.",
-        variant: "destructive",
-      });
-      navigate("/");
-    }
+    let isMounted = true;
+    setLoading(true);
+
+    getJobByIdOrSlug(jobId).then((foundJob) => {
+      if (!isMounted) return;
+      if (foundJob) {
+        setJob(foundJob);
+      } else {
+        toast({
+          title: "Job Not Found",
+          description: "The job you're looking for doesn't exist.",
+          variant: "destructive",
+        });
+        navigate("/");
+      }
+      setLoading(false);
+    });
+
+    return () => {
+      isMounted = false;
+    };
   }, [jobId, navigate, toast]);
 
   const isClosed = job?.status === "closed";
@@ -248,6 +253,24 @@ const JobDetails = () => {
                 </div>
               )}
             </Section>
+
+            {job.preferredExperience && job.preferredExperience.length > 0 && (
+              <Section title="Preferred experience">
+                <CheckList items={job.preferredExperience} muted />
+              </Section>
+            )}
+
+            {job.idealCandidate && (
+              <Section title="Ideal candidate">
+                <p className="whitespace-pre-line text-sm leading-relaxed text-gray-700">{job.idealCandidate}</p>
+              </Section>
+            )}
+
+            {job.kpis && job.kpis.length > 0 && (
+              <Section title="Key performance indicators (KPIs)">
+                <CheckList items={job.kpis} />
+              </Section>
+            )}
 
             {job.tags.length > 0 && (
               <Section title="Skills & tools">
